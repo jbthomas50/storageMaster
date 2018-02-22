@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\henry\Desktop\CS246\Git\storageMaster\app\app.iml" filepath="C:\Users\henry\Desktop\CS246\Git\storageMaster\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/storageMaster.iml" filepath="$PROJECT_DIR$/storageMaster.iml" />
+      <module fileurl="file://C:\Users\henry\Desktop\CS246\Git\storageMaster\storageMaster.iml" filepath="C:\Users\henry\Desktop\CS246\Git\storageMaster\storageMaster.iml" />
     </modules>
   </component>
 </project>
