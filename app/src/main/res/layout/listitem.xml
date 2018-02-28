@@ -4,45 +4,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/itemname"
-        android:layout_width="222dp"
-        android:layout_height="22dp"
+        android:layout_width="155dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:text="Item Name"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/subtractbutton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/subtractbutton"
-        android:layout_width="35dp"
+        android:layout_width="62dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="-"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        app:layout_constraintStart_toEndOf="@+id/itemname"
+        app:layout_constraintEnd_toStartOf="@+id/quantity"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addbutton"
-        android:layout_width="35dp"
+        android:layout_width="62dp"
         android:layout_height="wrap_content"
         android:text="+"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="333dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/quantity"
-        android:layout_width="wrap_content"
+        android:layout_width="27dp"
         android:layout_height="27dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginTop="16dp"
         android:text="QTY"
+        android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/addbutton"
-        app:layout_constraintStart_toEndOf="@+id/subtractbutton"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
