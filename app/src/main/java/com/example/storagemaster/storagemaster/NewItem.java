@@ -18,6 +18,6 @@ public class NewItem extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8), (int)(height*.4));
+        getWindow().setLayout((int)(width*.8), (int)(height*.5));
     }
 }

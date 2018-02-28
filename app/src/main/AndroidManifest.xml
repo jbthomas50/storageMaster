@@ -19,10 +19,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewItem"
+        <activity
+            android:name=".NewItem"
             android:label="@string/title_activity_new_item"
-            android:theme="@style/AppTheme.CustomTheme"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.CustomTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.storagemaster.storagemaster.MainActivity" />
+        </activity>
+        <activity
+            android:name=".NewListActivity"
+            android:label="@string/title_activity_new_list"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.CustomTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.storagemaster.storagemaster.MainActivity" />
