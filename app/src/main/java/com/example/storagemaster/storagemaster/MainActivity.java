@@ -3,10 +3,7 @@ package com.example.storagemaster.storagemaster;
 import android.content.Intent;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,20 +15,37 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public ArrayList<String> itemname = new ArrayList<String>();
+    public static ArrayList<Integer> quantity = new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        CustomListAdapter adapter = new CustomListAdapter(this, itemname, quantity);
+        ListView lv = (ListView) findViewById(R.id.itemlist);
+        generateListContent();
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "List item was clicked at " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // this button is for adding a new item to the list.
@@ -64,6 +78,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -72,6 +88,22 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+
+    private void generateListContent() {
+        for(int i = 1; i <= 8; i++) {
+            quantity.add(i);
+        }
+        itemname.add("Stuff1");
+        itemname.add("Food");
+        itemname.add("Groceries");
+        itemname.add("Useless");
+        itemname.add("Nothing");
+        itemname.add("More Nothing");
+        itemname.add("Absolutely Nothing");
+        itemname.add("Everything");
+
     }
 
     @Override
@@ -121,38 +153,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private class MyListAdapter extends ArrayAdapter<String> {
-        private int layout;
-
-        public MyListAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
-            super(context, resource, objects);
-            layout = resource;
-        }
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ViewHolder mainViewHolder = null;
-        if(convertView == null){
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(layout, parent, false);
-            ViewHolder viewHolder = new ViewHolder();
-            viewHolder.name = (TextView) convertView.findViewById(R.id.itemname);
-            viewHolder.subtractB = (Button) convertView.findViewById(R.id.subtractbutton);
-            viewHolder.qty = (TextView) convertView.findViewById(R.id.quantity);
-            viewHolder.addB = (Button) convertView.findViewById(R.id.addbutton);
-            convertView.setTag(viewHolder);
-        }
-        else {
-            mainViewHolder = (ViewHolder) convertView.getTag();
-            mainViewHolder.name.setText(getItem(position));
-        }
-        return convertView;
-    }
-}
-
-public class ViewHolder {
-    TextView name;
-    Button subtractB;
-    TextView qty;
-    Button addB;
-}
 }
