@@ -12,7 +12,7 @@
 
     <string name="title_activity_new_list">New List</string>
 
-    <string name="newItem">New Item</string>
+    <string name="newItem">New List</string>
 
     <string name="itemName">Item Name</string>
     <string name="startQuant">Start Quantity</string>

@@ -50,8 +50,17 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        // this button is just for testing the pop-ups. It will be taken out later.
+        Button newb = findViewById(R.id.newButton);
+        newb.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, NewListActivity.class));
+            }
+        });
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -64,15 +73,6 @@ public class MainActivity extends AppCompatActivity
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
         addNavDrawerItems(menu); //for now just add 15 listNames
 
-
-        Button newb = findViewById(R.id.newButton);
-        newb.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-               // startActivity(new Intent(MainActivity.this, NewListActivity.class));
-            }
-        });
     }
 
 
@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        //item.getItemId()
         int id = item.getItemId();
 
         item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
