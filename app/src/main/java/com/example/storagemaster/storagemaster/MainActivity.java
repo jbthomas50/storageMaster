@@ -1,7 +1,6 @@
 package com.example.storagemaster.storagemaster;
 
 import android.content.Intent;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -14,16 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +28,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         CustomListAdapter adapter = new CustomListAdapter(this, itemname, quantity);
         ListView lv = (ListView) findViewById(R.id.itemlist);
         generateListContent();
@@ -45,9 +42,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +51,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -64,6 +59,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Henry Function for adding a ListName/string to Nav Drawer
+        Menu menu = navigationView.getMenu(); //access to the nav drawer menu
+        addNavDrawerItems(menu); //for now just add 15 listNames
+
 
         Button newb = findViewById(R.id.newButton);
         newb.setOnClickListener(new View.OnClickListener(){
@@ -76,6 +76,22 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /**
+     * Function for adding 15 ListNames/string to Nav Drawer
+     * the add parameters are
+     * 1: which group they pertain to, all of our lists will belong to the same group.
+     * 2: the specific item id
+     * 3: the placement of the item in the menu
+     * 4: the item's title
+     * by Henry
+     */
+    public void addNavDrawerItems(Menu menu)
+    {
+        for (int i = 1; i <= 15; i++) {
+            String listName = "List " + i;
+            menu.add(1, i, i, listName);
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -107,6 +123,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        /*menu.add(1, 1, 0, "List 1");
+
+        menu.add(1, 2, 1, "List 2");
+
+        menu.add(1, 3, 2, "List 3");*/
         return true;
     }
 
@@ -129,9 +150,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        //item.getItemId()
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
+
+        Toast.makeText(MainActivity.this, item.getTitle() + " Was Selected", Toast.LENGTH_SHORT).show();
+
+        /*if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -143,7 +169,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
