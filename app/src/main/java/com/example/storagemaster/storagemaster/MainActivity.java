@@ -34,11 +34,22 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // this button is for adding a new item to the list.
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, NewItem.class));
+            }
+        });
+
+        // this button is just for testing the pop-ups. It will be taken out later.
+        Button newb = findViewById(R.id.newButton);
+        newb.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, NewListActivity.class));
             }
         });
 
@@ -51,14 +62,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button newb = findViewById(R.id.newButton);
-        newb.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-               // startActivity(new Intent(MainActivity.this, NewListActivity.class));
-            }
-        });
     }
 
     @Override

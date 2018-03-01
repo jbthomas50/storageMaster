@@ -22,20 +22,10 @@
         <activity
             android:name=".NewItem"
             android:label="@string/title_activity_new_item"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.CustomTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.storagemaster.storagemaster.MainActivity" />
-        </activity>
-        <activity
-            android:name=".NewListActivity"
+            android:theme="@style/AppTheme.CustomTheme"></activity>
+        <activity android:name=".NewListActivity"
             android:label="@string/title_activity_new_list"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.CustomTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.storagemaster.storagemaster.MainActivity" />
         </activity>
     </application>
 
