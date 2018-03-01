@@ -12,7 +12,10 @@
 
     <string name="title_activity_new_list">New List</string>
 
+    <string name="title_activity_slider">Number of Items</string>
+
     <string name="newItem">New List</string>
+    <string name="slider">Slider</string>
 
     <string name="itemName">Item Name</string>
     <string name="startQuant">Start Quantity</string>
@@ -23,5 +26,8 @@
     <string name="delete">Delete</string>
 
     <string name="listName">List Name</string>
+
+    <string name="add">+</string>
+    <string name="subtract">-</string>
 
 </resources>

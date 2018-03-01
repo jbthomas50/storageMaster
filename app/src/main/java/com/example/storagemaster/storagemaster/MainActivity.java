@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
 
     public ArrayList<String> itemname = new ArrayList<String>();
     public static ArrayList<Integer> quantity = new ArrayList<Integer>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,14 +59,25 @@ public class MainActivity extends AppCompatActivity
         });
 
         // this button is just for testing the pop-ups. It will be taken out later.
-        Button newb = findViewById(R.id.newButton);
-        newb.setOnClickListener(new View.OnClickListener(){
+        Button newList = findViewById(R.id.newButton);
+        newList.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, NewListActivity.class));
             }
         });
+
+        // this button is just for testing the slider. It will be taken out later.
+        Button newSlide = findViewById(R.id.sliderButton);
+        newSlide.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SlideBarActivity.class));
+            }
+        });
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
