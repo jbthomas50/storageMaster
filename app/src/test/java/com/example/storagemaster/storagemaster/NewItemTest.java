@@ -24,9 +24,9 @@ public class NewItemTest {
     public void testStartQuantity(){
         Item item = new Item();
         int start = 3;
-        item.setStartQuantity(3);
+        item.setQuantity(3);
 
-        assertEquals(start, item.getStartQuantity());
+        assertEquals(start, item.getQuantity());
     }
 
     @Test

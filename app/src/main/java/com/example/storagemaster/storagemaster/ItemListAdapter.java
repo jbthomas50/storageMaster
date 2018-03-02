@@ -15,13 +15,13 @@ package com.example.storagemaster.storagemaster;
 
         import java.util.ArrayList;
 
-public class CustomListAdapter extends ArrayAdapter<String> {
+public class ItemListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
     private final ArrayList<String> itemname;
     private final ArrayList<Integer> quantity;
 
-    public CustomListAdapter(Activity context, ArrayList<String> itemname, ArrayList<Integer> quantity) {
+    public ItemListAdapter(Activity context, ArrayList<String> itemname, ArrayList<Integer> quantity) {
         super(context, R.layout.listitem, itemname);
         // TODO Auto-generated constructor stub
         this.context=context;

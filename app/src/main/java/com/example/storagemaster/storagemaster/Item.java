@@ -7,7 +7,7 @@ package com.example.storagemaster.storagemaster;
 public class Item {
 
     private String itemName;
-    private int startQuantity;
+    private int quantity;
     private int min;
 
 
@@ -19,12 +19,12 @@ public class Item {
         return itemName;
     }
 
-    public int getStartQuantity() {
-        return startQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setStartQuantity(int startQuantity) {
-        this.startQuantity = startQuantity;
+    public void setQuantity(int startQuantity) {
+        this.quantity = startQuantity;
     }
 
     public int getMin() {

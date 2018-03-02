@@ -32,11 +32,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        CustomListAdapter adapter = new CustomListAdapter(this, itemname, quantity);
+        //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
+        ItemListAdapter adapter = new ItemListAdapter(this, itemname, quantity);
         ListView lv = (ListView) findViewById(R.id.itemlist);
         generateListContent();
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(MainActivity.this, "List item was clicked at " + position, Toast.LENGTH_SHORT).show();
@@ -115,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
+//Test for the Alex's Excellent Item List 0_0
     private void generateListContent() {
         for(int i = 1; i <= 8; i++) {
             quantity.add(i);
