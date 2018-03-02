@@ -22,10 +22,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    // JAMES - used for the filename
     public static final String FILENAME = "storageMaster.txt";
+    // JAMES - string used to access the new item in new activity
+    public static final String NEW_ITEM = "newItem";
 
-    public ArrayList<String> itemname = new ArrayList<String>();
-    public static ArrayList<Integer> quantity = new ArrayList<Integer>();
+    public ArrayList<String> itemname = new ArrayList<>();
+    public static ArrayList<Integer> quantity = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,10 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, NewItem.class));
+                //Item item = new Item();
+                Intent intent = new Intent(MainActivity.this, NewItem.class);
+                //intent.putExtra(NEW_ITEM, item.class);
+                startActivity(intent);
             }
         });
 

@@ -22,8 +22,6 @@ public class Item {
         min = -1;
     }
 
-
-
     Item(String itemName, int quantity){
         this.itemName = itemName;
         this.quantity = quantity;
@@ -49,7 +47,9 @@ public class Item {
     }
 
     public void setQuantity(int startQuantity) {
-        this.quantity = startQuantity;
+        if(startQuantity > 0) {
+            this.quantity = startQuantity;
+        }
     }
 
     public int getMin() {
@@ -57,6 +57,8 @@ public class Item {
     }
 
     public void setMin(int min) {
-        this.min = min;
+        if(min >= 0) {
+            this.min = min;
+        }
     }
 }
