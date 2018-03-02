@@ -8,6 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
+
+/***************************************************
+ * SLIDE BAR ACTIVITY created by James
+ * creates a slider bar to change the number of items
+ * in the inventory.
+ **************************************************/
 public class SlideBarActivity extends AppCompatActivity {
 
     int seekValue = 0;
@@ -18,6 +24,7 @@ public class SlideBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_bar);
 
+        // JAMES - gets the size of the screen and then sets it to the desired size.
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -26,11 +33,14 @@ public class SlideBarActivity extends AppCompatActivity {
 
         getWindow().setLayout((int) (width * .8), (int) (height * .4));
 
+        //initialize the variables.
         seek = new SeekBar(this);
-        numItems = new EditText(this);
-
         seek = findViewById(R.id.seekBar);
+
+        numItems = new EditText(this);
         numItems = findViewById(R.id.numItems);
+
+        numItems.setText("" + seekValue);
 
         Button more = findViewById(R.id.moreButton);
         Button less = findViewById(R.id.lessButton);

@@ -14,7 +14,8 @@
 
     <string name="title_activity_slider">Number of Items</string>
 
-    <string name="newItem">New List</string>
+    <string name="newItem">New Item</string>
+    <string name="newList">New List</string>
     <string name="slider">Slider</string>
 
     <string name="itemName">Item Name</string>
