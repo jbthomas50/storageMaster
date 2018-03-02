@@ -15,18 +15,16 @@ package com.example.storagemaster.storagemaster;
 
         import java.util.ArrayList;
 
-public class ItemListAdapter extends ArrayAdapter<String> {
+public class ItemListAdapter extends ArrayAdapter<Item> {
 
     private final Activity context;
-    private final ArrayList<String> itemname;
-    private final ArrayList<Integer> quantity;
+    private final ArrayList<Item> itemList;
 
-    public ItemListAdapter(Activity context, ArrayList<String> itemname, ArrayList<Integer> quantity) {
-        super(context, R.layout.listitem, itemname);
-        // TODO Auto-generated constructor stub
+    public ItemListAdapter(Activity context, ArrayList<Item> itemList) {
+        super(context, R.layout.listitem, itemList);
         this.context=context;
-        this.itemname=itemname;
-        this.quantity=quantity;
+        this.itemList = itemList;
+
     }
 
     public View getView(final int position, View view, ViewGroup parent) {
@@ -39,8 +37,8 @@ public class ItemListAdapter extends ArrayAdapter<String> {
             TextView txtTitle = (TextView) view.findViewById(R.id.itemname);
             final TextView quantityView = (TextView) view.findViewById(R.id.quantity);
 
-            txtTitle.setText(itemname.get(position));
-            quantityView.setText("" + quantity.get(position));
+            txtTitle.setText(itemList.get(position).getItemName());
+            quantityView.setText("" + itemList.get(position).getQuantity());
 
             viewHolder.name = (TextView) view.findViewById(R.id.itemname);
             viewHolder.subtractB = (Button) view.findViewById(R.id.subtractbutton);
@@ -50,23 +48,23 @@ public class ItemListAdapter extends ArrayAdapter<String> {
             viewHolder.subtractB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    quantity.set(position, quantity.get(position) - 1);
-                    quantityView.setText("" + quantity.get(position));
+                    itemList.get(position).setQuantity(itemList.get(position).getQuantity() - 1);
+                    quantityView.setText("" + itemList.get(position).getQuantity());
                 }
             });
 
             viewHolder.addB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    quantity.set(position, quantity.get(position) + 1);
-                    quantityView.setText("" + quantity.get(position));
+                    itemList.get(position).setQuantity(itemList.get(position).getQuantity() + 1);
+                    quantityView.setText("" + itemList.get(position).getQuantity());
                 }
             });
             view.setTag(viewHolder);
         }
         else {
                 mainViewHolder = (ViewHolder) view.getTag();
-                mainViewHolder.name.setText(getItem(position));
+                mainViewHolder.name.setText(itemList.get(position).getItemName());
             }
         return view;
 

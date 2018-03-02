@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-        ItemListAdapter adapter = new ItemListAdapter(this, itemname, quantity);
+        ItemListAdapter adapter = new ItemListAdapter(this, itemList);
         ListView lv = (ListView) findViewById(R.id.itemlist);
         generateListContent();
         lv.setAdapter(adapter);
@@ -55,10 +55,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Item item = new Item();
-                Intent intent = new Intent(MainActivity.this, NewItem.class);
-                //intent.putExtra(NEW_ITEM, item.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, NewItem.class));
             }
         });
 
@@ -128,18 +125,13 @@ public class MainActivity extends AppCompatActivity
 
 //Test for the Alex's Excellent Item List 0_0
     private void generateListContent() {
-        for(int i = 1; i <= 8; i++) {
-            quantity.add(i);
+        for (int i = 0; i < 10; i++) {
+            Item item1 = new Item();
+            item1.setItemName("Item"+i);
+            item1.setQuantity(i+1);
+            item1.setMin(i);
+            itemList.add(item1);
         }
-        itemname.add("Stuff1");
-        itemname.add("Food");
-        itemname.add("Groceries");
-        itemname.add("Useless");
-        itemname.add("Nothing");
-        itemname.add("More Nothing");
-        itemname.add("Absolutely Nothing");
-        itemname.add("Everything");
-
     }
 
     @Override
