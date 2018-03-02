@@ -1,17 +1,21 @@
 package com.example.storagemaster.storagemaster;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Alex the one and only on 3/1/2018.
  */
 
-public class Category {
+public class Category implements Comparable<Category> {
 
     private String categoryName;
-    public SortedList<Item> items;
+    protected ArrayList<Item> items; //DO NOT MANUALLY ADD ITEMS, use addItem() instead
 
 
     public void setCategoryName(String name){
@@ -22,7 +26,7 @@ public class Category {
         return categoryName;
     }
 
-    public boolean addItem(String name, int amount, int minimumAmount, Context context) {
+    public boolean addItem(String name, int amount, int minimumAmount, Barcode barcode, Context context) {
         boolean itemFound = false;
         //Logic that ensures the item isn't already in the list
         for (int i = 0; i < items.size(); i++)
@@ -38,7 +42,9 @@ public class Category {
             item.setItemName(name);
             item.setQuantity(amount);
             item.setMin(minimumAmount);
+            item.addBarcode(barcode);
             items.add(item);
+            Collections.sort(items);
             Toast.makeText(context, "Item successfully added to list", Toast.LENGTH_SHORT).show();
         }
         return true;
@@ -57,5 +63,19 @@ public class Category {
         }
         if (!itemFound)
             Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public int compareTo(@NonNull Category category) {
+
+        //Sorting by name
+        String codeName1 = this.getCategoryName().toUpperCase();
+        String codeName2 = category.getCategoryName().toUpperCase();
+
+        //ascending order
+        return codeName1.compareTo(codeName2);
+
+        //descending order
+        //return codeName2.compareTo(codeName1);
     }
 }

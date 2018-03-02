@@ -1,14 +1,22 @@
 package com.example.storagemaster.storagemaster;
 
+import android.support.annotation.NonNull;
+import android.support.v7.util.SortedList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Created by JBThomas on 2/28/2018.
  */
 
-public class Item {
+public class Item implements Comparable<Item>{
 
     private String itemName;
     private int quantity;
     private int min;
+    private ArrayList<Barcode> barcodesList;
 
     Item(){
         itemName = null;
@@ -60,5 +68,25 @@ public class Item {
         if(min >= 0) {
             this.min = min;
         }
+    }
+
+    public void addBarcode(Barcode barcode)
+    {
+        barcodesList.add(barcode);
+        Collections.sort(barcodesList);
+    }
+
+    @Override
+    public int compareTo(@NonNull Item item) {
+
+        //Sorting by name
+        String codeName1 = this.getItemName().toUpperCase();
+        String codeName2 = item.getItemName().toUpperCase();
+
+        //ascending order
+        return codeName1.compareTo(codeName2);
+
+        //descending order
+        //return codeName2.compareTo(codeName1);
     }
 }
