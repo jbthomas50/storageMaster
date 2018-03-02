@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
     // JAMES - string used to access the new item in new activity
     public static final String NEW_ITEM = "newItem";
 
-    public ArrayList<String> itemname = new ArrayList<>();
+    public static ArrayList<String> itemname = new ArrayList<>();
     public static ArrayList<Integer> quantity = new ArrayList<>();
 
     @Override

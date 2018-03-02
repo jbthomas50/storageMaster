@@ -3,6 +3,7 @@ package com.example.storagemaster.storagemaster;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -49,11 +50,23 @@ public class NewItem extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newItem.setItemName("" + nameText.getText());
-                if(true) {
-                    newItem.setQuantity(Integer.parseInt(startQuantityText.getText().toString()));
+                MainActivity.itemname.add("" + nameText.getText());
+                String quantity = startQuantityText.getText().toString();
+                if(TextUtils.isDigitsOnly(quantity) && startQuantityText.getText().length() > 0) {
+                    newItem.setQuantity(Integer.parseInt(quantity));
+                    MainActivity.quantity.add(Integer.parseInt(quantity));
                 }
-                if(true) {
-                    newItem.setMin(Integer.parseInt(minText.getText().toString()));
+                else{
+                    newItem.setQuantity(1);
+                    MainActivity.quantity.add(1);
+                }
+                String min = minText.getText().toString();
+                if(TextUtils.isDigitsOnly(min) && minText.getText().length() > 0) {
+                    newItem.setMin(Integer.parseInt(min));
+                }
+                else
+                {
+                    newItem.setMin(-1);
                 }
 
                 finish();
