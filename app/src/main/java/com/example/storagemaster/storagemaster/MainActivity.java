@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final String FILENAME = "storageMaster.txt";
 
-    public ArrayList<String> itemname = new ArrayList<String>();
-    public static ArrayList<Integer> quantity = new ArrayList<Integer>();
+    public ArrayList<Item> itemList = new ArrayList<Item>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +34,10 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-        ItemListAdapter adapter = new ItemListAdapter(this, itemname, quantity);
-        ListView lv = (ListView) findViewById(R.id.itemlist);
+
         generateListContent();
+        ItemListAdapter adapter = new ItemListAdapter(this, itemList);
+        ListView lv = (ListView) findViewById(R.id.itemlist);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
@@ -122,18 +122,13 @@ public class MainActivity extends AppCompatActivity
 
 //Test for the Alex's Excellent Item List 0_0
     private void generateListContent() {
-        for(int i = 1; i <= 8; i++) {
-            quantity.add(i);
+        for (int i = 0; i < 10; i++) {
+            Item item1 = new Item();
+            item1.setItemName("Item"+i);
+            item1.setQuantity(i+1);
+            item1.setMin(i);
+            itemList.add(item1);
         }
-        itemname.add("Stuff1");
-        itemname.add("Food");
-        itemname.add("Groceries");
-        itemname.add("Useless");
-        itemname.add("Nothing");
-        itemname.add("More Nothing");
-        itemname.add("Absolutely Nothing");
-        itemname.add("Everything");
-
     }
 
     @Override

@@ -50,7 +50,7 @@ public class Category implements Comparable<Category> {
         return true;
     }
 
-    public void removeItem(String name, Context context){
+    public boolean removeItem(String name, Context context){
         boolean itemFound = false;
         //Logic that searches for the item in the list
         for (int i = 0; i < items.size(); i++)
@@ -59,10 +59,12 @@ public class Category implements Comparable<Category> {
                 items.remove(items.get(i));
                 itemFound = true;
                 Toast.makeText(context, "Item successfully removed", Toast.LENGTH_SHORT).show();
+                return true;
             }
         }
         if (!itemFound)
             Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
+        return false;
     }
 
     @Override

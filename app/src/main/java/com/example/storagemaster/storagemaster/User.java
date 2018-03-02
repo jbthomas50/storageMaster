@@ -65,4 +65,67 @@ public boolean addCategory(String name, Context context)
     return true;
 }
 
+public boolean removeCategory(String name, Context context){
+
+    boolean itemFound = false;
+    //Logic that searches for the item in the list
+    for (int i = 0; i < inventory.size(); i++)
+    {
+        if(inventory.get(i).getCategoryName() == name) {
+            inventory.remove(inventory.get(i));
+            itemFound = true;
+            Toast.makeText(context, "Item successfully removed", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+    }
+    if (!itemFound)
+        Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
+    return false;
+}
+
+public boolean moveItem(String name, String categoryFrom, String categoryTo, Context context)
+{
+    boolean itemFound = false;
+    Category cFrom = null;
+    Category cTo;
+    //Logic that searches for the item in the list
+    for (int i = 0; i < inventory.size() && !itemFound; i++)
+    {
+        if(inventory.get(i).getCategoryName() == categoryFrom) {
+            cFrom = inventory.get(i);
+            itemFound = true;
+        }
+    }
+
+    if (!itemFound) {
+        Toast.makeText(context, "1st category not found", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    itemFound = false;
+    for (int i = 0; i < inventory.size() && !itemFound; i++)
+    {
+        if(inventory.get(i).getCategoryName() == categoryTo) {
+            cTo = inventory.get(i);
+            itemFound = true;
+        }
+    }
+    if (!itemFound) {
+        Toast.makeText(context, "2nd category not found", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    itemFound = false;
+
+    for (int i = 0; i < cFrom.items.size() && !itemFound; i++)
+    {
+        if(cFrom.items.get(i).getItemName() == name) {
+            cFrom = inventory.get(i);
+            itemFound = true;
+        }
+    }
+
+    return true;
+}
+
 }
