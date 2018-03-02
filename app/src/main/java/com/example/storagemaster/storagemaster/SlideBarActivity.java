@@ -1,5 +1,6 @@
 package com.example.storagemaster.storagemaster;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -16,9 +17,10 @@ import android.widget.SeekBar;
  **************************************************/
 public class SlideBarActivity extends AppCompatActivity {
 
-    int seekValue = 0;
+    int seekValue = 27;
     SeekBar seek;
     EditText numItems;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class SlideBarActivity extends AppCompatActivity {
         //initialize the variables.
         seek = new SeekBar(this);
         seek = findViewById(R.id.seekBar);
+        seek.setProgress(seekValue);
 
         numItems = new EditText(this);
         numItems = findViewById(R.id.numItems);
@@ -45,24 +48,51 @@ public class SlideBarActivity extends AppCompatActivity {
         Button more = findViewById(R.id.moreButton);
         Button less = findViewById(R.id.lessButton);
 
+        // set up the more button
         more.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 seekValue++;
                 numItems.setText("" + seekValue);
+                seek.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        seek.setProgress(seekValue);
+                    }
+                });
             }
         });
 
+        // set up the less button
         less.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 seekValue--;
                 numItems.setText("" + seekValue);
+                seek.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        seek.setProgress(seekValue);
+                    }
+                });
             }
         });
 
+        numItems.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                seekValue = Integer.parseInt(numItems.getText().toString());
+                seek.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        seek.setProgress(seekValue);
+                    }
+                });
+            }
+        });
+
+        //set up the seek bar. Needs to set the value in the text box equal to the value of the bar
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
