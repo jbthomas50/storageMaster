@@ -22,6 +22,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String FILENAME = "storageMaster.txt";
+
     public ArrayList<String> itemname = new ArrayList<String>();
     public static ArrayList<Integer> quantity = new ArrayList<Integer>();
 
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        // JAMES - set the fab to start the new item activity
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // this button is just for testing the pop-ups. It will be taken out later.
+        // JAMES - this button is just for testing the pop-ups. It will be taken out later.
         Button newList = findViewById(R.id.newButton);
         newList.setOnClickListener(new View.OnClickListener(){
 
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // this button is just for testing the slider. It will be taken out later.
+        // JAMES - this button is just for testing the slider. It will be taken out later.
         Button newSlide = findViewById(R.id.sliderButton);
         newSlide.setOnClickListener(new View.OnClickListener(){
 
