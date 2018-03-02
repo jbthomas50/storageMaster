@@ -21,7 +21,7 @@ public class NewItemTest {
     }
 
     @Test
-    public void testStartQuantity(){
+    public void testQuantity(){
         Item item = new Item();
         int start = 3;
         item.setQuantity(3);

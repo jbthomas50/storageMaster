@@ -10,6 +10,31 @@ public class Item {
     private int quantity;
     private int min;
 
+    Item(){
+        itemName = null;
+        quantity = 0;
+        min = -1;
+    }
+
+    Item(String itemName){
+        this.itemName = itemName;
+        quantity = 0;
+        min = -1;
+    }
+
+
+
+    Item(String itemName, int quantity){
+        this.itemName = itemName;
+        this.quantity = quantity;
+        min = -1;
+    }
+
+    Item(String itemName, int quantity, int min){
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.min = min;
+    }
 
     public void setItemName(String name){
         this.itemName = name;
