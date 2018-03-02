@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity
 
     public static final String FILENAME = "storageMaster.txt";
 
-    public ArrayList<Item> itemList = new ArrayList<Item>();
+    public ArrayList<String> itemname = new ArrayList<String>();
+    public static ArrayList<Integer> quantity = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-
-        generateListContent();
         ItemListAdapter adapter = new ItemListAdapter(this, itemList);
         ListView lv = (ListView) findViewById(R.id.itemlist);
+        generateListContent();
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box

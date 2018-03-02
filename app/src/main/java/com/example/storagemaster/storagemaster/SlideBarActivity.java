@@ -1,6 +1,5 @@
 package com.example.storagemaster.storagemaster;
 
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,9 +14,9 @@ import android.widget.SeekBar;
  * creates a slider bar to change the number of items
  * in the inventory.
  **************************************************/
-public class SlideBarActivity extends AppCompatActivity {
+public class SlideBarActivity extends AppCompatActivity{
 
-    int seekValue = 27;
+    int seekValue = 0;
     SeekBar seek;
     EditText numItems;
 
@@ -29,10 +28,8 @@ public class SlideBarActivity extends AppCompatActivity {
         // JAMES - gets the size of the screen and then sets it to the desired size.
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
         getWindow().setLayout((int) (width * .8), (int) (height * .4));
 
         //initialize the variables.
