@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final String FILENAME = "storageMaster.txt";
 
-    public ArrayList<String> itemname = new ArrayList<String>();
-    public static ArrayList<Integer> quantity = new ArrayList<Integer>();
+    public ArrayList<Item> itemList = new ArrayList<Item>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
