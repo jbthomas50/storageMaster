@@ -46,4 +46,5 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/addbutton"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
