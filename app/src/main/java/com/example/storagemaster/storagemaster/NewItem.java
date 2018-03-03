@@ -50,15 +50,15 @@ public class NewItem extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newItem.setItemName("" + nameText.getText());
-                MainActivity.itemname.add("" + nameText.getText());
+                //MainActivity.itemname.add("" + nameText.getText());
                 String quantity = startQuantityText.getText().toString();
                 if(TextUtils.isDigitsOnly(quantity) && startQuantityText.getText().length() > 0) {
                     newItem.setQuantity(Integer.parseInt(quantity));
-                    MainActivity.quantity.add(Integer.parseInt(quantity));
+                    //MainActivity.quantity.add(Integer.parseInt(quantity));
                 }
                 else{
                     newItem.setQuantity(1);
-                    MainActivity.quantity.add(1);
+                    //MainActivity.quantity.add(1);
                 }
                 String min = minText.getText().toString();
                 if(TextUtils.isDigitsOnly(min) && minText.getText().length() > 0) {
@@ -68,6 +68,7 @@ public class NewItem extends AppCompatActivity {
                 {
                     newItem.setMin(-1);
                 }
+                MainActivity.itemList.add(newItem);
 
                 finish();
             }

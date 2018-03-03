@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity
 
     public static ArrayList<String> itemname = new ArrayList<>();
     public static ArrayList<Integer> quantity = new ArrayList<>();
+    public static ArrayList<Item> itemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
