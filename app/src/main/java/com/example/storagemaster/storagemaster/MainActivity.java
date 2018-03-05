@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity
     // JAMES - string used to access the new item in new activity
     public static final String NEW_ITEM = "newItem";
 
-    public ArrayList<Item> itemList = new ArrayList<Item>();
+    public static ArrayList<Item> itemList = new ArrayList<Item>();
+
+    public static ItemListAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +39,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-        ItemListAdapter adapter = new ItemListAdapter(this, itemList);
+        adapter = new ItemListAdapter(this, itemList);
         ListView lv = (ListView) findViewById(R.id.itemlist);
-        generateListContent();
+//        generateListContent();
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
@@ -91,7 +93,6 @@ public class MainActivity extends AppCompatActivity
         //Henry Function for adding a ListName/string to Nav Drawer
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
         addNavDrawerItems(menu); //for now just add 15 listNames
-
     }
 
 
@@ -122,16 +123,16 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//Test for the Alex's Excellent Item List 0_0
-    private void generateListContent() {
-        for (int i = 0; i < 10; i++) {
-            Item item1 = new Item();
-            item1.setItemName("Item"+i);
-            item1.setQuantity(i+1);
-            item1.setMin(i);
-            itemList.add(item1);
-        }
-    }
+    //Test for the Alex's Excellent Item List 0_0
+//    private void generateListContent() {
+//        for (int i = 0; i < 5; i++) {
+//            Item item1 = new Item();
+//            item1.setItemName("Item"+i);
+//            item1.setQuantity(i+1);
+//            item1.setMin(i);
+//            itemList.add(item1);
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -188,5 +189,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }
