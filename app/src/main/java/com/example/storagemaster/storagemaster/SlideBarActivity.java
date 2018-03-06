@@ -16,9 +16,15 @@ import android.widget.SeekBar;
  **************************************************/
 public class SlideBarActivity extends AppCompatActivity{
 
-    int seekValue = 0;
-    SeekBar seek;
-    EditText numItems;
+    private int seekValue;
+    private SeekBar seek;
+    private EditText numItems;
+
+    private Button save;
+    private Button more;
+    private Button less;
+
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +39,22 @@ public class SlideBarActivity extends AppCompatActivity{
         getWindow().setLayout((int) (width * .8), (int) (height * .4));
 
         //initialize the variables.
+        this.position = Integer.parseInt(getIntent().getStringExtra("position"));
+        seekValue = MainActivity.itemList.get(position).getQuantity();
         seek = new SeekBar(this);
         seek = findViewById(R.id.seekBar);
         seek.setProgress(seekValue);
+
+
 
         numItems = new EditText(this);
         numItems = findViewById(R.id.numItems);
 
         numItems.setText("" + seekValue);
 
-        Button more = findViewById(R.id.moreButton);
-        Button less = findViewById(R.id.lessButton);
+        more = findViewById(R.id.moreButton);
+        less = findViewById(R.id.lessButton);
+        save = findViewById(R.id.sliderSave);
 
         // set up the more button
         more.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +117,17 @@ public class SlideBarActivity extends AppCompatActivity{
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                MainActivity.itemList.get(position).setQuantity(seekValue);
+
+                MainActivity.adapter.notifyDataSetChanged();
+                finish();
             }
         });
     }

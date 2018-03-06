@@ -5,7 +5,6 @@ package com.example.storagemaster.storagemaster;
  */
 
         import android.app.Activity;
-        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -30,7 +29,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder mainViewHolder = null;
-//        if(view == null) {
+        if(view == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.listitem, null, true);
             ViewHolder viewHolder = new ViewHolder();
@@ -62,12 +61,11 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 }
             });
             view.setTag(viewHolder);
-//        }
-//        else {
-//            Log.d("STRING", "Position created from else " + position);
-//                mainViewHolder = (ViewHolder) view.getTag();
-//                mainViewHolder.name.setText(itemList.get(position).getItemName());
-//            }
+        }
+        else {
+                mainViewHolder = (ViewHolder) view.getTag();
+                mainViewHolder.name.setText(itemList.get(position).getItemName());
+            }
         return view;
 
     };
