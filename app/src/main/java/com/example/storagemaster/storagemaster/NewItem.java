@@ -15,6 +15,10 @@ public class NewItem extends AppCompatActivity {
     EditText startQuantityText;
     EditText minText;
 
+    String name;
+    int quant;
+    int minimum;
+
     // save button
     Button saveButton;
 
@@ -49,18 +53,22 @@ public class NewItem extends AppCompatActivity {
                 newItem = new Item();
 
                 // add the new values to the item from the text boxes.
-                newItem.setItemName("" + nameText.getText());
+                name = ("" + nameText.getText());//newItem.setItemName("" + nameText.getText());
+                newItem.setItemName(name);
                 String quantity = startQuantityText.getText().toString();
                 if(TextUtils.isDigitsOnly(quantity) && startQuantityText.getText().length() > 0) {
-                    newItem.setQuantity(Integer.parseInt(quantity));
+                    quant = (Integer.parseInt(quantity));//newItem.setQuantity(Integer.parseInt(quantity));
+                    newItem.setQuantity(quant);
                 }
 
                 String min = minText.getText().toString();
                 if(TextUtils.isDigitsOnly(min) && minText.getText().length() > 0) {
+                    minimum = (Integer.parseInt(min));//newItem.setMin(Integer.parseInt(min));
                     newItem.setMin(Integer.parseInt(min));
                 }
 
-                MainActivity.itemList.add(newItem);
+                MainActivity.//user.inventory.get(0).addItem(name, quant, minimum);
+                        itemList.add(newItem);
                 MainActivity.adapter.notifyDataSetChanged();
 
                 finish();

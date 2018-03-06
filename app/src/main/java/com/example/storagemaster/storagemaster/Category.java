@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Alex the one and only on 3/1/2018.
@@ -15,7 +16,7 @@ import java.util.Collections;
 public class Category implements Comparable<Category> {
 
     private String categoryName;
-    protected ArrayList<Item> items; //DO NOT MANUALLY ADD ITEMS, use addItem() instead
+    public ArrayList<Item> items; //DO NOT MANUALLY ADD ITEMS, use addItem() instead
 
 
     public void setCategoryName(String name){
@@ -26,14 +27,14 @@ public class Category implements Comparable<Category> {
         return categoryName;
     }
 
-    public boolean addItem(String name, int amount, int minimumAmount, Barcode barcode, Context context) {
+    public boolean addItem(String name, int amount, int minimumAmount){//, Barcode barcode, Context context) {
         boolean itemFound = false;
         //Logic that ensures the item isn't already in the list
         for (int i = 0; i < items.size(); i++)
         {
             if(items.get(i).getItemName() == name) {
                 itemFound = true;
-                Toast.makeText(context, "Item name already in list - Cannot Add", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Item name already in list - Cannot Add", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -42,10 +43,10 @@ public class Category implements Comparable<Category> {
             item.setItemName(name);
             item.setQuantity(amount);
             item.setMin(minimumAmount);
-            item.addBarcode(barcode);
+            //item.addBarcode(barcode);
             items.add(item);
             Collections.sort(items);
-            Toast.makeText(context, "Item successfully added to list", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Item successfully added to list", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

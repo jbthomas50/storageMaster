@@ -40,7 +40,8 @@ public class SlideBarActivity extends AppCompatActivity{
 
         //initialize the variables.
         this.position = Integer.parseInt(getIntent().getStringExtra("position"));
-        seekValue = MainActivity.itemList.get(position).getQuantity();
+        seekValue = MainActivity.//user.inventory.get(0).items.get(position).getQuantity();
+                itemList.get(position).getQuantity();
         seek = new SeekBar(this);
         seek = findViewById(R.id.seekBar);
         seek.setProgress(seekValue);
@@ -124,7 +125,10 @@ public class SlideBarActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View view) {
-                MainActivity.itemList.get(position).setQuantity(seekValue);
+                //set seek value and change the item's quantity equal to it
+                seekValue = Integer.parseInt(numItems.getText().toString());
+                MainActivity.//user.inventory.get(0).items.get(position).setQuantity(seekValue);
+                        itemList.get(position).setQuantity(seekValue);
 
                 MainActivity.adapter.notifyDataSetChanged();
                 finish();

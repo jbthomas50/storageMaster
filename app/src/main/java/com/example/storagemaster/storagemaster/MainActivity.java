@@ -1,6 +1,9 @@
 package com.example.storagemaster.storagemaster;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -18,6 +21,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,19 +31,33 @@ public class MainActivity extends AppCompatActivity
     // JAMES - string used to access the new item in new activity
     public static final String NEW_ITEM = "newItem";
 
+    SharedPreferences mPrefs;
+
+    // making the user  object
+    public static User user;
+
     public static ArrayList<Item> itemList = new ArrayList<Item>();
 
     public static ItemListAdapter adapter = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mPrefs = getPreferences(MODE_PRIVATE);
+
+        user = new User();
+
+//        if(user.inventory.isEmpty()){
+            user.addCategory("Main", MainActivity.this);
+//        }
+
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-        adapter = new ItemListAdapter(this, itemList);
+        adapter = new ItemListAdapter(this, //user.inventory.get(0).items);
+                itemList);
         ListView lv = (ListView) findViewById(R.id.itemlist);
 //        generateListContent();
         lv.setAdapter(adapter);
@@ -188,5 +206,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
     }
 }

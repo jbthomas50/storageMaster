@@ -10,18 +10,19 @@
     <TextView
         android:id="@+id/itemname"
         android:layout_width="155dp"
-        android:layout_height="23dp"
+        android:layout_height="18dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:text="Item Name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/subtractbutton"
         app:layout_constraintEnd_toStartOf="@+id/subtractbutton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/subtractbutton"
         android:layout_width="62dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:text="-"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toStartOf="@+id/quantity"
@@ -31,6 +32,7 @@
         android:id="@+id/addbutton"
         android:layout_width="62dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="+"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +42,7 @@
         android:id="@+id/quantity"
         android:layout_width="27dp"
         android:layout_height="27dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:text="QTY"
         android:textAlignment="center"

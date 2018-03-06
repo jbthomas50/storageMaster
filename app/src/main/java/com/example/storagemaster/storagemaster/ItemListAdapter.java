@@ -15,6 +15,7 @@ package com.example.storagemaster.storagemaster;
         import android.widget.Toast;
 
         import java.util.ArrayList;
+        import java.util.List;
 
 public class ItemListAdapter extends ArrayAdapter<Item> {
 
@@ -68,7 +69,9 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
                 @Override
                 public boolean onLongClick(View view) {
-                    context.startActivity(new Intent(context, SlideBarActivity.class));
+                    Intent intent = new Intent(context, SlideBarActivity.class);
+                    intent.putExtra("position", new Integer(position).toString());
+                    context.startActivity(intent);
                     return false;
                 }
             });
