@@ -3,11 +3,11 @@ package com.example.storagemaster.storagemaster;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Alex the one and only on 3/1/2018.
@@ -16,7 +16,7 @@ import java.util.List;
 public class Category implements Comparable<Category> {
 
     private String categoryName;
-    public ArrayList<Item> items; //DO NOT MANUALLY ADD ITEMS, use addItem() instead
+    protected ArrayList<Item> items = new ArrayList<Item>(); //DO NOT MANUALLY ADD ITEMS, use addItem() instead
 
 
     public void setCategoryName(String name){
@@ -27,7 +27,7 @@ public class Category implements Comparable<Category> {
         return categoryName;
     }
 
-    public boolean addItem(String name, int amount, int minimumAmount){//, Barcode barcode, Context context) {
+    public boolean addItem(String name, int amount, int minimumAmount) {
         boolean itemFound = false;
         //Logic that ensures the item isn't already in the list
         for (int i = 0; i < items.size(); i++)
@@ -41,7 +41,8 @@ public class Category implements Comparable<Category> {
         if (!itemFound) {
             Item item = new Item();
             item.setItemName(name);
-            item.setQuantity(amount);
+            int amountNew = amount;
+            item.setQuantity(amountNew);
             item.setMin(minimumAmount);
             //item.addBarcode(barcode);
             items.add(item);

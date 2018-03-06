@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,28 +48,20 @@ public class NewItem extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                // create a new item that will be added to the list.
-                Item newItem;
-                // initialize the new item.
-                newItem = new Item();
-
+                int quantityI = 0;
+                int minI = 0;
                 // add the new values to the item from the text boxes.
-                name = ("" + nameText.getText());//newItem.setItemName("" + nameText.getText());
-                newItem.setItemName(name);
                 String quantity = startQuantityText.getText().toString();
                 if(TextUtils.isDigitsOnly(quantity) && startQuantityText.getText().length() > 0) {
-                    quant = (Integer.parseInt(quantity));//newItem.setQuantity(Integer.parseInt(quantity));
-                    newItem.setQuantity(quant);
+                    quantityI = Integer.parseInt(quantity);
                 }
 
                 String min = minText.getText().toString();
                 if(TextUtils.isDigitsOnly(min) && minText.getText().length() > 0) {
-                    minimum = (Integer.parseInt(min));//newItem.setMin(Integer.parseInt(min));
-                    newItem.setMin(Integer.parseInt(min));
+                    minI = Integer.parseInt(min);
                 }
 
-                MainActivity.//user.inventory.get(0).addItem(name, quant, minimum);
-                        itemList.add(newItem);
+                MainActivity.category.addItem("" + nameText.getText(), quantityI, minI);
                 MainActivity.adapter.notifyDataSetChanged();
 
                 finish();

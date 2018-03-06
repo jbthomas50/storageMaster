@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     // JAMES - string used to access the new item in new activity
     public static final String NEW_ITEM = "newItem";
 
+    public static Category category = new Category();
     SharedPreferences mPrefs;
 
     // making the user  object
@@ -41,23 +43,14 @@ public class MainActivity extends AppCompatActivity
     public static ItemListAdapter adapter = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mPrefs = getPreferences(MODE_PRIVATE);
-
-        user = new User();
-
-//        if(user.inventory.isEmpty()){
-            user.addCategory("Main", MainActivity.this);
-//        }
-
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-        adapter = new ItemListAdapter(this, //user.inventory.get(0).items);
-                itemList);
+        adapter = new ItemListAdapter(this, category.items);
         ListView lv = (ListView) findViewById(R.id.itemlist);
 //        generateListContent();
         lv.setAdapter(adapter);
@@ -142,16 +135,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     //Test for the Alex's Excellent Item List 0_0
-//    private void generateListContent() {
-//        for (int i = 0; i < 5; i++) {
-//            Item item1 = new Item();
-//            item1.setItemName("Item"+i);
-//            item1.setQuantity(i+1);
-//            item1.setMin(i);
-//            itemList.add(item1);
-//        }
-//    }
-
+    private void generateListContent() {
+        for (int i = 0; i < 5; i++) {
+            category.addItem("Item "+i, i+1, i);
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -16,7 +16,7 @@ public class Item implements Comparable<Item>{
     private String itemName;
     private int quantity;
     private int min;
-    private ArrayList<Barcode> barcodesList;
+    private ArrayList<Barcode> barcodesList = new ArrayList<Barcode>();
 
     Item(){
         itemName = null;
