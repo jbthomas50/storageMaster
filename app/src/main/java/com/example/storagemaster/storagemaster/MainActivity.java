@@ -71,14 +71,14 @@ public class MainActivity extends AppCompatActivity
         });
 
         // JAMES - this button is just for testing the slider. It will be taken out later.
-        Button newSlide = findViewById(R.id.sliderButton);
-        newSlide.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SlideBarActivity.class));
-            }
-        });
+//        Button newSlide = findViewById(R.id.sliderButton);
+//        newSlide.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this, SlideBarActivity.class));
+//            }
+//        });
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
