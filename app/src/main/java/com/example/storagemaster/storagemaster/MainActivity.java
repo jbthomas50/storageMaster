@@ -3,6 +3,7 @@ package com.example.storagemaster.storagemaster;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     // JAMES - string used to access the new item in new activity
     public static final String NEW_ITEM = "newItem";
 
+    public static Category category = new Category();
     public static ArrayList<Item> itemList = new ArrayList<Item>();
 
     public static ItemListAdapter adapter = null;
@@ -39,9 +41,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-        adapter = new ItemListAdapter(this, itemList);
+        adapter = new ItemListAdapter(this, category.items);
         ListView lv = (ListView) findViewById(R.id.itemlist);
-//        generateListContent();
+        generateListContent();
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
@@ -124,16 +126,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     //Test for the Alex's Excellent Item List 0_0
-//    private void generateListContent() {
-//        for (int i = 0; i < 5; i++) {
-//            Item item1 = new Item();
-//            item1.setItemName("Item"+i);
-//            item1.setQuantity(i+1);
-//            item1.setMin(i);
-//            itemList.add(item1);
-//        }
-//    }
-
+    private void generateListContent() {
+        for (int i = 0; i < 5; i++) {
+            category.addItem("Item "+i, i+1, i);
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
