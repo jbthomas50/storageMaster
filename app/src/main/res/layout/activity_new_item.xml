@@ -62,15 +62,23 @@
         android:imeOptions="actionDone"/>
 
     <Button
-        android:id="@+id/saveButton"
+        android:id="@+id/saveItemButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/deleteItemButton" />
+
+    <Button
+        android:id="@+id/deleteItemButton"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        app:layout_constraintBaseline_toBaselineOf="@+id/saveItemButton"
+        app:layout_constraintEnd_toStartOf="@+id/saveItemButton"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

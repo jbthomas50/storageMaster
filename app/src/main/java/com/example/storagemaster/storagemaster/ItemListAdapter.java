@@ -4,7 +4,7 @@ package com.example.storagemaster.storagemaster;
  * Created by Alex the one and only on 2/27/2018.
  */
 
-        import android.app.Activity;
+import android.app.Activity;
         import android.content.Intent;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -69,7 +69,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(context, SlideBarActivity.class);
-                    intent.putExtra("position", new Integer(position).toString());
+                    intent.putExtra(MainActivity.POS, Integer.toString(position));
                     context.startActivity(intent);
                     return false;
                 }
@@ -80,7 +80,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(context, SlideBarActivity.class);
-                    intent.putExtra("position", new Integer(position).toString());
+                    intent.putExtra(MainActivity.POS, Integer.toString(position));
                     context.startActivity(intent);
                     return false;
                 }
@@ -90,6 +90,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
         else {
                 mainViewHolder = (ViewHolder) view.getTag();
                 mainViewHolder.name.setText(itemList.get(position).getItemName());
+                mainViewHolder.qty.setText("" + itemList.get(position).getQuantity());
             }
         return view;
 

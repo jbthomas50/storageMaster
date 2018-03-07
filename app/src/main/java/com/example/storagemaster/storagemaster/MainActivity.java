@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity
     public static final String FILENAME = "storageMaster.txt";
     // JAMES - string used to access the new item in new activity
     public static final String NEW_ITEM = "newItem";
+    // JAMES - const variables to be used for passing values to the new activities
+    public static final String POS = "itemPosition";
 
     public static Category category = new Category();
     SharedPreferences mPrefs;
@@ -52,13 +54,15 @@ public class MainActivity extends AppCompatActivity
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         adapter = new ItemListAdapter(this, category.items);
         ListView lv = (ListView) findViewById(R.id.itemlist);
-//        generateListContent();
+ //       generateListContent();
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "List item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, NewItem.class);
+                intent.putExtra(POS, Integer.toString(position));
+                startActivity(intent);
             }
         });
 
@@ -67,7 +71,10 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, NewItem.class));
+                Intent intent = new Intent(MainActivity.this, NewItem.class);
+                int noItem = -1;
+                intent.putExtra(POS, Integer.toString(noItem));
+                startActivity(intent);
             }
         });
 
