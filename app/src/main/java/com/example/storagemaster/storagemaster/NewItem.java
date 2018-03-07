@@ -1,5 +1,6 @@
 package com.example.storagemaster.storagemaster;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,12 +14,16 @@ public class NewItem extends AppCompatActivity {
 
     // text boxes
     EditText nameText;
-    EditText startQuantityText;
+    EditText quantityText;
     EditText minText;
 
-    // save button
+    // save and delete button
     Button saveButton;
+    Button deleteButton;
+    // this variable is to get the correct item from the itemlist
+    private int position;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +38,21 @@ public class NewItem extends AppCompatActivity {
 
         // initialize the text boxes
         nameText = findViewById(R.id.newItemText);
-        startQuantityText = findViewById(R.id.startQuantityText);
+        quantityText = findViewById(R.id.startQuantityText);
         minText = findViewById(R.id.minimumText);
 
+        // if they are editing an already existing item we need to load the values into the text
+        // boxes
+        position = Integer.parseInt(getIntent().getStringExtra(MainActivity.POS));
+        if(position >= 0){
+            nameText.setText(MainActivity.category.items.get(position).getItemName());
+            quantityText.setText(Integer.toString(MainActivity.category.items.get(position).getQuantity()));
+            minText.setText(Integer.toString(MainActivity.category.items.get(position).getMin()));
+        }
+
         // initialize the button
-        saveButton = findViewById(R.id.saveButton);
+        saveButton = findViewById(R.id.saveItemButton);
+        deleteButton = findViewById(R.id.deleteItemButton);
 
         // save button will get the values from the three text boxes, save them to the new item
         // and then end the activity.
@@ -46,9 +61,10 @@ public class NewItem extends AppCompatActivity {
             public void onClick(View view) {
                 int quantityI = 0;
                 int minI = 0;
+                String nameI = ("" + nameText.getText());
                 // add the new values to the item from the text boxes.
-                String quantity = startQuantityText.getText().toString();
-                if(TextUtils.isDigitsOnly(quantity) && startQuantityText.getText().length() > 0) {
+                String quantity = quantityText.getText().toString();
+                if(TextUtils.isDigitsOnly(quantity) && quantityText.getText().length() > 0) {
                     quantityI = Integer.parseInt(quantity);
                 }
 
@@ -57,9 +73,26 @@ public class NewItem extends AppCompatActivity {
                     minI = Integer.parseInt(min);
                 }
 
-                MainActivity.category.addItem("" + nameText.getText(), quantityI, minI);
+                if(position >= 0){
+                    MainActivity.category.items.get(position).setItemName(nameI);
+                    MainActivity.category.items.get(position).setQuantity(quantityI);
+                    MainActivity.category.items.get(position).setMin(minI);
+
+                }
+                else {
+                    MainActivity.category.addItem(nameI, quantityI, minI);
+                }
                 MainActivity.adapter.notifyDataSetChanged();
+
                 finish();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                MainActivity.adapter.notifyDataSetChanged();
             }
         });
     }

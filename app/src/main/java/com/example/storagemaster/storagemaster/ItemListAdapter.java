@@ -4,7 +4,8 @@ package com.example.storagemaster.storagemaster;
  * Created by Alex the one and only on 2/27/2018.
  */
 
-        import android.app.Activity;
+import android.app.Activity;
+        import android.content.Intent;
         import android.content.Intent;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -30,7 +31,6 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder mainViewHolder = null;
-//        if(view == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.listitem, null, true);
             ViewHolder viewHolder = new ViewHolder();
@@ -62,34 +62,32 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 }
             });
 
-        // JAMES - added long click to both add button and subtract button.
-        // when long clicked, the buttons will open the slider to edit the quantity of the items
-        viewHolder.subtractB.setOnLongClickListener(new View.OnLongClickListener(){
+            // JAMES - added long click to both add button and subtract button.
+            // when long clicked, the buttons will open the slider to edit the quantity of the items
+            viewHolder.subtractB.setOnLongClickListener(new View.OnLongClickListener(){
 
-            @Override
-            public boolean onLongClick(View view) {
-                context.startActivity(new Intent(context, SlideBarActivity.class));
-                return false;
-            }
-        });
+                @Override
+                public boolean onLongClick(View view) {
+                    Intent intent = new Intent(context, SlideBarActivity.class);
+                    intent.putExtra(MainActivity.POS, Integer.toString(position));
+                    context.startActivity(intent);
+                    return false;
+                }
+            });
 
-        viewHolder.addB.setOnLongClickListener(new View.OnLongClickListener(){
+            viewHolder.addB.setOnLongClickListener(new View.OnLongClickListener(){
 
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intent = new Intent(context, SlideBarActivity.class);
-                intent.putExtra("position", new Integer(position).toString());
-                context.startActivity(intent);
-                return false;
-            }
-        });
-
+                @Override
+                public boolean onLongClick(View view) {
+                    Intent intent = new Intent(context, SlideBarActivity.class);
+                    intent.putExtra(MainActivity.POS, Integer.toString(position));
+                    context.startActivity(intent);
+                    return false;
+                }
+            });
             view.setTag(viewHolder);
-//        }
-//        else {
-//                mainViewHolder = (ViewHolder) view.getTag();
-//                mainViewHolder.name.setText(itemList.get(position).getItemName());
-//            }
+
+
         return view;
 
     };

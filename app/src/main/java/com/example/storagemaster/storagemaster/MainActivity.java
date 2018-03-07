@@ -1,6 +1,9 @@
 package com.example.storagemaster.storagemaster;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
@@ -19,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,8 +31,15 @@ public class MainActivity extends AppCompatActivity
     public static final String FILENAME = "storageMaster.txt";
     // JAMES - string used to access the new item in new activity
     public static final String NEW_ITEM = "newItem";
+    // JAMES - const variables to be used for passing values to the new activities
+    public static final String POS = "itemPosition";
 
     public static Category category = new Category();
+    SharedPreferences mPrefs;
+
+    // making the user  object
+    public static User user;
+
     public static ArrayList<Item> itemList = new ArrayList<Item>();
 
     public static ItemListAdapter adapter = null;
@@ -43,13 +54,15 @@ public class MainActivity extends AppCompatActivity
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         adapter = new ItemListAdapter(this, category.items);
         ListView lv = (ListView) findViewById(R.id.itemlist);
-        generateListContent();
+ //       generateListContent();
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "List item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, NewItem.class);
+                intent.putExtra(POS, Integer.toString(position));
+                startActivity(intent);
             }
         });
 
@@ -58,7 +71,10 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, NewItem.class));
+                Intent intent = new Intent(MainActivity.this, NewItem.class);
+                int noItem = -1;
+                intent.putExtra(POS, Integer.toString(noItem));
+                startActivity(intent);
             }
         });
 
@@ -185,5 +201,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
     }
 }
