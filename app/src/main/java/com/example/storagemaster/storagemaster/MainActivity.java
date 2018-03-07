@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity
 
     // JAMES - used for the filename
     public static final String FILENAME = "storageMaster.txt";
-    // JAMES - string used to access the new item in new activity
-    public static final String NEW_ITEM = "newItem";
     // JAMES - const variables to be used for passing values to the new activities
     public static final String POS = "itemPosition";
 

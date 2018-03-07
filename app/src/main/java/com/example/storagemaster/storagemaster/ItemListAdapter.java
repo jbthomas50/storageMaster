@@ -4,6 +4,7 @@ package com.example.storagemaster.storagemaster;
  * Created by Alex the one and only on 2/27/2018.
  */
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
         import android.content.Intent;
         import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
     private final Activity context;
     private final ArrayList<Item> itemList;
 
+
     public ItemListAdapter(Activity context, ArrayList<Item> itemList) {
         super(context, R.layout.listitem, itemList);
         this.context=context;
@@ -28,11 +30,14 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     }
 
+    @SuppressLint("SetTextI18n")
     public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder mainViewHolder = null;
+
         if(view == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.listitem, null, true);
+
             ViewHolder viewHolder = new ViewHolder();
 
             TextView txtTitle = (TextView) view.findViewById(R.id.itemname);
@@ -88,10 +93,11 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
             view.setTag(viewHolder);
         }
         else {
-                mainViewHolder = (ViewHolder) view.getTag();
-                mainViewHolder.name.setText(itemList.get(position).getItemName());
-                mainViewHolder.qty.setText("" + itemList.get(position).getQuantity());
-            }
+            mainViewHolder = (ViewHolder) view.getTag();
+            mainViewHolder.name.setText(itemList.get(position).getItemName());
+            mainViewHolder.qty.setText(Integer.toString(itemList.get(position).getQuantity())); //added by James
+        }
+
         return view;
 
     };

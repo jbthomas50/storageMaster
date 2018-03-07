@@ -17,7 +17,7 @@
         android:ems="10"
         android:hint="@string/newItem"
         android:imeOptions="actionDone"
-        android:inputType="textCapSentences|textPersonName"
+        android:inputType="textCapWords|textCapSentences|textPersonName"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -74,7 +74,7 @@
 
     <Button
         android:id="@+id/deleteItemButton"
-        android:layout_width="194dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/delete"
         app:layout_constraintBaseline_toBaselineOf="@+id/saveItemButton"
