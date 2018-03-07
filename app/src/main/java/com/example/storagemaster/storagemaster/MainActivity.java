@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
@@ -33,12 +34,9 @@ public class MainActivity extends AppCompatActivity
     public static final String POS = "itemPosition";
 
     public static Category category = new Category();
-    SharedPreferences mPrefs;
 
     // making the user  object
     public static User user;
-
-    public static ArrayList<Item> itemList = new ArrayList<Item>();
 
     public static ItemListAdapter adapter = null;
 
@@ -48,6 +46,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Gson gson = new Gson();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String json = preferences.getString("user", null);
+        category = gson.fromJson(json, Category.class);
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         adapter = new ItemListAdapter(this, category.items);
@@ -203,6 +206,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onStop() {
+        Gson gson = new Gson();
+        String json = gson.toJson(category);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor edit = sharedPref.edit();
+        edit.putString("user", json);
+        edit.apply();
+
         super.onStop();
 
     }
