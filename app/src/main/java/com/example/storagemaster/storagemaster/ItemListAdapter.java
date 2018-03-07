@@ -5,6 +5,7 @@ package com.example.storagemaster.storagemaster;
  */
 
         import android.app.Activity;
+        import android.content.Intent;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder mainViewHolder = null;
-        if(view == null) {
+//        if(view == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.listitem, null, true);
             ViewHolder viewHolder = new ViewHolder();
@@ -60,12 +61,35 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                     quantityView.setText("" + itemList.get(position).getQuantity());
                 }
             });
-            view.setTag(viewHolder);
-        }
-        else {
-                mainViewHolder = (ViewHolder) view.getTag();
-                mainViewHolder.name.setText(itemList.get(position).getItemName());
+
+        // JAMES - added long click to both add button and subtract button.
+        // when long clicked, the buttons will open the slider to edit the quantity of the items
+        viewHolder.subtractB.setOnLongClickListener(new View.OnLongClickListener(){
+
+            @Override
+            public boolean onLongClick(View view) {
+                context.startActivity(new Intent(context, SlideBarActivity.class));
+                return false;
             }
+        });
+
+        viewHolder.addB.setOnLongClickListener(new View.OnLongClickListener(){
+
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(context, SlideBarActivity.class);
+                intent.putExtra("position", new Integer(position).toString());
+                context.startActivity(intent);
+                return false;
+            }
+        });
+
+            view.setTag(viewHolder);
+//        }
+//        else {
+//                mainViewHolder = (ViewHolder) view.getTag();
+//                mainViewHolder.name.setText(itemList.get(position).getItemName());
+//            }
         return view;
 
     };
