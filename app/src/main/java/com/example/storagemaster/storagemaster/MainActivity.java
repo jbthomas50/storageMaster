@@ -4,8 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.internal.NavigationMenu;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.view.menu.MenuAdapter;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,20 +38,19 @@ public class MainActivity extends AppCompatActivity
 
     // JAMES - used for the filename
     public static final String FILENAME = "storageMaster.txt";
-    // JAMES - string used to access the new item in new activity
-    public static final String NEW_ITEM = "newItem";
     // JAMES - const variables to be used for passing values to the new activities
     public static final String POS = "itemPosition";
 
     public static Category category = new Category();
-    SharedPreferences mPrefs;
 
     // making the user  object
     public static User user;
 
-    public static ArrayList<Item> itemList = new ArrayList<Item>();
-
     public static ItemListAdapter adapter = null;
+
+    public static ArrayList<Category> inventory = new ArrayList<Category>();
+
+    public static NavigationView navigationView; //findViewById(R.id.nav_view);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Gson gson = new Gson();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String json = preferences.getString("user", null);
+        category = gson.fromJson(json, Category.class);
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         adapter = new ItemListAdapter(this, category.items);
@@ -105,7 +118,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //Henry Function for adding a ListName/string to Nav Drawer
@@ -123,12 +136,27 @@ public class MainActivity extends AppCompatActivity
      * 4: the item's title
      * by Henry
      */
-    public void addNavDrawerItems(Menu menu)
+    public static void addNavDrawerItems(Menu menu)
     {
-        for (int i = 1; i <= 15; i++) {
-            String listName = "List " + i;
+        menu.clear();
+        //Toast.makeText(MainActivity.this, "Inventory Size: " + inventory.size(), Toast.LENGTH_SHORT).show();
+        //inventory.add(new Category());
+        for (int i = 0; i < inventory.size(); i++) {
+            SpannableString listName = new SpannableString(inventory.get(i).getCategoryName());
+            listName.setSpan(new RelativeSizeSpan(1.2f),0,listName.length(),0);
+            //String listName = inventory.get(i).getCategoryName();
             menu.add(1, i, i, listName);
+            //Toast.makeText(this, "List: " + i, Toast.LENGTH_SHORT).show();
         }
+
+        //Spannable strings are strings that allow a manipulation of color and size.
+        SpannableString newList = new SpannableString("new list..."); //new string
+        newList.setSpan(new ForegroundColorSpan(Color.GRAY), 0, newList.length(), 0);//change color to Gray
+        newList.setSpan(new RelativeSizeSpan(1.2f),0,newList.length(),0);//make the font size bigger.
+        /*The new list id will be -1 to differentiate from the real Categories*/
+        menu.add(2, -1, 99, newList);
+        //menu.add(1, 16, 98, "Test List");
+
     }
 
     @Override
@@ -180,23 +208,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
+
+        if (id == -1) {
+            startActivity(new Intent(MainActivity.this, NewListActivity.class));
+        }
+        else{
+            item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
+        }
 
         Toast.makeText(MainActivity.this, item.getTitle() + " Was Selected", Toast.LENGTH_SHORT).show();
-
-        /*if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -205,6 +225,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onStop() {
+        Gson gson = new Gson();
+        String json = gson.toJson(category);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor edit = sharedPref.edit();
+        edit.putString("user", json);
+        edit.apply();
+
         super.onStop();
 
     }
