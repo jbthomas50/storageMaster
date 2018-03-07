@@ -33,10 +33,8 @@ public class Category implements Comparable<Category> {
         //Logic that ensures the item isn't already in the list
         for (int i = 0; i < items.size(); i++)
         {
-            Log.d("STRING","Searching "+ items.get(i).getItemName() + " Equals " + name);
             if(Objects.equals(items.get(i).getItemName(), name)) {
                 itemFound = true;
-                Log.d("STRING","Found");
                 //Toast.makeText(context, "Item name already in list - Cannot Add", Toast.LENGTH_SHORT).show();
                 return false;
             }
