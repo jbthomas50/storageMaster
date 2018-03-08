@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String json = preferences.getString("user", null);
-        category = gson.fromJson(json, Category.class);
+        if (json != null) {
+            category = gson.fromJson(json, Category.class);
+        }
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         adapter = new ItemListAdapter(this, category.items);
