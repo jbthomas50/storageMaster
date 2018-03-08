@@ -40,11 +40,14 @@ public class MainActivity extends AppCompatActivity
     public static final String FILENAME = "storageMaster.txt";
     // JAMES - const variables to be used for passing values to the new activities
     public static final String POS = "itemPosition";
+    // JAMES - consts for getting out of sharedPreferences
+    public static final String USER = "user";
+    public static final String ALCAT = "ListCat";
 
     public static Category category = new Category();
 
     // making the user  object
-    public static User user;
+//    public static User user = new User();
 
     public static ItemListAdapter adapter = null;
 
@@ -61,15 +64,26 @@ public class MainActivity extends AppCompatActivity
 
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String json = preferences.getString("user", null);
-        if (json != null) {
-            category = gson.fromJson(json, Category.class);
+        String jsonC = preferences.getString(USER, null);
+        String jsonI = "1";
+        if (jsonC != null) {
+            category = gson.fromJson(jsonC, Category.class);
         }
+        for(int i = 0; jsonI != null; i++) {
+            jsonI = preferences.getString(ALCAT + i, null);
+            if (jsonI != null) {
+                inventory.add(gson.fromJson(jsonI, Category.class));
+            }
+        }
+
+//        else{
+//            user.addCategory("Main", this);
+//        }
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         adapter = new ItemListAdapter(this, category.items);
         ListView lv = (ListView) findViewById(R.id.itemlist);
- //       generateListContent();
+
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
@@ -171,12 +185,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    //Test for the Alex's Excellent Item List 0_0
-    private void generateListContent() {
-        for (int i = 0; i < 5; i++) {
-            category.addItem("Item "+i, i+1, i);
-        }
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -228,11 +236,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStop() {
         Gson gson = new Gson();
-        String json = gson.toJson(category);
+        String jsonC = gson.toJson(category);
+
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor edit = sharedPref.edit();
-        edit.putString("user", json);
+        edit.putString(USER, jsonC);
+        for(int i = 0; i < inventory.size(); i++) {
+            String jsonL = gson.toJson(inventory.get(i));
+            edit.putString(ALCAT + i, jsonL);
+        }
         edit.apply();
 
         super.onStop();
