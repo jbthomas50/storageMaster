@@ -224,6 +224,8 @@ public class MainActivity extends AppCompatActivity
         }
         else{
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
+            //Set adapter to new category here
+            //Shopping list is 0
         }
 
         Toast.makeText(MainActivity.this, item.getTitle() + " Was Selected", Toast.LENGTH_SHORT).show();

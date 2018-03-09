@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 /**
  * Created by ME on 3/2/2018.
@@ -45,19 +46,19 @@ public class User {
     public boolean addCategory(String name, Context context) {
         boolean itemFound = false;
         //Logic that ensures the category isn't already in the list
-//        for (int i = 0; i < inventory.size(); i++) {
-//            if (inventory.get(i).getCategoryName() == name) {
-//                itemFound = true;
-//                //Toast.makeText(context, "Category name already in list - Cannot Add", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        }
-//        if (!itemFound) {
+        for (int i = 0; i < inventory.size(); i++) {
+            if (Objects.equals(inventory.get(i).getCategoryName(), name)) {
+                itemFound = true;
+                Toast.makeText(context, "Category name already in list - Cannot Add", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        if (!itemFound) {
             Category category = new Category();
             category.setCategoryName(name);
-            //Collections.sort(inventory);
-            //Toast.makeText(context, "Category successfully added to list", Toast.LENGTH_SHORT).show();
-//        }
+            Collections.sort(inventory);
+            Toast.makeText(context, "Category successfully added to list", Toast.LENGTH_SHORT).show();
+        }
         return true;
     }
 
