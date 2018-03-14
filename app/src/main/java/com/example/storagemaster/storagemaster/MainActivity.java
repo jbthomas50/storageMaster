@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -63,10 +64,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        category.setCategoryName("Test1");
-        inventory.add(category);
-        user.inventory = inventory;
-        user.inventory.get(0).addItem("Name", 1, 0);
+
 
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -74,6 +72,7 @@ public class MainActivity extends AppCompatActivity
         String jsonI = "1";
         if (jsonC != null) {
             category = gson.fromJson(jsonC, Category.class);
+            //inventory.add(category);
         }
         for(int i = 0; jsonI != null; i++) {
             jsonI = preferences.getString(ALCAT + i, null);
@@ -82,12 +81,14 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-//        else{
-//            user.addCategory("Main", this);
-//        }
+        //category.getCategoryName();
+        inventory.add(category);
+        user.inventory = inventory;
 
+        //user.inventory.clear();
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-        adapter = new ItemListAdapter(this, user.inventory.get(0).items);
+        for (int i = 0; i < user.inventory.size(); i++){
+            adapter = new ItemListAdapter(this, user.inventory.get(i).items);}
         ListView lv = (ListView) findViewById(R.id.itemlist);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, NewItem.class);
                 intent.putExtra(POS, Integer.toString(position));
                 startActivity(intent);
+                //user.inventory = inventory;
             }
         });
 
@@ -112,14 +114,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
         // JAMES - this button is just for testing the pop-ups. It will be taken out later.
-        Button newList = findViewById(R.id.newButton);
-        newList.setOnClickListener(new View.OnClickListener(){
+        //Button newList = findViewById(R.id.newButton);
+       /* newList.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, NewListActivity.class));
             }
-        });
+        });*/
 
         // JAMES - this button is just for testing the slider. It will be taken out later.
 //        Button newSlide = findViewById(R.id.sliderButton);
@@ -157,6 +159,7 @@ public class MainActivity extends AppCompatActivity
     public static void addNavDrawerItems(Menu menu)
     {
         menu.clear();
+        //inventory.sort();
         //Toast.makeText(MainActivity.this, "Inventory Size: " + inventory.size(), Toast.LENGTH_SHORT).show();
         //inventory.add(new Category());
         for (int i = 0; i < user.inventory.size(); i++) {
@@ -164,9 +167,9 @@ public class MainActivity extends AppCompatActivity
             listName.setSpan(new RelativeSizeSpan(1.2f),0,listName.length(),0);
             //String listName = inventory.get(i).getCategoryName();
             menu.add(1, i, i, listName);
-            //Toast.makeText(this, "List: " + i, Toast.LENGTH_SHORT).show();
         }
 
+        //menu.getItem(inventory.size()-1).setCheckable(true);//leaves the list selected highlighted in the nav drawer
         //Spannable strings are strings that allow a manipulation of color and size.
         SpannableString newList = new SpannableString("new list..."); //new string
         newList.setSpan(new ForegroundColorSpan(Color.GRAY), 0, newList.length(), 0);//change color to Gray
@@ -191,11 +194,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        /*menu.add(1, 1, 0, "List 1");
-
-        menu.add(1, 2, 1, "List 2");
-
-        menu.add(1, 3, 2, "List 3");*/
         return true;
     }
 
@@ -208,7 +206,22 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(MainActivity.this, "Settings Selected", Toast.LENGTH_SHORT).show();
             return true;
+        }
+
+        if (id == R.id.edit_list){
+           int position = -99;//default if there isn't a menu item
+           for (int i = 0; i < navigationView.getMenu().size(); i++)
+               if (navigationView.getMenu().getItem(i).isChecked())
+                   position = i;
+            //add the category to inventory
+            Intent intent = new Intent(MainActivity.this, NewListActivity.class);
+            intent.putExtra(POS, Integer.toString(position));
+            startActivity(intent);
+
+            //startActivity(new Intent(MainActivity.this, NewListActivity.class));
+            //Toast.makeText(MainActivity.this, "List Deleted", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -220,9 +233,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         if (id == -1) {
-            startActivity(new Intent(MainActivity.this, NewListActivity.class));
+            int position = -99;
+            Intent intent = new Intent(MainActivity.this, NewListActivity.class);
+            intent.putExtra(POS, Integer.toString(position));
+            startActivity(intent);
+            //startActivity(new Intent(MainActivity.this, NewListActivity.class));
         }
         else{
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
@@ -244,7 +260,9 @@ public class MainActivity extends AppCompatActivity
 
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
         SharedPreferences.Editor edit = sharedPref.edit();
+        edit.clear();
         edit.putString(USER, jsonC);
         for(int i = 0; i < inventory.size(); i++) {
             String jsonL = gson.toJson(inventory.get(i));

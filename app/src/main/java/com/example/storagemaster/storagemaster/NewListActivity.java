@@ -17,6 +17,9 @@ public class NewListActivity extends AppCompatActivity {
 
     EditText listName;
 
+    // this variable is to get the correct category from the inventory
+    private int position;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +40,32 @@ public class NewListActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.button2);
         deleteButton = findViewById(R.id.button);
 
+        position = Integer.parseInt(getIntent().getStringExtra(MainActivity.POS));
+
+        if(position > -1){
+           // listName.setText(MainActivity.category.items.get(position).getItemName());
+            listName.setText(MainActivity.navigationView.getMenu().getItem(position).getTitle());
+        }
+
         //set on click listeners
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Category newCategory = new Category();
-                newCategory.setCategoryName(listName.getText().toString());
-                MainActivity.inventory.add(newCategory);
-
                 Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
+
+                if (position > -1) {
+                    listName = findViewById(R.id.editText);
+                    MainActivity.inventory.get(position).setCategoryName(listName.getText().toString());
+                }
+                else{
+                    Category newCategory = new Category();
+                    newCategory.setCategoryName(listName.getText().toString());
+                    MainActivity.inventory.add(newCategory);
+                }
+
+
+
+                //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
                 MainActivity.addNavDrawerItems(menu);
 
                 finish();
@@ -55,9 +75,12 @@ public class NewListActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                //MainActivity.inventory.remove(position);
-
                 Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
+                if (position > -1) {
+                    MainActivity.user.inventory.remove(position);
+                    menu.removeItem(position);
+                }
+
                 MainActivity.addNavDrawerItems(menu);
 
                 finish();
@@ -65,8 +88,8 @@ public class NewListActivity extends AppCompatActivity {
         });
 
         //Henry Function for adding a ListName/string to Nav Drawer
-        Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
-        MainActivity.addNavDrawerItems(menu);
+       // Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
+       // MainActivity.addNavDrawerItems(menu);
 
         //System.out.println("Inventory Size: " + MainActivity.inventory.size());
 
