@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity
 
     public static ItemListAdapter adapter = null;
     public static User user = new User();
-    public static ArrayList<Category> inventory = new ArrayList<Category>();
-    public static Category category = new Category();
+//    public static Category category = new Category();
 
     public static ListView lv;
     public static int ID = 0;
@@ -70,32 +69,23 @@ public class MainActivity extends AppCompatActivity
 
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String jsonC = preferences.getString(USER, null);
+        String json = preferences.getString(USER, null);
         String jsonI = "1";
-        if (jsonC != null) {
-            category = gson.fromJson(jsonC, Category.class);
+        if (json != null) {
+            user = gson.fromJson(json, User.class);
         }
-        for(int i = 0; jsonI != null; i++) {
-            jsonI = preferences.getString(ALCAT + i, null);
-            if (jsonI != null) {
-                inventory.add(gson.fromJson(jsonI, Category.class));
-            }
-        }
+
         Log.d(TAG, "loaded from shared preferences");
 
-        if(inventory.size() == 0) {
+        if(user.inventory.size() == 0) {
+            Log.d(TAG, "inside of if");
+            Category category = new Category();
             category.setCategoryName("Main");
-            inventory.add(category);
-            user.inventory = inventory;
-            user.inventory.get(0).addItem("Name", 1, 0);
-        }
-        Log.d(TAG, "added to inventory");
-        //category.getCategoryName();
-        inventory.add(category);
-        user.inventory = inventory;
-        Log.d(TAG, "added to user inventory");
+            user.inventory.add(category);
 
-        //user.inventory.clear();
+        }
+        Log.d(TAG, "added category to user inventory");
+
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         adapter = new ItemListAdapter(this, user.inventory.get(0).items);
         lv = (ListView) findViewById(R.id.itemlist);
@@ -216,9 +206,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, NewListActivity.class);
             intent.putExtra(POSC, Integer.toString(position));
             startActivity(intent);
-
-            //startActivity(new Intent(MainActivity.this, NewListActivity.class));
-            //Toast.makeText(MainActivity.this, "List Deleted", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -258,18 +245,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStop() {
         Gson gson = new Gson();
-        String jsonC = gson.toJson(category);
-
+        String json = gson.toJson(user);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-
         SharedPreferences.Editor edit = sharedPref.edit();
         edit.clear();
-        edit.putString(USER, jsonC);
-        for(int i = 0; i < inventory.size(); i++) {
-            String jsonL = gson.toJson(inventory.get(i));
-            edit.putString(ALCAT + i, jsonL);
-        }
+        edit.putString(USER, json);
+
         edit.apply();
 
         super.onStop();

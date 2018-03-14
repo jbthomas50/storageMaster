@@ -55,12 +55,12 @@ public class NewListActivity extends AppCompatActivity {
 
                 if (position > -1) {
                     listName = findViewById(R.id.editText);
-                    MainActivity.inventory.get(position).setCategoryName(listName.getText().toString());
+                    MainActivity.user.inventory.get(position).setCategoryName(listName.getText().toString());
                 }
                 else{
                     Category newCategory = new Category();
                     newCategory.setCategoryName(listName.getText().toString());
-                    MainActivity.inventory.add(newCategory);
+                    MainActivity.user.inventory.add(newCategory);
                 }
 
 

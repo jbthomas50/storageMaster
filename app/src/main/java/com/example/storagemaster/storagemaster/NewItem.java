@@ -47,9 +47,9 @@ public class NewItem extends AppCompatActivity {
         itemNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSI));
         categoryNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
         if(itemNum >= 0){
-            nameText.setText(MainActivity.inventory.get(categoryNum).items.get(itemNum).getItemName());
-            quantityText.setText(Integer.toString(MainActivity.inventory.get(categoryNum).items.get(itemNum).getQuantity()));
-            minText.setText(Integer.toString(MainActivity.inventory.get(categoryNum).items.get(itemNum).getMin()));
+            nameText.setText(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getItemName());
+            quantityText.setText(Integer.toString(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getQuantity()));
+            minText.setText(Integer.toString(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getMin()));
         }
 
         // initialize the button
@@ -76,13 +76,13 @@ public class NewItem extends AppCompatActivity {
                 }
 
                 if(itemNum >= 0){
-                    MainActivity.inventory.get(categoryNum).items.get(itemNum).setItemName(nameI);
-                    MainActivity.inventory.get(categoryNum).items.get(itemNum).setQuantity(quantityI);
-                    MainActivity.inventory.get(categoryNum).items.get(itemNum).setMin(minI);
+                    MainActivity.user.inventory.get(categoryNum).items.get(itemNum).setItemName(nameI);
+                    MainActivity.user.inventory.get(categoryNum).items.get(itemNum).setQuantity(quantityI);
+                    MainActivity.user.inventory.get(categoryNum).items.get(itemNum).setMin(minI);
 
                 }
                 else {
-                    MainActivity.inventory.get(categoryNum).addItem(nameI, quantityI, minI);
+                    MainActivity.user.inventory.get(categoryNum).addItem(nameI, quantityI, minI);
                 }
                 MainActivity.adapter.notifyDataSetChanged();
 
@@ -93,7 +93,7 @@ public class NewItem extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                MainActivity.inventory.get(categoryNum).items.remove(itemNum);
+                MainActivity.user.inventory.get(categoryNum).items.remove(itemNum);
 
                 MainActivity.adapter.notifyDataSetChanged();
                 finish();

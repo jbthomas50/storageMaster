@@ -18,6 +18,12 @@ public class User {
     private String password;
     public ArrayList<Category> inventory;
 
+    public User(){
+        name = "";
+        password = "";
+        inventory = new ArrayList<>();
+    }
+
     public ArrayList<Category> getShoppingList() {
         ArrayList<Category> list = new ArrayList<Category>(); //Main list that we'll return
         //Searching through the categories
@@ -119,4 +125,5 @@ public class User {
 
         return true;
     }
+
 }
