@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        //category.getCategoryName();
+
+        //category.addItem("Test1", 10, 0);
         inventory.add(category);
         user.inventory = inventory;
 
@@ -163,7 +164,12 @@ public class MainActivity extends AppCompatActivity
         //Toast.makeText(MainActivity.this, "Inventory Size: " + inventory.size(), Toast.LENGTH_SHORT).show();
         //inventory.add(new Category());
         for (int i = 0; i < user.inventory.size(); i++) {
-            SpannableString listName = new SpannableString(user.inventory.get(i).getCategoryName());
+           // if (user.inventory != null)
+            SpannableString listName = new SpannableString("");
+            if(user.inventory.get(i).getCategoryName() != null){
+                listName = new SpannableString(user.inventory.get(i).getCategoryName());
+            }
+            //SpannableString listName = new SpannableString(user.inventory.get(i).getCategoryName().toString());
             listName.setSpan(new RelativeSizeSpan(1.2f),0,listName.length(),0);
             //String listName = inventory.get(i).getCategoryName();
             menu.add(1, i, i, listName);
