@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 public class NewListActivity extends AppCompatActivity {
 
+    private static final String TAG = "NewListActivity";
     Button saveButton;
     Button deleteButton;
 
@@ -64,13 +66,13 @@ public class NewListActivity extends AppCompatActivity {
                     Category newCategory = new Category();
                     newCategory.setCategoryName(listName.getText().toString());
                     MainActivity.user.inventory.add(newCategory);
-                    Log.d("NewListActvity", "list added to inventory");
+                    Log.d(TAG, "list added to inventory");
                 }
 
                 //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
                 MainActivity.addNavDrawerItems(menu);
 
-                Log.d("NewListActvity", "addNavDrawerItems called");
+                Log.d(TAG, "addNavDrawerItems called");
                 //item.setCheckable(true);
                 if(position > -1)
                     menu.getItem(position).setChecked(true);
