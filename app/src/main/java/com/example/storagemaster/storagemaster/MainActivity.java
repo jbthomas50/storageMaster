@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         if(user.inventory.size() == 0) {
             Log.d(TAG, "inside of if");
             Category category = new Category();
-            category.setCategoryName("Main");
+            category.setCategoryName("Shopping List");
             user.inventory.add(category);
 
         }
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity
         //Henry Function for adding a ListName/string to Nav Drawer
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
         addNavDrawerItems(menu); //for now just add 15 listNames
-
+        menu.getItem(0).setChecked(true);
         Log.d(TAG, "passed drawer layout");
     }
 
@@ -143,18 +143,23 @@ public class MainActivity extends AppCompatActivity
     public static void addNavDrawerItems(Menu menu)
     {
         menu.clear();
-        //Toast.makeText(MainActivity.this, "Inventory Size: " + inventory.size(), Toast.LENGTH_SHORT).show();
-        //inventory.add(new Category());
-        for (int i = 0; i < user.inventory.size(); i++) {
+
+        SpannableString shoppingList = new SpannableString("Shopping List"); //new string
+        shoppingList.setSpan(new ForegroundColorSpan(Color.GRAY), 0, shoppingList.length(), 0);//change color to Gray
+        shoppingList.setSpan(new RelativeSizeSpan(1.2f),0,shoppingList.length(),0);//make the font size bigger.
+        menu.add(1, 0, 0, shoppingList);
+
+
+        for (int i = 1; i < user.inventory.size(); i++) {
            // if (user.inventory != null)
-            SpannableString listName = new SpannableString("");
+            SpannableString listName = new SpannableString("     ");
             if(user.inventory.get(i).getCategoryName() != null){
                 listName = new SpannableString(user.inventory.get(i).getCategoryName());
             }
             //SpannableString listName = new SpannableString(user.inventory.get(i).getCategoryName().toString());
             listName.setSpan(new RelativeSizeSpan(1.2f),0,listName.length(),0);
             //String listName = inventory.get(i).getCategoryName();
-            menu.add(1, i, i, listName);
+            menu.add(2, i, i, listName);
         }
 
         //Spannable strings are strings that allow a manipulation of color and size.
@@ -162,9 +167,7 @@ public class MainActivity extends AppCompatActivity
         newList.setSpan(new ForegroundColorSpan(Color.GRAY), 0, newList.length(), 0);//change color to Gray
         newList.setSpan(new RelativeSizeSpan(1.2f),0,newList.length(),0);//make the font size bigger.
         /*The new list id will be -1 to differentiate from the real Categories*/
-        menu.add(2, -1, 99, newList);
-        //menu.add(1, 16, 98, "Test List");
-
+        menu.add(3, -1, 100, newList);
     }
 
     @Override
@@ -203,9 +206,13 @@ public class MainActivity extends AppCompatActivity
                if (navigationView.getMenu().getItem(i).isChecked())
                    position = i;
             //add the category to inventory
-            Intent intent = new Intent(MainActivity.this, NewListActivity.class);
-            intent.putExtra(POSC, Integer.toString(position));
-            startActivity(intent);
+            if (position == 0){
+                Toast.makeText(MainActivity.this, "Cannot edit/delete Shopping List", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(MainActivity.this, NewListActivity.class);
+                intent.putExtra(POSC, Integer.toString(position));
+                startActivity(intent);
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -218,12 +225,24 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         ID = id;
 
+        for (int i = 0; i < navigationView.getMenu().size(); i++){
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+
         if (id == -1) {
             int position = -99;
             Intent intent = new Intent(MainActivity.this, NewListActivity.class);
             intent.putExtra(POSC, Integer.toString(position));
             startActivity(intent);
             //startActivity(new Intent(MainActivity.this, NewListActivity.class));
+        }
+        else if(id == -2) {
+            item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
+            //Set adapter to new category here
+            //Shopping list is 0
+            adapter = new ItemListAdapter(this, user.inventory.get(id).items);
+            lv.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
         else{
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer

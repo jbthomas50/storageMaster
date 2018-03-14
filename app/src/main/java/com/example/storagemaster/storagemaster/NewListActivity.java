@@ -4,6 +4,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,8 @@ public class NewListActivity extends AppCompatActivity {
 
         getWindow().setLayout((int)(width*.8), (int)(height*.3));
 
+        getWindow().setSoftInputMode(20);
+
         // initialize the edit text'
         listName = findViewById(R.id.editText);
 
@@ -53,7 +56,7 @@ public class NewListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
 
-                if (position > -1) {
+                if (position > 0) {
                     listName = findViewById(R.id.editText);
                     MainActivity.user.inventory.get(position).setCategoryName(listName.getText().toString());
                 }
@@ -61,6 +64,7 @@ public class NewListActivity extends AppCompatActivity {
                     Category newCategory = new Category();
                     newCategory.setCategoryName(listName.getText().toString());
                     MainActivity.user.inventory.add(newCategory);
+                    Log.d("NewListActvity", "list added to inventory");
                 }
 
 
@@ -68,6 +72,10 @@ public class NewListActivity extends AppCompatActivity {
                 //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
                 MainActivity.addNavDrawerItems(menu);
 
+                Log.d("NewListActvity", "addNavDrawerItems called");
+                //item.setCheckable(true);
+                if(position > -1)
+                    menu.getItem(position).setChecked(true);
                 finish();
             }
         });
@@ -76,7 +84,7 @@ public class NewListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
-                if (position > -1) {
+                if (position > 0) {
                     MainActivity.user.inventory.remove(position);
                     menu.removeItem(position);
                 }

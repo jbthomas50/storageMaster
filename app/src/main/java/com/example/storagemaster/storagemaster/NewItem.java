@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -36,6 +38,10 @@ public class NewItem extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*.8), (int)(height*.45));
+
+        //getWindow().setGravity(Gravity.TOP);
+
+        getWindow().setSoftInputMode(5|20);
 
         // initialize the text boxes
         nameText = findViewById(R.id.newItemText);
