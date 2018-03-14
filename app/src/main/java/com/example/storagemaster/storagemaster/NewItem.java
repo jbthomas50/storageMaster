@@ -21,7 +21,8 @@ public class NewItem extends AppCompatActivity {
     Button saveButton;
     Button deleteButton;
     // this variable is to get the correct item from the itemlist
-    private int position;
+    private int itemNum;
+    private int categoryNum;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,11 +44,12 @@ public class NewItem extends AppCompatActivity {
 
         // if they are editing an already existing item we need to load the values into the text
         // boxes
-        position = Integer.parseInt(getIntent().getStringExtra(MainActivity.POS));
-        if(position >= 0){
-            nameText.setText(MainActivity.category.items.get(position).getItemName());
-            quantityText.setText(Integer.toString(MainActivity.category.items.get(position).getQuantity()));
-            minText.setText(Integer.toString(MainActivity.category.items.get(position).getMin()));
+        itemNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSI));
+        categoryNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
+        if(itemNum >= 0){
+            nameText.setText(MainActivity.inventory.get(categoryNum).items.get(itemNum).getItemName());
+            quantityText.setText(Integer.toString(MainActivity.inventory.get(categoryNum).items.get(itemNum).getQuantity()));
+            minText.setText(Integer.toString(MainActivity.inventory.get(categoryNum).items.get(itemNum).getMin()));
         }
 
         // initialize the button
@@ -73,14 +75,14 @@ public class NewItem extends AppCompatActivity {
                     minI = Integer.parseInt(min);
                 }
 
-                if(position >= 0){
-                    MainActivity.category.items.get(position).setItemName(nameI);
-                    MainActivity.category.items.get(position).setQuantity(quantityI);
-                    MainActivity.category.items.get(position).setMin(minI);
+                if(itemNum >= 0){
+                    MainActivity.inventory.get(categoryNum).items.get(itemNum).setItemName(nameI);
+                    MainActivity.inventory.get(categoryNum).items.get(itemNum).setQuantity(quantityI);
+                    MainActivity.inventory.get(categoryNum).items.get(itemNum).setMin(minI);
 
                 }
                 else {
-                    MainActivity.category.addItem(nameI, quantityI, minI);
+                    MainActivity.inventory.get(categoryNum).addItem(nameI, quantityI, minI);
                 }
                 MainActivity.adapter.notifyDataSetChanged();
 
@@ -91,7 +93,7 @@ public class NewItem extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                MainActivity.category.items.remove(position);
+                MainActivity.inventory.get(categoryNum).items.remove(itemNum);
 
                 MainActivity.adapter.notifyDataSetChanged();
                 finish();

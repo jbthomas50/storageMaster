@@ -55,7 +55,7 @@ public class Item implements Comparable<Item>{
     }
 
     public void setQuantity(int startQuantity) {
-        if(startQuantity >= 0) {
+        if(startQuantity >= 0 & startQuantity < 1000) {
             this.quantity = startQuantity;
         }
     }
@@ -65,7 +65,7 @@ public class Item implements Comparable<Item>{
     }
 
     public void setMin(int min) {
-        if(min >= 0) {
+        if(min >= 0 && min < 1000) {
             this.min = min;
         }
     }

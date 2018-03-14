@@ -1,7 +1,9 @@
 package com.example.storagemaster.storagemaster;
 
-/**
+/*
  * Created by Alex the one and only on 2/27/2018.
+ * maybe have the item list adapter take in the list of categories from user class, and then update to the new category
+ * when it is pressed?? can't take in inventory.get(index). Can add another variable for index??
  */
 
 import android.app.Activity;
@@ -69,7 +71,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(context, SlideBarActivity.class);
-                    intent.putExtra(MainActivity.POS, Integer.toString(position));
+                    intent.putExtra(MainActivity.POSI, Integer.toString(position));
                     context.startActivity(intent);
                     return false;
                 }
@@ -80,7 +82,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(context, SlideBarActivity.class);
-                    intent.putExtra(MainActivity.POS, Integer.toString(position));
+                    intent.putExtra(MainActivity.POSI, Integer.toString(position));
                     context.startActivity(intent);
                     return false;
                 }

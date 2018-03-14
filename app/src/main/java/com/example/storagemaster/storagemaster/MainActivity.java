@@ -39,19 +39,19 @@ public class MainActivity extends AppCompatActivity
     // JAMES - used for the filename
     public static final String FILENAME = "storageMaster.txt";
     // JAMES - const variables to be used for passing values to the new activities
-    public static final String POS = "itemPosition";
+    public static final String POSI = "itemPosition";
+    public static final String POSC = "categoryPosition";
     // JAMES - consts for getting out of sharedPreferences
     public static final String USER = "user";
     public static final String ALCAT = "ListCat";
-
-
-    // making the user  object
-//public static User user = new User();
 
     public static ItemListAdapter adapter = null;
     public static User user = new User();
     public static ArrayList<Category> inventory = new ArrayList<Category>();
     public static Category category = new Category();
+
+    public static ListView lv;
+    public static int ID = 0;
 
 
     public static NavigationView navigationView; //findViewById(R.id.nav_view);
@@ -63,10 +63,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        category.setCategoryName("Test1");
-        inventory.add(category);
-        user.inventory = inventory;
-        user.inventory.get(0).addItem("Name", 1, 0);
+
 
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -82,20 +79,24 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-//        else{
-//            user.addCategory("Main", this);
-//        }
+        if(user.inventory.size() == 0) {
+            category.setCategoryName("Main");
+            inventory.add(category);
+            user.inventory = inventory;
+            user.inventory.get(0).addItem("Name", 1, 0);
+        }
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         adapter = new ItemListAdapter(this, user.inventory.get(0).items);
-        ListView lv = (ListView) findViewById(R.id.itemlist);
+        lv = (ListView) findViewById(R.id.itemlist);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, NewItem.class);
-                intent.putExtra(POS, Integer.toString(position));
+                intent.putExtra(POSI, Integer.toString(position));
+                intent.putExtra(POSC, Integer.toString(ID));
                 startActivity(intent);
             }
         });
@@ -107,30 +108,11 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewItem.class);
                 int noItem = -1;
-                intent.putExtra(POS, Integer.toString(noItem));
+                intent.putExtra(POSI, Integer.toString(noItem));
+                intent.putExtra(POSC, Integer.toString(ID));
                 startActivity(intent);
             }
         });
-        // JAMES - this button is just for testing the pop-ups. It will be taken out later.
-        Button newList = findViewById(R.id.newButton);
-        newList.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, NewListActivity.class));
-            }
-        });
-
-        // JAMES - this button is just for testing the slider. It will be taken out later.
-//        Button newSlide = findViewById(R.id.sliderButton);
-//        newSlide.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(MainActivity.this, SlideBarActivity.class));
-//            }
-//        });
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -219,7 +201,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        ID = id;
 
         if (id == -1) {
             startActivity(new Intent(MainActivity.this, NewListActivity.class));
@@ -228,6 +210,10 @@ public class MainActivity extends AppCompatActivity
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
             //Set adapter to new category here
             //Shopping list is 0
+            adapter = new ItemListAdapter(this, user.inventory.get(id).items);
+            lv.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
         }
 
         Toast.makeText(MainActivity.this, item.getTitle() + " Was Selected", Toast.LENGTH_SHORT).show();
