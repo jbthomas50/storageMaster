@@ -8,6 +8,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/edit_list"
+        android:icon="@mipmap/ic_launcher_round"
         android:orderInCategory="99"
         android:title="Edit List"
         app:showAsAction="never" />

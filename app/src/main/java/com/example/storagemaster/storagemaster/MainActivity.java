@@ -37,6 +37,8 @@ import com.google.gson.Gson;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "MainAct";
+
     // JAMES - used for the filename
     public static final String FILENAME = "storageMaster.txt";
     // JAMES - const variables to be used for passing values to the new activities
@@ -79,16 +81,19 @@ public class MainActivity extends AppCompatActivity
                 inventory.add(gson.fromJson(jsonI, Category.class));
             }
         }
+        Log.d(TAG, "loaded from shared preferences");
 
-        if(user.inventory.size() == 0) {
+        if(inventory.size() == 0) {
             category.setCategoryName("Main");
             inventory.add(category);
             user.inventory = inventory;
             user.inventory.get(0).addItem("Name", 1, 0);
         }
+        Log.d(TAG, "added to inventory");
         //category.getCategoryName();
         inventory.add(category);
         user.inventory = inventory;
+        Log.d(TAG, "added to user inventory");
 
         //user.inventory.clear();
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
@@ -105,6 +110,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        Log.d(TAG, "set item list adapter");
 
         // JAMES - set the fab to start the new item activity
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -118,6 +124,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        Log.d(TAG, "set fab listener");
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -129,6 +136,8 @@ public class MainActivity extends AppCompatActivity
         //Henry Function for adding a ListName/string to Nav Drawer
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
         addNavDrawerItems(menu); //for now just add 15 listNames
+
+        Log.d(TAG, "passed drawer layout");
     }
 
 
@@ -205,7 +214,7 @@ public class MainActivity extends AppCompatActivity
                    position = i;
             //add the category to inventory
             Intent intent = new Intent(MainActivity.this, NewListActivity.class);
-            intent.putExtra(POS, Integer.toString(position));
+            intent.putExtra(POSC, Integer.toString(position));
             startActivity(intent);
 
             //startActivity(new Intent(MainActivity.this, NewListActivity.class));
@@ -225,7 +234,7 @@ public class MainActivity extends AppCompatActivity
         if (id == -1) {
             int position = -99;
             Intent intent = new Intent(MainActivity.this, NewListActivity.class);
-            intent.putExtra(POS, Integer.toString(position));
+            intent.putExtra(POSC, Integer.toString(position));
             startActivity(intent);
             //startActivity(new Intent(MainActivity.this, NewListActivity.class));
         }

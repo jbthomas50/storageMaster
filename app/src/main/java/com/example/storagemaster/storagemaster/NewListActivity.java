@@ -40,7 +40,7 @@ public class NewListActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.button2);
         deleteButton = findViewById(R.id.button);
 
-        position = Integer.parseInt(getIntent().getStringExtra(MainActivity.POS));
+        position = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
 
         if(position > -1){
            // listName.setText(MainActivity.category.items.get(position).getItemName());
