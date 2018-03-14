@@ -99,9 +99,10 @@ public class NewItem extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                MainActivity.user.inventory.get(categoryNum).items.remove(itemNum);
-
-                MainActivity.adapter.notifyDataSetChanged();
+                if(itemNum >= 0) {
+                    MainActivity.user.inventory.get(categoryNum).items.remove(itemNum);
+                    MainActivity.adapter.notifyDataSetChanged();
+                }
                 finish();
             }
         });

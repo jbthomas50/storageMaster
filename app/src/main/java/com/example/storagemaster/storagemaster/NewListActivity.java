@@ -67,8 +67,6 @@ public class NewListActivity extends AppCompatActivity {
                     Log.d("NewListActvity", "list added to inventory");
                 }
 
-
-
                 //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
                 MainActivity.addNavDrawerItems(menu);
 
