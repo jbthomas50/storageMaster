@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Henry Function for adding a ListName/string to Nav Drawer
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
-        //addNavDrawerItems(menu); //for now just add 15 listNames
+        addNavDrawerItems(menu); //for now just add 15 listNames
     }
 
 
