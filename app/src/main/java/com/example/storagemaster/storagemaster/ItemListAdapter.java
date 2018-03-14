@@ -24,6 +24,8 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
     private final Activity context;
     private final ArrayList<Item> itemList;
 
+    private static final String TAG = "ItemListAdapter";
+
     public ItemListAdapter(Activity context, ArrayList<Item> itemList) {
         super(context, R.layout.listitem, itemList);
         this.context=context;

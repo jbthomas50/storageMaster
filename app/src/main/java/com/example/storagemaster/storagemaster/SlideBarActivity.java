@@ -16,6 +16,7 @@ import android.widget.SeekBar;
  **************************************************/
 public class SlideBarActivity extends AppCompatActivity{
 
+    private static final String TAG = "SlideBarActivity";
     private int seekValue;
     private SeekBar seek;
     private EditText numItems;

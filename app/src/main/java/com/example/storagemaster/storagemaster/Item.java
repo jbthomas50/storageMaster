@@ -18,6 +18,8 @@ public class Item implements Comparable<Item>{
     private int min;
     private ArrayList<Barcode> barcodesList = new ArrayList<Barcode>();
 
+    private static final String TAG = "Item";
+
     Item(){
         itemName = null;
         quantity = 0;

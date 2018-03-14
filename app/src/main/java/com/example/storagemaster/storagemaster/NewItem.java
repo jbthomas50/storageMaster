@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 public class NewItem extends AppCompatActivity {
 
+    public static final String TAG = "NewItem";
     // text boxes
     EditText nameText;
     EditText quantityText;

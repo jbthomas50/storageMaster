@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 public class Barcode implements Comparable<Barcode> {
     private String name;
     private int value;
+    private static final String TAG = "Barcode";
 
     public String getName() { return name; }
 
