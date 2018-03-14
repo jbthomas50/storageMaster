@@ -44,14 +44,15 @@ public class MainActivity extends AppCompatActivity
     public static final String USER = "user";
     public static final String ALCAT = "ListCat";
 
-    public static Category category = new Category();
 
     // making the user  object
-//    public static User user = new User();
+//public static User user = new User();
 
     public static ItemListAdapter adapter = null;
-
+    public static User user = new User();
     public static ArrayList<Category> inventory = new ArrayList<Category>();
+    public static Category category = new Category();
+
 
     public static NavigationView navigationView; //findViewById(R.id.nav_view);
 
@@ -61,6 +62,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        category.setCategoryName("Test1");
+        inventory.add(category);
+        user.inventory = inventory;
+        user.inventory.get(0).addItem("Name", 1, 0);
 
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -81,9 +87,8 @@ public class MainActivity extends AppCompatActivity
 //        }
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
-        adapter = new ItemListAdapter(this, category.items);
+        adapter = new ItemListAdapter(this, user.inventory.get(0).items);
         ListView lv = (ListView) findViewById(R.id.itemlist);
-
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
@@ -106,7 +111,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
         // JAMES - this button is just for testing the pop-ups. It will be taken out later.
         Button newList = findViewById(R.id.newButton);
         newList.setOnClickListener(new View.OnClickListener(){
@@ -133,13 +137,11 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         //Henry Function for adding a ListName/string to Nav Drawer
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
-        addNavDrawerItems(menu); //for now just add 15 listNames
+        //addNavDrawerItems(menu); //for now just add 15 listNames
     }
 
 
@@ -157,8 +159,8 @@ public class MainActivity extends AppCompatActivity
         menu.clear();
         //Toast.makeText(MainActivity.this, "Inventory Size: " + inventory.size(), Toast.LENGTH_SHORT).show();
         //inventory.add(new Category());
-        for (int i = 0; i < inventory.size(); i++) {
-            SpannableString listName = new SpannableString(inventory.get(i).getCategoryName());
+        for (int i = 0; i < user.inventory.size(); i++) {
+            SpannableString listName = new SpannableString(user.inventory.get(i).getCategoryName());
             listName.setSpan(new RelativeSizeSpan(1.2f),0,listName.length(),0);
             //String listName = inventory.get(i).getCategoryName();
             menu.add(1, i, i, listName);
