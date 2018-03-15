@@ -19,6 +19,8 @@ public class User {
     private String password;
     public ArrayList<Category> inventory;
 
+    private static final String TAG = "User";
+
     public User(){
         name = "";
         password = "";

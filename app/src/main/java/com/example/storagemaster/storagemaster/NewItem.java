@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 public class NewItem extends AppCompatActivity {
 
+    public static final String TAG = "NewItem";
     // text boxes
     EditText nameText;
     EditText quantityText;
@@ -52,10 +53,12 @@ public class NewItem extends AppCompatActivity {
         // boxes
         itemNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSI));
         categoryNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
+
         if(itemNum >= 0){
             nameText.setText(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getItemName());
             quantityText.setText(Integer.toString(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getQuantity()));
             minText.setText(Integer.toString(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getMin()));
+            this.setTitle("Edit Item");
         }
 
         // initialize the button

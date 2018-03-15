@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String json = preferences.getString(USER, null);
@@ -87,6 +85,7 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "added category to user inventory");
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
+        this.setTitle(user.inventory.get(0).getCategoryName());
         adapter = new ItemListAdapter(this, user.inventory.get(0).items);
         lv = (ListView) findViewById(R.id.itemlist);
         lv.setAdapter(adapter);
@@ -228,9 +227,9 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < navigationView.getMenu().size(); i++){
             navigationView.getMenu().getItem(i).setChecked(false);
         }
-
         if (id == -1) {
             int position = -99;
+
             Intent intent = new Intent(MainActivity.this, NewListActivity.class);
             intent.putExtra(POSC, Integer.toString(position));
             startActivity(intent);
@@ -241,14 +240,17 @@ public class MainActivity extends AppCompatActivity
             //Set adapter to new category here
             //Shopping list is 0
             adapter = new ItemListAdapter(this, user.inventory.get(id).items);
+            adapter.setID(id);
             lv.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
         else{
+            this.setTitle(user.inventory.get(id).getCategoryName());
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
             //Set adapter to new category here
             //Shopping list is 0
             adapter = new ItemListAdapter(this, user.inventory.get(id).items);
+            adapter.setID(id);
             lv.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 

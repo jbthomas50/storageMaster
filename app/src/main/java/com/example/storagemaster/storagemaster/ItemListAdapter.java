@@ -24,6 +24,10 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
     private final Activity context;
     private final ArrayList<Item> itemList;
 
+    private static final String TAG = "ItemListAdapter";
+
+    private int ID = 0;
+
     public ItemListAdapter(Activity context, ArrayList<Item> itemList) {
         super(context, R.layout.listitem, itemList);
         this.context=context;
@@ -72,6 +76,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(context, SlideBarActivity.class);
                     intent.putExtra(MainActivity.POSI, Integer.toString(position));
+                    intent.putExtra(MainActivity.POSC, Integer.toString(ID));
                     context.startActivity(intent);
                     return false;
                 }
@@ -83,6 +88,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(context, SlideBarActivity.class);
                     intent.putExtra(MainActivity.POSI, Integer.toString(position));
+                    intent.putExtra(MainActivity.POSC, Integer.toString(ID));
                     context.startActivity(intent);
                     return false;
                 }
@@ -99,5 +105,9 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
         Button subtractB;
         TextView qty;
         Button addB;
+    }
+
+    public void setID(int id){
+        this.ID = id;
     }
 }

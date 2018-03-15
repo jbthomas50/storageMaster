@@ -19,7 +19,7 @@ public class Category implements Comparable<Category> {
     private String categoryName;
     protected ArrayList<Item> items = new ArrayList<Item>(); //DO NOT MANUALLY ADD ITEMS, use addItem() instead
 
-
+    private static final String TAG = "Category";
     public void setCategoryName(String name){
         this.categoryName = name;
     }
