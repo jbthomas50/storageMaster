@@ -236,14 +236,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             //startActivity(new Intent(MainActivity.this, NewListActivity.class));
         }
-        else if(id == -2) {
-            item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
-            //Set adapter to new category here
-            //Shopping list is 0
-            adapter = new ItemListAdapter(this, user.inventory.get(id).items);
-            lv.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
         else{
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
             //Set adapter to new category here
