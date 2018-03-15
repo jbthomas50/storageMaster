@@ -129,6 +129,21 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "passed drawer layout");
     }
 
+public void testFunction(View view){
+    ArrayList<Category> mylist = new ArrayList<Category>();
+    mylist = user.getShoppingList();
+    ArrayList<Item> thelist = new ArrayList<Item>();
+    for (Category e : mylist)
+    {
+        for (Item i: e.items)
+        {
+            thelist.add(i);
+        }
+    }
+    adapter = new ItemListAdapter(this, thelist);
+    lv = (ListView) findViewById(R.id.itemlist);
+    lv.setAdapter(adapter);
+}
 
     /**
      * Function for adding 15 ListNames/string to Nav Drawer
