@@ -21,7 +21,7 @@ public class NewListActivity extends AppCompatActivity {
     EditText listName;
 
     // this variable is to get the correct category from the inventory
-    private int position;
+    private int catPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +30,11 @@ public class NewListActivity extends AppCompatActivity {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
         getWindow().setLayout((int)(width*.8), (int)(height*.3));
-
         getWindow().setSoftInputMode(20);
-
+        Log.d(TAG, "changed display size");
         // initialize the edit text'
         listName = findViewById(R.id.editText);
 
@@ -45,11 +42,12 @@ public class NewListActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.button2);
         deleteButton = findViewById(R.id.button);
 
-        position = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
+        catPosition = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
 
-        if(position > -1){
+        if(catPosition > -1){
            // listName.setText(MainActivity.category.items.get(position).getItemName());
-            listName.setText(MainActivity.navigationView.getMenu().getItem(position).getTitle());
+            listName.setText(MainActivity.navigationView.getMenu().getItem(catPosition).getTitle());
+            this.setTitle("Edit List");
         }
 
         //set on click listeners
@@ -58,9 +56,9 @@ public class NewListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
 
-                if (position > 0) {
+                if (catPosition > 0) {
                     listName = findViewById(R.id.editText);
-                    MainActivity.user.inventory.get(position).setCategoryName(listName.getText().toString());
+                    MainActivity.user.inventory.get(catPosition).setCategoryName(listName.getText().toString());
                 }
                 else{
                     Category newCategory = new Category();
@@ -74,8 +72,8 @@ public class NewListActivity extends AppCompatActivity {
 
                 Log.d(TAG, "addNavDrawerItems called");
                 //item.setCheckable(true);
-                if(position > -1)
-                    menu.getItem(position).setChecked(true);
+                if(catPosition > -1)
+                    menu.getItem(catPosition).setChecked(true);
                 finish();
             }
         });
@@ -84,9 +82,9 @@ public class NewListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
-                if (position > 0) {
-                    MainActivity.user.inventory.remove(position);
-                    menu.removeItem(position);
+                if (catPosition > 0) {
+                    MainActivity.user.inventory.remove(catPosition);
+                    menu.removeItem(catPosition);
                 }
 
                 MainActivity.addNavDrawerItems(menu);
