@@ -35,6 +35,7 @@ public class Category implements Comparable<Category> {
         {
             if(Objects.equals(items.get(i).getItemName(), name)) {
                 itemFound = true;
+                Log.i("Category", "User attempted to add a duplicate item: " + name);
                 //Toast.makeText(context, "Item name already in list - Cannot Add", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -62,11 +63,14 @@ public class Category implements Comparable<Category> {
                 items.remove(items.get(i));
                 itemFound = true;
                 Toast.makeText(context, "Item successfully removed", Toast.LENGTH_SHORT).show();
+                Log.i("Category", "User successfully removed item: " + name);
                 return true;
             }
         }
-        if (!itemFound)
+        if (!itemFound) {
             Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
+            Log.e("Category", "User attempted to remove an item that doesn't exist: " + name);
+        }
         return false;
     }
 
