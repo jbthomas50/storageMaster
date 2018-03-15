@@ -1,5 +1,6 @@
 package com.example.storagemaster.storagemaster;
 
+import android.content.Context;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,10 +62,16 @@ public class NewListActivity extends AppCompatActivity {
                     MainActivity.user.inventory.get(catPosition).setCategoryName(listName.getText().toString());
                 }
                 else{
-                    Category newCategory = new Category();
-                    newCategory.setCategoryName(listName.getText().toString());
-                    MainActivity.user.inventory.add(newCategory);
-                    Log.d(TAG, "list added to inventory");
+                    //String empty = "";
+                   /* if (listName.toString() == null) {
+                        Toast.makeText(getApplicationContext(), "No Name Entered!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else {
+                        Category newCategory = new Category();
+                        newCategory.setCategoryName(listName.getText().toString());
+                        MainActivity.user.inventory.add(newCategory);
+                        Log.d(TAG, "list added to inventory");
+                    }*/
                 }
 
                 //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
