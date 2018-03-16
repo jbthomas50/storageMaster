@@ -16,6 +16,7 @@ public class Item implements Comparable<Item>{
     private String itemName;
     private int quantity;
     private int min;
+    public boolean inShoppingList;
     private ArrayList<Barcode> barcodesList = new ArrayList<Barcode>();
 
     private static final String TAG = "Item";
@@ -24,24 +25,28 @@ public class Item implements Comparable<Item>{
         itemName = null;
         quantity = 0;
         min = -1;
+        inShoppingList = false;
     }
 
     Item(String itemName){
         this.itemName = itemName;
         quantity = 0;
         min = -1;
+        inShoppingList = false;
     }
 
     Item(String itemName, int quantity){
         this.itemName = itemName;
         this.quantity = quantity;
         min = -1;
+        inShoppingList = false;
     }
 
     Item(String itemName, int quantity, int min){
         this.itemName = itemName;
         this.quantity = quantity;
         this.min = min;
+        inShoppingList = false;
     }
 
     public void setItemName(String name){
