@@ -130,17 +130,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 public void testFunction(View view){
-    ArrayList<Category> mylist = new ArrayList<Category>();
-    mylist = user.getShoppingList();
-    ArrayList<Item> thelist = new ArrayList<Item>();
-    for (Category e : mylist)
-    {
-        for (Item i: e.items)
-        {
-            thelist.add(i);
-        }
-    }
-    adapter = new ItemListAdapter(this, thelist);
+    ArrayList<Item> mylist = user.getShoppingList();
+    adapter = new ItemListAdapter(this, mylist);
     lv = (ListView) findViewById(R.id.itemlist);
     lv.setAdapter(adapter);
 }

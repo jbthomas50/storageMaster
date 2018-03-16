@@ -27,26 +27,18 @@ public class User {
         inventory = new ArrayList<>();
     }
 
-    public ArrayList<Category> getShoppingList() {
-        ArrayList<Category> list = new ArrayList<Category>(); //Main list that we'll return
+    public ArrayList<Item> getShoppingList() {
+        ArrayList<Item> list = new ArrayList<Item>(); //Main list that we'll return
         //Searching through the categories
         for (int i = 0; i < inventory.size(); i++) {
             ArrayList<Item> tempItems = inventory.get(i).items; //Items we'll look through
-            boolean itemShortageFound = false;
-            Category shoppingCategory = new Category(); //New category to add to shopping list
             //Searching through the item list
             for (int j = 0; j < tempItems.size(); j++) {
                 //If the quantity is less than the desired quantity
                 if (tempItems.get(j).getQuantity() < tempItems.get(j).getMin()) {
-                    //Only add the category to the list if there's an item shortage in it
-                    if (!itemShortageFound) {
-                        list.add(shoppingCategory);
-                        itemShortageFound = true;
-                    }
-                    shoppingCategory.items.add(tempItems.get(j));
+                    list.add(tempItems.get(j));
                 }
             }
-            Collections.sort(shoppingCategory.items);
         }
         Collections.sort(list);
         return list;
@@ -59,7 +51,7 @@ public class User {
             if (Objects.equals(inventory.get(i).getCategoryName(), name)) {
                 itemFound = true;
                 Toast.makeText(context, "Category name already in list - Cannot Add", Toast.LENGTH_SHORT).show();
-                Log.i("User", "User attempted to make duplicate category: " + name);
+                Log.i("User1", "User attempted to make duplicate category: " + name);
                 return false;
             }
         }
@@ -68,7 +60,7 @@ public class User {
             category.setCategoryName(name);
             Collections.sort(inventory);
             Toast.makeText(context, "Category successfully added to list", Toast.LENGTH_SHORT).show();
-            Log.i("User", "User added a valid category: " + name);
+            Log.i("User1", "User added a valid category: " + name);
         }
         return true;
     }
@@ -82,13 +74,13 @@ public class User {
                 inventory.remove(inventory.get(i));
                 itemFound = true;
                 Toast.makeText(context, "Item successfully removed", Toast.LENGTH_SHORT).show();
-                Log.i("User", "User successfully removed category: " + name);
+                Log.i("User1", "User successfully removed category: " + name);
                 return true;
             }
         }
         if (!itemFound) {
             Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
-            Log.e("User", "User attempted to remove an item that doesn't exist: " + name);
+            Log.e("User1", "User attempted to remove an item that doesn't exist: " + name);
         }
         return false;
     }
@@ -107,7 +99,7 @@ public class User {
 
         if (!itemFound) {
             Toast.makeText(context, "1st category not found", Toast.LENGTH_SHORT).show();
-            Log.e("User", "User attempted to move an item from a category that doesn't exist: " + categoryFrom);
+            Log.e("User1", "User attempted to move an item from a category that doesn't exist: " + categoryFrom);
             return false;
         }
 
@@ -120,7 +112,7 @@ public class User {
         }
         if (!itemFound) {
             Toast.makeText(context, "2nd category not found", Toast.LENGTH_SHORT).show();
-            Log.e("User", "User attempted to move an item to a category that doesn't exist: " + categoryTo);
+            Log.e("User1", "User attempted to move an item to a category that doesn't exist: " + categoryTo);
             return false;
         }
 
@@ -134,7 +126,7 @@ public class User {
         }
         if (!itemFound) {
             Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
-            Log.e("User", "User attempted to move an item that doesn't exist: " + name);
+            Log.e("User1", "User attempted to move an item that doesn't exist: " + name);
             return false;
         }
 

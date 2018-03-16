@@ -63,7 +63,7 @@ public class NewListActivity extends AppCompatActivity {
                 }
                 else{
                     //String empty = "";
-                   /* if (listName.toString() == null) {
+                    if (listName.toString() == null) {
                         Toast.makeText(getApplicationContext(), "No Name Entered!", Toast.LENGTH_SHORT).show();
                         finish();
                     }else {
@@ -71,7 +71,7 @@ public class NewListActivity extends AppCompatActivity {
                         newCategory.setCategoryName(listName.getText().toString());
                         MainActivity.user.inventory.add(newCategory);
                         Log.d(TAG, "list added to inventory");
-                    }*/
+                    }
                 }
 
                 //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
