@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     public static final String ALCAT = "ListCat";
 
     public static ItemListAdapter adapter = null;
+    public static ShoppingListAdapter adapterShopping = null;
     public static User user = new User();
 //    public static Category category = new Category();
 
@@ -128,13 +129,6 @@ public class MainActivity extends AppCompatActivity
         menu.getItem(0).setChecked(true);
         Log.d(TAG, "passed drawer layout");
     }
-
-public void testFunction(View view){
-    ArrayList<Item> mylist = user.getShoppingList();
-    adapter = new ItemListAdapter(this, mylist);
-    lv = (ListView) findViewById(R.id.itemlist);
-    lv.setAdapter(adapter);
-}
 
     /**
      * Function for adding 15 ListNames/string to Nav Drawer
@@ -255,10 +249,19 @@ public void testFunction(View view){
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
             //Set adapter to new category here
             //Shopping list is 0
-            adapter = new ItemListAdapter(this, user.inventory.get(id).items);
-            adapter.setID(id);
-            lv.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            if (id > 0) { //Regular categories - ♠♣♥♦(Alex)♠♣♥♦
+                adapter = new ItemListAdapter(this, user.inventory.get(id).items);
+                adapter.setID(id);
+                lv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+            else //Shopping category - ♠♣♥♦(Alex)♠♣♥♦
+            {
+                adapterShopping = new ShoppingListAdapter(this, user.getShoppingList());
+                adapterShopping.setID(id);
+                lv.setAdapter(adapterShopping);
+                adapterShopping.notifyDataSetChanged();
+            }
 
         }
 

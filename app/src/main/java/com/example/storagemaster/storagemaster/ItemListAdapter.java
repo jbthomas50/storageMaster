@@ -30,7 +30,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     public ItemListAdapter(Activity context, ArrayList<Item> itemList) {
         super(context, R.layout.listitem, itemList);
-        this.context=context;
+        this.context = context;
         this.itemList = itemList;
 
     }
