@@ -71,6 +71,13 @@ public class NewListActivity extends AppCompatActivity {
                         newCategory.setCategoryName(listName.getText().toString());
                         MainActivity.user.inventory.add(newCategory);
                         Log.d(TAG, "list added to inventory");
+
+                        //trying to get the new activity to load
+                        /*int id = MainActivity.user.inventory.size();
+                        MainActivity.adapter = new ItemListAdapter(this, MainActivity.user.inventory.get(id).items);
+                        MainActivity.adapter.setID(id);
+                        MainActivity.lv.setAdapter(MainActivity.adapter);
+                        MainActivity.adapter.notifyDataSetChanged();*/
                     }
                 }
 

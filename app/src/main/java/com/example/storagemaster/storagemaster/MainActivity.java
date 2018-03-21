@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity
            int position = -99;//default if there isn't a menu item
            for (int i = 0; i < navigationView.getMenu().size(); i++)
                if (navigationView.getMenu().getItem(i).isChecked())
-                   position = i;
+                   position = i;//the position of a selected category
             //add the category to inventory
             if (position == 0){
                 Toast.makeText(MainActivity.this, "Cannot edit/delete Shopping List", Toast.LENGTH_SHORT).show();
