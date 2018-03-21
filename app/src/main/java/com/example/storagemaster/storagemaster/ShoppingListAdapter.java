@@ -43,9 +43,9 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
         quantityView.setText("" + itemList.get(position).getQuantity());
 
         viewHolder.name = (TextView) view.findViewById(R.id.itemname);
-        viewHolder.subtractB = (Button) view.findViewById(R.id.subtractbutton);
+        viewHolder.subtractB = (Button) view.findViewById(R.id.crossoutbutton);
         viewHolder.qty = (TextView) view.findViewById(R.id.quantity);
-        viewHolder.addB = (Button) view.findViewById(R.id.addbutton);
+        viewHolder.addB = (Button) view.findViewById(R.id.addbutton2);
 
         viewHolder.subtractB.setOnClickListener(new View.OnClickListener() {
             @Override

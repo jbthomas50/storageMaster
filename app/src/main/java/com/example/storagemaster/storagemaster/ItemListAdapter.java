@@ -1,24 +1,22 @@
 package com.example.storagemaster.storagemaster;
 
-/*
- * Created by Alex the one and only on 2/27/2018.
- * maybe have the item list adapter take in the list of categories from user class, and then update to the new category
- * when it is pressed?? can't take in inventory.get(index). Can add another variable for index??
- */
 
 import android.app.Activity;
         import android.content.Intent;
-        import android.content.Intent;
-        import android.view.LayoutInflater;
+import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.TextView;
-        import android.widget.Toast;
 
-        import java.util.ArrayList;
-
+import java.util.ArrayList;
+/**
+ * Created by Alex the one and only on 2/27/2018.
+ * This adapter takes a list of items and displays them with a - and + button
+ * and a dynamic quantity counter. Displays them on the selected listview.
+ * Used for the all item lists except the shopping list
+ */
 public class ItemListAdapter extends ArrayAdapter<Item> {
 
     private final Activity context;
@@ -28,6 +26,13 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     private int ID = 0;
 
+    /**
+     * Constructor
+     * @param context The context of the current activity so it
+     *                knows how to display the list in the listview
+     * @param itemList The list of items to display in the list view
+     *                 with their names and quantities
+     */
     public ItemListAdapter(Activity context, ArrayList<Item> itemList) {
         super(context, R.layout.listitem, itemList);
         this.context = context;
@@ -35,6 +40,13 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     }
 
+    /**
+     *
+     * @param position The index of where the item is on the list, 0 is top, next is 1, etc.
+     * @param view
+     * @param parent
+     * @return
+     */
     public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder mainViewHolder = null;
             LayoutInflater inflater = LayoutInflater.from(getContext());
