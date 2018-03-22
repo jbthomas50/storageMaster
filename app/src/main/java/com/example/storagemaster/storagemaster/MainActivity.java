@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity
     public static ItemListAdapter adapter = null;
     public static ShoppingListAdapter adapterShopping = null;
     public static User user = new User();
-//    public static Category category = new Category();
 
     public static ListView lv;
     public static int ID = 0;
@@ -69,27 +68,27 @@ public class MainActivity extends AppCompatActivity
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String json = preferences.getString(USER, null);
-        String jsonI = "1";
         if (json != null) {
             user = gson.fromJson(json, User.class);
         }
 
-        Log.d(TAG, "loaded from shared preferences");
+        Log.i(TAG, "loaded from shared preferences");
 
         if(user.inventory.size() == 0) {
             Log.d(TAG, "inside of if");
             Category category = new Category();
             category.setCategoryName("Shopping List");
             user.inventory.add(category);
-
+            Log.i(TAG, "added category to user inventory");
         }
-        Log.d(TAG, "added category to user inventory");
+
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         this.setTitle(user.inventory.get(0).getCategoryName());
-        adapter = new ItemListAdapter(this, user.inventory.get(0).items);
+        //adapter = new ItemListAdapter(this, user.inventory.get(0).items);
+        adapterShopping = new ShoppingListAdapter(this, user.inventory.get(0).items);
         lv = (ListView) findViewById(R.id.itemlist);
-        lv.setAdapter(adapter);
+        lv.setAdapter(adapterShopping);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
             @Override
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-        Log.d(TAG, "set item list adapter");
+        Log.i(TAG, "set item list adapter");
 
         // JAMES - set the fab to start the new item activity
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -114,7 +113,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-        Log.d(TAG, "set fab listener");
+        Log.i(TAG, "set fab listener");
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
         addNavDrawerItems(menu); //for now just add 15 listNames
         menu.getItem(0).setChecked(true);
-        Log.d(TAG, "passed drawer layout");
+        Log.i(TAG, "passed drawer layout");
     }
 
     /**
@@ -257,7 +256,7 @@ public class MainActivity extends AppCompatActivity
             }
             else //Shopping category - ♠♣♥♦(Alex)♠♣♥♦
             {
-                adapterShopping = new ShoppingListAdapter(this, user.getShoppingList());
+
                 adapterShopping.setID(id);
                 lv.setAdapter(adapterShopping);
                 adapterShopping.notifyDataSetChanged();

@@ -9,11 +9,11 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 
-/***************************************************
+/**
  * SLIDE BAR ACTIVITY created by James
  * creates a slider bar to change the number of items
  * in the inventory.
- **************************************************/
+ */
 public class SlideBarActivity extends AppCompatActivity{
 
     private static final String TAG = "SlideBarActivity";
@@ -28,6 +28,11 @@ public class SlideBarActivity extends AppCompatActivity{
     private int itemPosition;
     private int catPosition;
 
+    /**
+     * Set up UI for Slide Bar.
+     *
+     * @param savedInstanceState is stuff
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

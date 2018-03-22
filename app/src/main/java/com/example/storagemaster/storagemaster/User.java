@@ -28,7 +28,7 @@ public class User {
     }
 
     public ArrayList<Item> getShoppingList() {
-        ArrayList<Item> list = new ArrayList<Item>(); //Main list that we'll return
+        ArrayList<Item> list = inventory.get(0).items; //Main list that we'll return
         //Searching through the categories
         for (int i = 0; i < inventory.size(); i++) {
             ArrayList<Item> tempItems = inventory.get(i).items; //Items we'll look through

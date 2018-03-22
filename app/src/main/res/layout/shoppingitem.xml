@@ -9,35 +9,41 @@
 
     <TextView
         android:id="@+id/itemname"
-        android:layout_width="155dp"
-        android:layout_height="18dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:text="Item Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/subtractbutton"
-        app:layout_constraintEnd_toStartOf="@+id/subtractbutton"
+        android:layout_width="0dp"
+        android:layout_height="14dp"
+        android:layout_marginEnd="175dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/crossButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/subtractbutton"
+        android:id="@+id/crossButton"
         android:layout_width="62dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="200dp"
         android:backgroundTint="@android:color/darker_gray"
         android:text="X"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintBaseline_toBaselineOf="@+id/addToButton"
         app:layout_constraintEnd_toStartOf="@+id/quantity"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/addbutton"
+        android:id="@+id/addToButton"
         android:layout_width="62dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:backgroundTint="@android:color/darker_gray"
         android:text="+"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/quantity"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -45,10 +51,11 @@
         android:layout_width="27dp"
         android:layout_height="27dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
         android:text="QTY"
         android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/addbutton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/addToButton"
+        app:layout_constraintEnd_toStartOf="@+id/addToButton"
+        app:layout_constraintStart_toEndOf="@+id/crossButton" />
 
 </android.support.constraint.ConstraintLayout>

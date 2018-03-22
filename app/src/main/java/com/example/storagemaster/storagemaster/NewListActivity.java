@@ -12,7 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
+/**
+ * Create a new category or edit an existing category
+ *
+ *
+ */
 public class NewListActivity extends AppCompatActivity {
 
     private static final String TAG = "NewListActivity";
@@ -108,8 +112,8 @@ public class NewListActivity extends AppCompatActivity {
         });
 
         //Henry Function for adding a ListName/string to Nav Drawer
-       // Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
-       // MainActivity.addNavDrawerItems(menu);
+        //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
+        //MainActivity.addNavDrawerItems(menu);
 
         //System.out.println("Inventory Size: " + MainActivity.inventory.size());
 

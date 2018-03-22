@@ -12,21 +12,41 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Popup for creating a new item or editing an existing item.
+ *
+ * This popup has several parts to it. There are three editable
+ * text boxes (name, quantity, minimum), and two buttons(save,
+ * delete). The three text boxes will have default values if a
+ * new item is being created, or will load the information from
+ * an existing item if it is being edited.
+ *
+ */
 public class NewItem extends AppCompatActivity {
 
+    /**Tag used for log entries.*/
     public static final String TAG = "NewItem";
-    // text boxes
+    /**First box in the popup. For item name.*/
     EditText nameText;
+    /**Second box in popup. For quantity of item.*/
     EditText quantityText;
+    /**Third box in popup. For user's desired minimum amount.*/
     EditText minText;
 
-    // save and delete button
+    /**Save new/edited item*/
     Button saveButton;
+    /**Delete existing item*/
     Button deleteButton;
-    // this variable is to get the correct item from the itemlist
+    /**for correct item from the itemlist*/
     private int itemNum;
+    /**for correct category from the user*/
     private int categoryNum;
 
+    /**
+     * Set up UI for New Item Activity.
+     *
+     * @param savedInstanceState
+     */
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +73,6 @@ public class NewItem extends AppCompatActivity {
         // boxes
         itemNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSI));
         categoryNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
-
         if(itemNum >= 0){
             nameText.setText(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getItemName());
             quantityText.setText(Integer.toString(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getQuantity()));
@@ -61,16 +80,18 @@ public class NewItem extends AppCompatActivity {
             this.setTitle("Edit Item");
         }
 
-        // initialize the button
+        // initialize the buttons
         saveButton = findViewById(R.id.saveItemButton);
         deleteButton = findViewById(R.id.deleteItemButton);
 
-        // save button will get the values from the three text boxes, save them to the new item
-        // and then end the activity.
+        /**
+         * Get the values from the three text boxes, save them to the item
+         * and then end the activity.
+         */
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                int quantityI = 0;
+                int quantityI = 1;
                 int minI = 0;
                 String nameI = ("" + nameText.getText());
                 // add the new values to the item from the text boxes.
@@ -99,6 +120,13 @@ public class NewItem extends AppCompatActivity {
             }
         });
 
+        /**
+         * Delete the item.
+         *
+         * Ff there is an item already there, it will be deleted. If this
+         * button is pushed without a pre-existing item, it will just end
+         * the activity.
+         */
         deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
