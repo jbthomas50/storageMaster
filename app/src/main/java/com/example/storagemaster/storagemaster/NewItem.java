@@ -83,6 +83,7 @@ public class NewItem extends AppCompatActivity {
         // initialize the buttons
         saveButton = findViewById(R.id.saveItemButton);
         deleteButton = findViewById(R.id.deleteItemButton);
+        
 
         /**
          * Get the values from the three text boxes, save them to the item

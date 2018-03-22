@@ -43,11 +43,11 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
         quantityView.setText("" + itemList.get(position).getQuantity());
 
         viewHolder.name = (TextView) view.findViewById(R.id.itemname);
-        viewHolder.crossB = (Button) view.findViewById(R.id.crossButton);
+        viewHolder.subtractB = (Button) view.findViewById(R.id.crossoutbutton);
         viewHolder.qty = (TextView) view.findViewById(R.id.quantity);
-        viewHolder.addToB = (Button) view.findViewById(R.id.addToButton);
+        viewHolder.addB = (Button) view.findViewById(R.id.addbutton2);
 
-        viewHolder.crossB.setOnClickListener(new View.OnClickListener() {
+        viewHolder.subtractB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 itemList.get(position).setQuantity(itemList.get(position).getQuantity() - 1);
@@ -55,7 +55,7 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
             }
         });
 
-        viewHolder.addToB.setOnClickListener(new View.OnClickListener() {
+        viewHolder.addB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 itemList.get(position).setQuantity(itemList.get(position).getQuantity() + 1);
@@ -65,7 +65,7 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
 
         // JAMES - added long click to both add button and subtract button.
         // when long clicked, the buttons will open the slider to edit the quantity of the items
-        viewHolder.crossB.setOnLongClickListener(new View.OnLongClickListener(){
+        viewHolder.subtractB.setOnLongClickListener(new View.OnLongClickListener(){
 
             @Override
             public boolean onLongClick(View view) {
@@ -77,7 +77,7 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
             }
         });
 
-        viewHolder.addToB.setOnLongClickListener(new View.OnLongClickListener(){
+        viewHolder.addB.setOnLongClickListener(new View.OnLongClickListener(){
 
             @Override
             public boolean onLongClick(View view) {
@@ -97,9 +97,9 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
 
     public class ViewHolder {
         TextView name;
-        Button crossB;
+        Button subtractB;
         TextView qty;
-        Button addToB;
+        Button addB;
     }
 
     public void setID(int id){

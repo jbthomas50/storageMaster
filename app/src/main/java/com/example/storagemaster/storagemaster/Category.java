@@ -12,8 +12,10 @@ import java.util.Objects;
 
 /**
  * Created by Alex the one and only on 3/1/2018.
+ * Mainly to hold an ArrayList of items for the user
+ * A category is meant to hold a list of similar items
+ * e.g. food, clothes, cleaning supplies.
  */
-
 public class Category implements Comparable<Category> {
 
     private String categoryName;
@@ -28,6 +30,14 @@ public class Category implements Comparable<Category> {
         return categoryName;
     }
 
+    /**
+     * This class takes care of sorting the list of items and checking that the user
+     * isn't adding a duplicate item
+     * @param name What the user wants to call the item
+     * @param amount The amount of that item the user has on hand
+     * @param minimumAmount The amount of that item the user WANTS to always have on hand
+     * @return Returns true if the item was successfully added to the list
+     */
     public boolean addItem(String name, int amount, int minimumAmount) {
         boolean itemFound = false;
         //Logic that ensures the item isn't already in the list
@@ -54,6 +64,12 @@ public class Category implements Comparable<Category> {
         return true;
     }
 
+    /**
+     * Looks for the name of the item in the list and removes it if it's there
+     * @param name The name of the item the user wants to remove from the list
+     * @param context The context the app is in so it knows how to display a toast
+     * @return Returns true if it was successfully removed
+     */
     public boolean removeItem(String name, Context context){
         boolean itemFound = false;
         //Logic that searches for the item in the list
@@ -74,6 +90,11 @@ public class Category implements Comparable<Category> {
         return false;
     }
 
+    /**
+     * Used to sort the list of categories in the USER object
+     * @param category The category to be compared
+     * @return Returns true if the category has a higher sort value
+     */
     @Override
     public int compareTo(@NonNull Category category) {
 

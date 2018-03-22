@@ -3,9 +3,10 @@ package com.example.storagemaster.storagemaster;
 import android.support.annotation.NonNull;
 
 /**
- * Created by ME on 3/2/2018.
+ * Created by Alex on 3/2/2018.
+ * Class that holds barcode information, also allows comparing barcode name strings
+ * to sort them.
  */
-
 public class Barcode implements Comparable<Barcode> {
     private String name;
     private int value;
@@ -25,6 +26,12 @@ public class Barcode implements Comparable<Barcode> {
         this.value = value;
     }
 
+
+    /**
+     * Used to sort the list of barcodes in the ITEM object
+     * @param barcode The barcode to be compared
+     * @return Returns true if the barcode has a higher sort value
+     */
     @Override
     public int compareTo(@NonNull Barcode barcode) {
 

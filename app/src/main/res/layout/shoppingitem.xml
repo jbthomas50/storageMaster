@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/itemname"
-        android:layout_width="0dp"
-        android:layout_height="14dp"
-        android:layout_marginEnd="175dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/crossButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="155dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:text="Item Name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/crossoutbutton"
+        app:layout_constraintEnd_toStartOf="@+id/crossoutbutton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/crossButton"
+        android:id="@+id/crossoutbutton"
         android:layout_width="62dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="200dp"
         android:backgroundTint="@android:color/darker_gray"
         android:text="X"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        app:layout_constraintBaseline_toBaselineOf="@+id/addToButton"
         app:layout_constraintEnd_toStartOf="@+id/quantity"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/addToButton"
+        android:id="@+id/addbutton2"
         android:layout_width="62dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:backgroundTint="@android:color/darker_gray"
         android:text="+"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/quantity"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -51,11 +44,9 @@
         android:layout_width="27dp"
         android:layout_height="27dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="QTY"
         android:textAlignment="center"
-        app:layout_constraintBaseline_toBaselineOf="@+id/addToButton"
-        app:layout_constraintEnd_toStartOf="@+id/addToButton"
-        app:layout_constraintStart_toEndOf="@+id/crossButton" />
-
+        app:layout_constraintEnd_toStartOf="@+id/addbutton2"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
