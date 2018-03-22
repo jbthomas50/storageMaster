@@ -12,6 +12,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  * Popup for creating a new item or editing an existing item.
  *
@@ -115,7 +118,36 @@ public class NewItem extends AppCompatActivity {
                 else {
                     MainActivity.user.inventory.get(categoryNum).addItem(nameI, quantityI, minI);
                 }
-                MainActivity.adapter.notifyDataSetChanged();
+                if(categoryNum > 0) {
+                    MainActivity.adapter.notifyDataSetChanged();
+                }
+                else{
+                    Collections.sort(MainActivity.user.inventory.get(categoryNum).items, new Comparator<Item>(){
+
+                        @Override
+                        public int compare(Item item, Item t1) {
+                            int first = 0;
+                            String codeName1 = item.getItemName().toUpperCase();
+                            String codeName2 = t1.getItemName().toUpperCase();
+
+                            if(item.getCrossed() && t1.getCrossed()){
+                                first = codeName1.compareTo(codeName2);
+                            }
+                            else if(item.getCrossed()){
+                                first = -1;
+                            }
+                            else if(t1.getCrossed()){
+                                first = 1;
+                            }
+                            else{
+                                first = codeName1.compareTo(codeName2);
+                            }
+
+                            return first;
+                        }
+                    });
+                    MainActivity.adapterShopping.notifyDataSetChanged();
+                }
 
                 finish();
             }
@@ -133,7 +165,12 @@ public class NewItem extends AppCompatActivity {
             public void onClick(View view) {
                 if(itemNum >= 0) {
                     MainActivity.user.inventory.get(categoryNum).items.remove(itemNum);
-                    MainActivity.adapter.notifyDataSetChanged();
+                    if(categoryNum > 0) {
+                        MainActivity.adapter.notifyDataSetChanged();
+                    }
+                    else{
+                        MainActivity.adapterShopping.notifyDataSetChanged();
+                    }
                 }
                 finish();
             }

@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity
 
         //Alex's Excellent CustomAdapter, allows multiple objects to appear in each item in a listview
         this.setTitle(user.inventory.get(0).getCategoryName());
-        //adapter = new ItemListAdapter(this, user.inventory.get(0).items);
         adapterShopping = new ShoppingListAdapter(this, user.inventory.get(0).items);
         lv = (ListView) findViewById(R.id.itemlist);
         lv.setAdapter(adapterShopping);

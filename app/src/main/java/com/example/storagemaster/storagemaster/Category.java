@@ -91,6 +91,22 @@ public class Category implements Comparable<Category> {
     }
 
     /**
+     * cross out an item from the shopping list.
+     */
+    public void crossItem(int pos){
+        items.get(pos).crossItem();
+        Collections.sort(items, new ShoppingCompare());
+    }
+
+    /**
+     * uncross an item that has been crossed
+     */
+    public void uncrossItem(int pos){
+        items.get(pos).uncrossItem();
+        Collections.sort(items, new ShoppingCompare());
+    }
+
+    /**
      * Used to sort the list of categories in the USER object
      * @param category The category to be compared
      * @return Returns true if the category has a higher sort value

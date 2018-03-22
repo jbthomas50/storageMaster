@@ -22,6 +22,9 @@ public class Item implements Comparable<Item>{
      * or if the user manually adds it to the shopping list
      */
     public boolean inShoppingList;
+
+    private boolean isCrossed;
+
     private ArrayList<Barcode> barcodesList = new ArrayList<Barcode>();
 
     private static final String TAG = "Item";
@@ -31,6 +34,7 @@ public class Item implements Comparable<Item>{
         quantity = 0;
         min = -1;
         inShoppingList = false;
+        isCrossed = false;
     }
 
     Item(String itemName){
@@ -38,6 +42,7 @@ public class Item implements Comparable<Item>{
         quantity = 0;
         min = -1;
         inShoppingList = false;
+        isCrossed = false;
     }
 
     Item(String itemName, int quantity){
@@ -45,6 +50,7 @@ public class Item implements Comparable<Item>{
         this.quantity = quantity;
         min = -1;
         inShoppingList = false;
+        isCrossed = false;
     }
 
     Item(String itemName, int quantity, int min){
@@ -52,6 +58,7 @@ public class Item implements Comparable<Item>{
         this.quantity = quantity;
         this.min = min;
         inShoppingList = false;
+        isCrossed = false;
     }
 
     public void setItemName(String name){
@@ -98,6 +105,29 @@ public class Item implements Comparable<Item>{
     }
 
     /**
+     * cross out an item from the shopping list.
+     */
+    public void crossItem(){
+        isCrossed = true;
+    }
+
+    /**
+     * uncross an item that has been crossed
+     */
+    public void uncrossItem(){
+        isCrossed = false;
+    }
+
+    /**
+     * return if the item has been crossed from the shopping list.
+     *
+     * @return isCrossed
+     */
+    public boolean getCrossed(){
+        return isCrossed;
+    }
+
+    /**
      * Used to sort the list of items in the CATEGORY object
      * @param item The item to be sorted
      * @return Returns true if the item has a higher sort value
@@ -115,4 +145,5 @@ public class Item implements Comparable<Item>{
         //descending order
         //return codeName2.compareTo(codeName1);
     }
+
 }

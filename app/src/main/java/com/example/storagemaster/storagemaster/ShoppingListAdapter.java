@@ -36,56 +36,54 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
         view = inflater.inflate(R.layout.shoppingitem, null, true);
         ViewHolder viewHolder = new ViewHolder();
 
-        TextView txtTitle = (TextView) view.findViewById(R.id.itemname);
-        final TextView quantityView = (TextView) view.findViewById(R.id.quantity);
+        TextView txtTitle = view.findViewById(R.id.itemname);
+        final TextView quantityView = view.findViewById(R.id.quantity);
 
         txtTitle.setText(itemList.get(position).getItemName());
         quantityView.setText("" + itemList.get(position).getQuantity());
 
-        viewHolder.name = (TextView) view.findViewById(R.id.itemname);
-        viewHolder.subtractB = (Button) view.findViewById(R.id.crossoutbutton);
-        viewHolder.qty = (TextView) view.findViewById(R.id.quantity);
-        viewHolder.addB = (Button) view.findViewById(R.id.addbutton2);
+        viewHolder.name = view.findViewById(R.id.itemname);
+        viewHolder.crossOutB = view.findViewById(R.id.crossoutbutton);
+        viewHolder.qty =  view.findViewById(R.id.quantity);
+        viewHolder.addB2 = view.findViewById(R.id.addbutton2);
 
-        viewHolder.subtractB.setOnClickListener(new View.OnClickListener() {
+        viewHolder.name.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View view) {
-                itemList.get(position).setQuantity(itemList.get(position).getQuantity() - 1);
-                quantityView.setText("" + itemList.get(position).getQuantity());
+                Intent intent = new Intent(context, NewItem.class);
+                intent.putExtra(MainActivity.POSI, Integer.toString(position));
+                intent.putExtra(MainActivity.POSC, Integer.toString(ID));
+                context.startActivity(intent);
             }
         });
 
-        viewHolder.addB.setOnClickListener(new View.OnClickListener() {
+        // JAMES - added click to both add button 2 and cross out button.
+        // when clicked, the add button 2 will open the slider to edit the
+        // quantity of the items, and the cross out button will cross out
+        // the item.
+        viewHolder.crossOutB.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View view) {
-                itemList.get(position).setQuantity(itemList.get(position).getQuantity() + 1);
-                quantityView.setText("" + itemList.get(position).getQuantity());
+                if(!MainActivity.user.inventory.get(ID).items.get(position).getCrossed()){
+                   MainActivity.user.inventory.get(ID).crossItem(position);
+                }
+                else{
+                    MainActivity.user.inventory.get(ID).uncrossItem(position);
+                }
+                MainActivity.adapterShopping.notifyDataSetChanged();
             }
         });
 
-        // JAMES - added long click to both add button and subtract button.
-        // when long clicked, the buttons will open the slider to edit the quantity of the items
-        viewHolder.subtractB.setOnLongClickListener(new View.OnLongClickListener(){
+        viewHolder.addB2.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public boolean onLongClick(View view) {
+            public void onClick(View view) {
                 Intent intent = new Intent(context, SlideBarActivity.class);
                 intent.putExtra(MainActivity.POSI, Integer.toString(position));
                 intent.putExtra(MainActivity.POSC, Integer.toString(ID));
                 context.startActivity(intent);
-                return false;
-            }
-        });
-
-        viewHolder.addB.setOnLongClickListener(new View.OnLongClickListener(){
-
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intent = new Intent(context, SlideBarActivity.class);
-                intent.putExtra(MainActivity.POSI, Integer.toString(position));
-                intent.putExtra(MainActivity.POSC, Integer.toString(ID));
-                context.startActivity(intent);
-                return false;
             }
         });
         view.setTag(viewHolder);
@@ -97,9 +95,9 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
 
     public class ViewHolder {
         TextView name;
-        Button subtractB;
+        Button crossOutB;
         TextView qty;
-        Button addB;
+        Button addB2;
     }
 
     public void setID(int id){

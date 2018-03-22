@@ -3,6 +3,7 @@ package com.example.storagemaster.storagemaster;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -137,9 +138,16 @@ public class SlideBarActivity extends AppCompatActivity{
             public void onClick(View view) {
                 //set seek value and change the item's quantity equal to it
                 seekValue = Integer.parseInt(numItems.getText().toString());
+                Log.d(TAG, "got seek value");
                 MainActivity.user.inventory.get(catPosition).items.get(itemPosition).setQuantity(seekValue);//user.inventory.get(0).items.get(position).setQuantity(seekValue);
-
-                MainActivity.adapter.notifyDataSetChanged();
+                Log.d(TAG, "set quantity");
+                if(catPosition > 0) {
+                    MainActivity.adapter.notifyDataSetChanged();
+                }
+                else{
+                    MainActivity.adapterShopping.notifyDataSetChanged();
+                }
+                Log.d(TAG, "notified adapter");
                 finish();
             }
         });
