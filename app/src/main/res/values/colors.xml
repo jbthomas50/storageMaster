@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#b98aa1b1</color>
+    <color name="colorPrimary">#8aa1b1</color>
     <color name="colorPrimaryDark">#4A5043</color>
     <color name="colorAccent">#FFCB47</color>
     <color name="topBarColor">#b9d8c2</color>
