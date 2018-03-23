@@ -79,7 +79,8 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                         Toast.makeText(context, itemList.get(position).getItemName() + " added to Shopping List", Toast.LENGTH_SHORT).show();
                         quantityView.setTextColor(Color.RED);
                     }
-                    else if (itemList.get(position).inShoppingList == true){
+                    else if (itemList.get(position).inShoppingList &&
+                            itemList.get(position).getQuantity() > itemList.get(position).getMin()){
                         quantityView.setTextColor(Color.GRAY);
                         itemList.get(position).inShoppingList = false;
                         Toast.makeText(context, itemList.get(position).getItemName() + " removed from Shopping List", Toast.LENGTH_SHORT).show();
@@ -94,13 +95,14 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                     quantityView.setText("" + itemList.get(position).getQuantity());
                     //Henry- set shopping list to true or false based off of the min and quantity
                     //changes the color of quantity to red if in the shopping list
-                    if (itemList.get(position).inShoppingList == false &&
+                    if (!itemList.get(position).inShoppingList &&
                             itemList.get(position).getQuantity() <= itemList.get(position).getMin()){
                         itemList.get(position).inShoppingList = true;
                         Toast.makeText(context, itemList.get(position).getItemName() + " added to Shopping List", Toast.LENGTH_SHORT).show();
                         quantityView.setTextColor(Color.RED);
                     }
-                    else if (itemList.get(position).inShoppingList == true){
+                    else if (itemList.get(position).inShoppingList &&
+                            itemList.get(position).getQuantity() > itemList.get(position).getMin()){
                         quantityView.setTextColor(Color.GRAY);
                         itemList.get(position).inShoppingList = false;
                         Toast.makeText(context, itemList.get(position).getItemName() + " removed from Shopping List", Toast.LENGTH_SHORT).show();
@@ -122,6 +124,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
                     //Henry- set shopping list to true or false based off of the min and quantity
                     //changes the color of quantity to red if in the shopping list
+                    ///THIS IS NOT WORKING!!!
                     if (itemList.get(position).getQuantity() <= itemList.get(position).getMin()){
                         itemList.get(position).inShoppingList = true;
                         quantityView.setTextColor(Color.RED);
@@ -146,6 +149,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
                     //Henry- set shopping list to true or false based off of the min and quantity
                     //changes the color of quantity to red if in the shopping list
+                    ///THIS IS NOT WORKING!!!
                     if (itemList.get(position).getQuantity() <= itemList.get(position).getMin()){
                         itemList.get(position).inShoppingList = true;
                         quantityView.setTextColor(Color.RED);

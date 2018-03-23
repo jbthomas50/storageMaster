@@ -145,6 +145,7 @@ public class SlideBarActivity extends AppCompatActivity{
 
                 //Henry- set shopping list to true or false based off of the min and quantity
                 //changes the color of quantity to red if in the shopping list
+                ///THIS IS NOT WORKING!!!!
                 if (seekValue <= MainActivity.user.inventory.get(catPosition).items.get(itemPosition).getMin()){
                     MainActivity.user.inventory.get(catPosition).items.get(itemPosition).inShoppingList = true;
                     //quantityView.setTextColor(Color.RED);
