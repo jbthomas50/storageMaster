@@ -123,18 +123,19 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Henry Function for adding a ListName/string to Nav Drawer
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
-        addNavDrawerItems(menu); //for now just add 15 listNames
+        addNavDrawerItems(menu); //update the nav drawer with correct category names
         menu.getItem(0).setChecked(true);
         Log.i(TAG, "passed drawer layout");
     }
 
     /**
-     * Function for adding 15 ListNames/string to Nav Drawer
-     * the add parameters are
+     * Function for adding ListNames/strings to Nav Drawer
+     * the add parameters are:
      * 1: which group they pertain to, all of our lists will belong to the same group.
      * 2: the specific item id
      * 3: the placement of the item in the menu
      * 4: the item's title
+     * @param menu this is the navigation drawer menu
      * by Henry
      */
     public static void addNavDrawerItems(Menu menu)
@@ -167,6 +168,9 @@ public class MainActivity extends AppCompatActivity
         menu.add(3, -1, 100, newList);
     }
 
+    /**
+     * the code to close the nav drawer
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -177,6 +181,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Fill the ... settings menu
+     * @param menu The menu in the settings menu.
+     * @return if menu inflated
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -184,6 +193,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * The actions performed when an item is pressed in the settings menu
+     * @param item the specific item pressed in the settings menu
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -215,6 +229,11 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * The actions performed when a specific category is pressed in the navigation drawer
+     * @param item The specific category pressed in the nav drawer
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -270,6 +289,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * The actions preformed when the app stops.
+     * Saves all of the user information to the device.
+     */
     @Override
     protected void onStop() {
         Gson gson = new Gson();

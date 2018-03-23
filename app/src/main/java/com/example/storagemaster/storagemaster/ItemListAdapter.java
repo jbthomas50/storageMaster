@@ -3,12 +3,14 @@ package com.example.storagemaster.storagemaster;
 
 import android.app.Activity;
         import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 /**
@@ -23,7 +25,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
     private final ArrayList<Item> itemList;
 
     private static final String TAG = "ItemListAdapter";
-
+    public static ViewHolder viewHolder;
     private int ID = 0;
 
     /**
@@ -51,7 +53,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
         ViewHolder mainViewHolder = null;
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.listitem, null, true);
-            ViewHolder viewHolder = new ViewHolder();
+            viewHolder = new ViewHolder();
 
             TextView txtTitle = (TextView) view.findViewById(R.id.itemname);
             final TextView quantityView = (TextView) view.findViewById(R.id.quantity);
@@ -69,6 +71,19 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 public void onClick(View view) {
                     itemList.get(position).setQuantity(itemList.get(position).getQuantity() - 1);
                     quantityView.setText("" + itemList.get(position).getQuantity());
+                    //Henry- set shopping list to true or false based off of the min and quantity
+                    //changes the color of quantity to red if in the shopping list
+                    if (itemList.get(position).inShoppingList == false &&
+                            itemList.get(position).getQuantity() <= itemList.get(position).getMin()){
+                        itemList.get(position).inShoppingList = true;
+                        Toast.makeText(context, itemList.get(position).getItemName() + " added to Shopping List", Toast.LENGTH_SHORT).show();
+                        quantityView.setTextColor(Color.RED);
+                    }
+                    else if (itemList.get(position).inShoppingList == true){
+                        quantityView.setTextColor(Color.GRAY);
+                        itemList.get(position).inShoppingList = false;
+                        Toast.makeText(context, itemList.get(position).getItemName() + " removed from Shopping List", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -77,6 +92,19 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                 public void onClick(View view) {
                     itemList.get(position).setQuantity(itemList.get(position).getQuantity() + 1);
                     quantityView.setText("" + itemList.get(position).getQuantity());
+                    //Henry- set shopping list to true or false based off of the min and quantity
+                    //changes the color of quantity to red if in the shopping list
+                    if (itemList.get(position).inShoppingList == false &&
+                            itemList.get(position).getQuantity() <= itemList.get(position).getMin()){
+                        itemList.get(position).inShoppingList = true;
+                        Toast.makeText(context, itemList.get(position).getItemName() + " added to Shopping List", Toast.LENGTH_SHORT).show();
+                        quantityView.setTextColor(Color.RED);
+                    }
+                    else if (itemList.get(position).inShoppingList == true){
+                        quantityView.setTextColor(Color.GRAY);
+                        itemList.get(position).inShoppingList = false;
+                        Toast.makeText(context, itemList.get(position).getItemName() + " removed from Shopping List", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -90,6 +118,19 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                     intent.putExtra(MainActivity.POSI, Integer.toString(position));
                     intent.putExtra(MainActivity.POSC, Integer.toString(ID));
                     context.startActivity(intent);
+
+
+                    //Henry- set shopping list to true or false based off of the min and quantity
+                    //changes the color of quantity to red if in the shopping list
+                    if (itemList.get(position).getQuantity() <= itemList.get(position).getMin()){
+                        itemList.get(position).inShoppingList = true;
+                        quantityView.setTextColor(Color.RED);
+                    }
+                    else{
+                        quantityView.setTextColor(Color.GRAY);
+                        itemList.get(position).inShoppingList = false;
+                    }
+
                     return false;
                 }
             });
@@ -102,11 +143,22 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                     intent.putExtra(MainActivity.POSI, Integer.toString(position));
                     intent.putExtra(MainActivity.POSC, Integer.toString(ID));
                     context.startActivity(intent);
+
+                    //Henry- set shopping list to true or false based off of the min and quantity
+                    //changes the color of quantity to red if in the shopping list
+                    if (itemList.get(position).getQuantity() <= itemList.get(position).getMin()){
+                        itemList.get(position).inShoppingList = true;
+                        quantityView.setTextColor(Color.RED);
+                    }
+                    else{
+                        quantityView.setTextColor(Color.GRAY);
+                        itemList.get(position).inShoppingList = false;
+                    }
+
                     return false;
                 }
             });
             view.setTag(viewHolder);
-
 
         return view;
 

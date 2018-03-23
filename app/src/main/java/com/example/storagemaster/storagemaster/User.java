@@ -35,8 +35,8 @@ public class User {
             ArrayList<Item> tempItems = inventory.get(i).items; //Items we'll look through
             //Searching through the item list
             for (int j = 0; j < tempItems.size(); j++) {
-                //If the quantity is less than the desired quantity
-                if (tempItems.get(j).getQuantity() < tempItems.get(j).getMin()) {
+                //If the quantity is less than or equal to the desired quantity
+                if (tempItems.get(j).getQuantity() <= tempItems.get(j).getMin()) {
                     list.add(tempItems.get(j));
                 }
             }

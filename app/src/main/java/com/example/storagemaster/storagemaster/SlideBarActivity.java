@@ -1,5 +1,6 @@
 package com.example.storagemaster.storagemaster;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 
 /**
@@ -140,6 +142,20 @@ public class SlideBarActivity extends AppCompatActivity{
                 seekValue = Integer.parseInt(numItems.getText().toString());
                 Log.d(TAG, "got seek value");
                 MainActivity.user.inventory.get(catPosition).items.get(itemPosition).setQuantity(seekValue);//user.inventory.get(0).items.get(position).setQuantity(seekValue);
+
+                //Henry- set shopping list to true or false based off of the min and quantity
+                //changes the color of quantity to red if in the shopping list
+                if (seekValue <= MainActivity.user.inventory.get(catPosition).items.get(itemPosition).getMin()){
+                    MainActivity.user.inventory.get(catPosition).items.get(itemPosition).inShoppingList = true;
+                    //quantityView.setTextColor(Color.RED);
+                    ItemListAdapter.viewHolder.qty.setTextColor(Color.RED);
+                }
+                else{
+                    //quantityView.setTextColor(Color.GRAY);
+                    ItemListAdapter.viewHolder.qty.setTextColor(Color.GRAY);
+                    MainActivity.user.inventory.get(catPosition).items.get(itemPosition).inShoppingList = false;
+                }
+
                 Log.d(TAG, "set quantity");
                 if(catPosition > 0) {
                     MainActivity.adapter.notifyDataSetChanged();
