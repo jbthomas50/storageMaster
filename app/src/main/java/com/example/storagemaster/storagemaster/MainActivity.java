@@ -72,8 +72,12 @@ public class MainActivity extends AppCompatActivity
 
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         String json = preferences.getString(USER, null);
+
+        Log.v(TAG, json);
         if (json != null) {
+            Log.d(TAG, "inside of the if??");
             user = gson.fromJson(json, User.class);
         }
 

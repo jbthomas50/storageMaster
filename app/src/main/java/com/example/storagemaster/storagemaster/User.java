@@ -36,9 +36,9 @@ public class User {
             //Searching through the item list
             for (int j = 0; j < tempItems.size(); j++) {
                 //If the quantity is less than or equal to the desired quantity
-                if (tempItems.get(j).getQuantity() <= tempItems.get(j).getMin()) {
+                /*if (tempItems.get(j).getQuantity() <= tempItems.get(j).getMin()) {
                     list.add(tempItems.get(j));
-                }
+                }*/
             }
         }
         Collections.sort(list, new ShoppingCompare());

@@ -1,8 +1,12 @@
 package com.example.storagemaster.storagemaster;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +19,8 @@ import java.util.Collections;
 
 public class Item implements Comparable<Item>{
 
+    private SpannableString quantity;
     private SpannableString itemName;
-    private int quantity;
     private int min;
     /**
      * True if the item quantity has fallen beneath the minimum amount
@@ -35,7 +39,7 @@ public class Item implements Comparable<Item>{
 
     Item(){
         itemName = null;
-        quantity = 0;
+        quantity = new SpannableString("0");
         min = -1;
         inShoppingList = false;
         isCrossed = false;
@@ -47,8 +51,8 @@ public class Item implements Comparable<Item>{
      * @param itemName
      */
     Item(String itemName){
+        quantity = new SpannableString("0");
         this.itemName = new SpannableString(itemName);
-        quantity = 0;
         min = -1;
         inShoppingList = false;
         isCrossed = false;
@@ -61,8 +65,9 @@ public class Item implements Comparable<Item>{
      * @param quantity
      */
     Item(String itemName, int quantity){
+        String newQuantity = Integer.toString(quantity);
+        this.quantity = new SpannableString(newQuantity);
         this.itemName = new SpannableString(itemName);
-        this.quantity = quantity;
         min = -1;
         inShoppingList = false;
         isCrossed = false;
@@ -77,7 +82,8 @@ public class Item implements Comparable<Item>{
      */
     Item(String itemName, int quantity, int min){
         this.itemName = new SpannableString(itemName);
-        this.quantity = quantity;
+        String newQuantity = Integer.toString(quantity);
+        this.quantity = new SpannableString(newQuantity);
         this.min = min;
         inShoppingList = false;
         isCrossed = false;
@@ -91,13 +97,63 @@ public class Item implements Comparable<Item>{
         return itemName;
     }
 
-    public int getQuantity() {
+    public SpannableString getQuantity() {
+        if (Integer.parseInt(quantity.toString()) <=  min)
+        {
+            inShoppingList = true;
+            quantity.setSpan(new ForegroundColorSpan(Color.RED), 0, quantity.length(), 0);//change color to RED
+        }
+        else
+        {
+            inShoppingList = false;
+        }
         return quantity;
     }
 
     public void setQuantity(int startQuantity) {
         if(startQuantity >= 0 & startQuantity < 1000) {
-            this.quantity = startQuantity;
+            this.quantity = new SpannableString(Integer.toString(startQuantity));
+            if (startQuantity <=  min)
+            {
+                inShoppingList = true;
+                quantity.setSpan(new ForegroundColorSpan(Color.RED), 0, quantity.length(), 0);//change color to RED
+            }
+            else
+            {
+                inShoppingList = false;
+            }
+        }
+    }
+
+    public void addQuantity(){
+        /*String number = "10";
+        int result = Integer.parseInt(number);*/
+        int result = Integer.parseInt(quantity.toString());
+        result++;
+        quantity = new SpannableString(Integer.toString(result));
+        if (result <=  min)
+        {
+            inShoppingList = true;
+        }
+        else
+        {
+            inShoppingList = false;
+        }
+    }
+
+    public void subtractQuantity(){
+        int result = Integer.parseInt(quantity.toString());
+        if(result > 0)
+            result--;
+        quantity = new SpannableString(Integer.toString(result));
+        if (result <=  min)
+        {
+            inShoppingList = true;
+            //quantity.setSpan(new StrikethroughSpan(), 0, quantity.length(), 0);
+        }
+        else
+        {
+            inShoppingList = false;
         }
     }
 

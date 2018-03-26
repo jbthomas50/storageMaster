@@ -55,7 +55,7 @@ public class SlideBarActivity extends AppCompatActivity{
         this.catPosition = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
         this.setTitle(MainActivity.user.inventory.get(catPosition).items.get(itemPosition).getItemName());
 
-        seekValue = MainActivity.user.inventory.get(catPosition).items.get(itemPosition).getQuantity();
+        seekValue = Integer.parseInt(MainActivity.user.inventory.get(catPosition).items.get(itemPosition).getQuantity().toString());
 
         seek = new SeekBar(this);
         seek = findViewById(R.id.seekBar);
