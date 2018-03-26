@@ -37,7 +37,7 @@ public class NewListActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.8), (int)(height*.3));
+        getWindow().setLayout((int)(width*.8), (int)(height*.9)); //Originally .8 .3
         getWindow().setSoftInputMode(20);
         Log.d(TAG, "changed display size");
         // initialize the edit text'
