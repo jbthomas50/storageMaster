@@ -75,7 +75,7 @@ public class Category implements Comparable<Category> {
         //Logic that searches for the item in the list
         for (int i = 0; i < items.size(); i++)
         {
-            if(items.get(i).getItemName() == name) {
+            if(items.get(i).getItemName().toString() == name) {
                 items.remove(items.get(i));
                 itemFound = true;
                 Toast.makeText(context, "Item successfully removed", Toast.LENGTH_SHORT).show();

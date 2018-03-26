@@ -61,9 +61,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "at the very, very beginning");
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Log.d(TAG, "before loading from shared preferences");
 
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -75,7 +80,6 @@ public class MainActivity extends AppCompatActivity
         Log.i(TAG, "loaded from shared preferences");
 
         if(user.inventory.size() == 0) {
-            Log.d(TAG, "inside of if");
             Category category = new Category();
             category.setCategoryName("Shopping List");
             user.inventory.add(category);

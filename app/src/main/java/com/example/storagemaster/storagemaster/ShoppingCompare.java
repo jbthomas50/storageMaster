@@ -11,8 +11,8 @@ public class ShoppingCompare implements Comparator<Item> {
     @Override
     public int compare(Item item, Item t1) {
         int first = 0;
-        String codeName1 = item.getItemName().toUpperCase();
-        String codeName2 = t1.getItemName().toUpperCase();
+        String codeName1 = item.getItemName().toString().toUpperCase();
+        String codeName2 = t1.getItemName().toString().toUpperCase();
 
         if(item.getCrossed() && t1.getCrossed()){
             first = codeName1.compareTo(codeName2);

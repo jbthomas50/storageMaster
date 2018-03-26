@@ -2,6 +2,7 @@ package com.example.storagemaster.storagemaster;
 
 import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
+import android.text.SpannableString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +15,7 @@ import java.util.Collections;
 
 public class Item implements Comparable<Item>{
 
-    private String itemName;
+    private SpannableString itemName;
     private int quantity;
     private int min;
     /**
@@ -22,7 +23,10 @@ public class Item implements Comparable<Item>{
      * or if the user manually adds it to the shopping list
      */
     public boolean inShoppingList;
-
+    /**
+     * True if user presses crossed button in shopping list.
+     * Sort moves item to bottom.
+     */
     private boolean isCrossed;
 
     private ArrayList<Barcode> barcodesList = new ArrayList<Barcode>();
@@ -37,24 +41,42 @@ public class Item implements Comparable<Item>{
         isCrossed = false;
     }
 
+    /**
+     * Item Constructor that sets item name.
+     *
+     * @param itemName
+     */
     Item(String itemName){
-        this.itemName = itemName;
+        this.itemName = new SpannableString(itemName);
         quantity = 0;
         min = -1;
         inShoppingList = false;
         isCrossed = false;
     }
 
+    /**
+     * Item constructor that sets name and quantity.
+     *
+     * @param itemName
+     * @param quantity
+     */
     Item(String itemName, int quantity){
-        this.itemName = itemName;
+        this.itemName = new SpannableString(itemName);
         this.quantity = quantity;
         min = -1;
         inShoppingList = false;
         isCrossed = false;
     }
 
+    /**
+     * Item constructor that sets name, quantity, and min.
+     *
+     * @param itemName
+     * @param quantity
+     * @param min
+     */
     Item(String itemName, int quantity, int min){
-        this.itemName = itemName;
+        this.itemName = new SpannableString(itemName);
         this.quantity = quantity;
         this.min = min;
         inShoppingList = false;
@@ -62,10 +84,10 @@ public class Item implements Comparable<Item>{
     }
 
     public void setItemName(String name){
-        this.itemName = name;
+        this.itemName = new SpannableString(name);
     }
 
-    public String getItemName(){
+    public SpannableString getItemName(){
         return itemName;
     }
 
@@ -136,8 +158,8 @@ public class Item implements Comparable<Item>{
     public int compareTo(@NonNull Item item) {
 
         //Sorting by name
-        String codeName1 = this.getItemName().toUpperCase();
-        String codeName2 = item.getItemName().toUpperCase();
+        String codeName1 = this.getItemName().toString().toUpperCase();
+        String codeName2 = item.getItemName().toString().toUpperCase();
 
         //ascending order
         return codeName1.compareTo(codeName2);
