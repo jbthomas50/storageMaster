@@ -120,7 +120,7 @@ public class User {
         itemFound = false;
 
         for (int i = 0; i < cFrom.items.size() && !itemFound; i++) {
-            if (cFrom.items.get(i).getItemName() == name) {
+            if (cFrom.items.get(i).getItemName().toString() == name) {
                 cFrom = inventory.get(i);
                 itemFound = true;
             }
