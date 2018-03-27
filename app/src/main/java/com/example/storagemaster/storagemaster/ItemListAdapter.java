@@ -4,6 +4,7 @@ package com.example.storagemaster.storagemaster;
 import android.app.Activity;
         import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -108,10 +109,13 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
                 @Override
                 public boolean onLongClick(View view) {
-                    Intent intent = new Intent(context, SlideBarActivity.class);
-                    intent.putExtra(MainActivity.POSI, Integer.toString(position));
-                    intent.putExtra(MainActivity.POSC, Integer.toString(ID));
-                    context.startActivity(intent);
+                    if (!MainActivity.isWindowOpen) {
+                        MainActivity.isWindowOpen = true;
+                        Intent intent = new Intent(context, SlideBarActivity.class);
+                        intent.putExtra(MainActivity.POSI, Integer.toString(position));
+                        intent.putExtra(MainActivity.POSC, Integer.toString(ID));
+                        context.startActivity(intent);
+                    }
 
                     return false;
                 }
@@ -121,10 +125,13 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
                 @Override
                 public boolean onLongClick(View view) {
-                    Intent intent = new Intent(context, SlideBarActivity.class);
-                    intent.putExtra(MainActivity.POSI, Integer.toString(position));
-                    intent.putExtra(MainActivity.POSC, Integer.toString(ID));
-                    context.startActivity(intent);
+                    if (!MainActivity.isWindowOpen) {
+                        MainActivity.isWindowOpen = true;
+                        Intent intent = new Intent(context, SlideBarActivity.class);
+                        intent.putExtra(MainActivity.POSI, Integer.toString(position));
+                        intent.putExtra(MainActivity.POSC, Integer.toString(ID));
+                        context.startActivity(intent);
+                    }
 
                     return false;
                 }

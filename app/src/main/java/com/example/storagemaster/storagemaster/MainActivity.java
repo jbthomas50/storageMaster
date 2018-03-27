@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
 
     public static ListView lv;
     public static int ID = 0;
-
+    public static boolean isWindowOpen = false; //Variable used to prevent multiple conflicting windows from opening
 
     public static NavigationView navigationView; //findViewById(R.id.nav_view);
 
@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity
 
         String json = preferences.getString(USER, null);
 
-        Log.v(TAG, json);
         if (json != null) {
+            Log.v(TAG, json);
             Log.d(TAG, "inside of the if??");
             user = gson.fromJson(json, User.class);
         }
@@ -100,10 +100,13 @@ public class MainActivity extends AppCompatActivity
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, NewItem.class);
-                intent.putExtra(POSI, Integer.toString(position));
-                intent.putExtra(POSC, Integer.toString(ID));
-                startActivity(intent);
+                if (!MainActivity.isWindowOpen) {
+                    MainActivity.isWindowOpen = true;
+                    Intent intent = new Intent(MainActivity.this, NewItem.class);
+                    intent.putExtra(POSI, Integer.toString(position));
+                    intent.putExtra(POSC, Integer.toString(ID));
+                    startActivity(intent);
+                }
             }
         });
         Log.i(TAG, "set item list adapter");

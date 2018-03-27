@@ -45,11 +45,20 @@ public class NewItem extends AppCompatActivity {
     /**for correct category from the user*/
     private int categoryNum;
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MainActivity.isWindowOpen = false;
+    }
+
     /**
      * Set up UI for New Item Activity.
      *
      * @param savedInstanceState
      */
+
+
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

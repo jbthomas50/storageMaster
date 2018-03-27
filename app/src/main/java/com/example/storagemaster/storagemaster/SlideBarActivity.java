@@ -31,11 +31,20 @@ public class SlideBarActivity extends AppCompatActivity{
     private int itemPosition;
     private int catPosition;
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MainActivity.isWindowOpen = false;
+    }
+
     /**
      * Set up UI for Slide Bar.
      *
      * @param savedInstanceState is stuff
      */
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

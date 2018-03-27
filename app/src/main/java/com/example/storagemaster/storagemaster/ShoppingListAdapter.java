@@ -53,10 +53,13 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, NewItem.class);
-                intent.putExtra(MainActivity.POSI, Integer.toString(position));
-                intent.putExtra(MainActivity.POSC, Integer.toString(ID));
-                context.startActivity(intent);
+                if (!MainActivity.isWindowOpen) {
+                    MainActivity.isWindowOpen = true;
+                    Intent intent = new Intent(context, NewItem.class);
+                    intent.putExtra(MainActivity.POSI, Integer.toString(position));
+                    intent.putExtra(MainActivity.POSC, Integer.toString(ID));
+                    context.startActivity(intent);
+                }
             }
         });
 
