@@ -95,7 +95,9 @@ public class MainActivity extends AppCompatActivity
         this.setTitle(user.inventory.get(0).getCategoryName());
         adapterShopping = new ShoppingListAdapter(this, user.inventory.get(0).items);
         lv = (ListView) findViewById(R.id.itemlist);
+        adapterShopping.setID(0);
         lv.setAdapter(adapterShopping);
+        adapterShopping.notifyDataSetChanged();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //This runs when an item is clicked in the listview, anywhere on the bar except the buttons or quantity box
             @Override
@@ -285,7 +287,6 @@ public class MainActivity extends AppCompatActivity
             }
             else //Shopping category - ♠♣♥♦(Alex)♠♣♥♦
             {
-
                 adapterShopping.setID(id);
                 lv.setAdapter(adapterShopping);
                 adapterShopping.notifyDataSetChanged();

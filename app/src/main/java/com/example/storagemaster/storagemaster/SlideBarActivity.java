@@ -154,20 +154,7 @@ public class SlideBarActivity extends AppCompatActivity{
                 Log.d(TAG, "got seek value");
                 MainActivity.user.inventory.get(catPosition).items.get(itemPosition).setQuantity(seekValue);//user.inventory.get(0).items.get(position).setQuantity(seekValue);
 
-                //Henry- set shopping list to true or false based off of the min and quantity
-                //changes the color of quantity to red if in the shopping list
-                ///THIS IS NOT WORKING!!!!
-                if (seekValue <= MainActivity.user.inventory.get(catPosition).items.get(itemPosition).getMin()){
-                    MainActivity.user.inventory.get(catPosition).items.get(itemPosition).inShoppingList = true;
-                    //quantityView.setTextColor(Color.RED);
-                    ItemListAdapter.viewHolder.qty.setTextColor(Color.RED);
-                }
-                else{
-                    //quantityView.setTextColor(Color.GRAY);
-                    ItemListAdapter.viewHolder.qty.setTextColor(Color.GRAY);
-                    MainActivity.user.inventory.get(catPosition).items.get(itemPosition).inShoppingList = false;
-                }
-
+                //Removed setting inshoppinglist bool here because it already gets taken care of when you call setQuantity --^
                 Log.d(TAG, "set quantity");
                 if(catPosition > 0) {
                     MainActivity.adapter.notifyDataSetChanged();

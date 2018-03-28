@@ -31,6 +31,25 @@ public class Category implements Comparable<Category> {
     }
 
     /**
+     * This class is for adding an item to the shopping list, the item needs to exist
+     * already to be added this way
+     * @param item What item needs to be added to the shopping list
+     * @return Returns true if the item was successfully added to the list
+     */
+    public boolean addExistingItem(Item item) {
+        //Logic that ensures the item isn't already in the list
+        if (items.contains(item)) {
+            Log.i("Category", "User attempted to add a duplicate item: " + item.getItemName());
+            return false;
+        }
+        else {
+            items.add(item);
+            Collections.sort(items);
+        }
+        return true;
+    }
+
+    /**
      * This class takes care of sorting the list of items and checking that the user
      * isn't adding a duplicate item
      * @param name What the user wants to call the item
@@ -66,27 +85,22 @@ public class Category implements Comparable<Category> {
 
     /**
      * Looks for the name of the item in the list and removes it if it's there
-     * @param name The name of the item the user wants to remove from the list
-     * @param context The context the app is in so it knows how to display a toast
+     * @param item The item to be removed from the list
      * @return Returns true if it was successfully removed
      */
-    public boolean removeItem(String name, Context context){
-        boolean itemFound = false;
+    public boolean removeItem(Item item){
         //Logic that searches for the item in the list
-        for (int i = 0; i < items.size(); i++)
-        {
-            if(items.get(i).getItemName().toString() == name) {
-                items.remove(items.get(i));
-                itemFound = true;
-                Toast.makeText(context, "Item successfully removed", Toast.LENGTH_SHORT).show();
-                Log.i("Category", "User successfully removed item: " + name);
+
+            if(items.contains(item)) {
+                items.remove(item);
+                //Toast.makeText(context, "Item successfully removed", Toast.LENGTH_SHORT).show();
+                Log.i("Category", "User successfully removed item: " + item.getItemName());
                 return true;
             }
-        }
-        if (!itemFound) {
-            Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
-            Log.e("Category", "User attempted to remove an item that doesn't exist: " + name);
-        }
+            else{
+            //Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
+            Log.e("Category", "User attempted to remove an item that doesn't exist: " + item.getItemName());
+            }
         return false;
     }
 

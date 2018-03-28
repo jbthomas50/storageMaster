@@ -115,11 +115,13 @@ public class Item implements Comparable<Item>{
             this.quantity = new SpannableString(Integer.toString(startQuantity));
             if (startQuantity <=  min)
             {
+                MainActivity.user.inventory.get(0).addExistingItem(this);
                 inShoppingList = true;
                 quantity.setSpan(new ForegroundColorSpan(Color.RED), 0, quantity.length(), 0);//change color to RED
             }
             else
             {
+                MainActivity.user.inventory.get(0).removeItem(this);
                 inShoppingList = false;
             }
         }
@@ -133,10 +135,12 @@ public class Item implements Comparable<Item>{
         quantity = new SpannableString(Integer.toString(result));
         if (result <=  min)
         {
+            MainActivity.user.inventory.get(0).addExistingItem(this);
             inShoppingList = true;
         }
         else
         {
+            MainActivity.user.inventory.get(0).removeItem(this);
             inShoppingList = false;
         }
     }
@@ -148,11 +152,13 @@ public class Item implements Comparable<Item>{
         quantity = new SpannableString(Integer.toString(result));
         if (result <=  min)
         {
+            MainActivity.user.inventory.get(0).addExistingItem(this);
             inShoppingList = true;
             //quantity.setSpan(new StrikethroughSpan(), 0, quantity.length(), 0);
         }
         else
         {
+            MainActivity.user.inventory.get(0).removeItem(this);
             inShoppingList = false;
         }
     }
