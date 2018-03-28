@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
+    android:background="@color/backgroundColor"
     tools:context="com.example.storagemaster.storagemaster.NewItem">
 
     <EditText

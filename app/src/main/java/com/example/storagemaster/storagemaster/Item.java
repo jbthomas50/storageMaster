@@ -94,6 +94,12 @@ public class Item implements Comparable<Item>{
     }
 
     public SpannableString getItemName(){
+        if(isCrossed) {
+            itemName.setSpan(new StrikethroughSpan(), 0, itemName.length(), 0);
+        }
+        else{
+            itemName = new SpannableString(itemName.toString());
+        }
         return itemName;
     }
 

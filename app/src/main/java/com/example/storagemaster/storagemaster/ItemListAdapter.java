@@ -59,7 +59,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
             TextView txtTitle = (TextView) view.findViewById(R.id.itemname);
             final TextView quantityView = (TextView) view.findViewById(R.id.quantity);
 
-            txtTitle.setText(itemList.get(position).getItemName());
+            txtTitle.setText(itemList.get(position).getItemName().toString());
             quantityView.setText(itemList.get(position).getQuantity());
 
             viewHolder.name = (TextView) view.findViewById(R.id.itemname);

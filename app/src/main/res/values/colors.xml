@@ -5,4 +5,5 @@
     <color name="colorAccent">#FFCB47</color>
     <color name="topBarColor">#b9d8c2</color>
     <color name="buttonColor">#CECCCC</color>
+    <color name="backgroundColor">#43b9d8c2</color>
 </resources>

@@ -18,10 +18,10 @@ public class ShoppingCompare implements Comparator<Item> {
             first = codeName1.compareTo(codeName2);
         }
         else if(item.getCrossed()){
-            first = -1;
+            first = 1;
         }
         else if(t1.getCrossed()){
-            first = 1;
+            first = -1;
         }
         else{
             first = codeName1.compareTo(codeName2);

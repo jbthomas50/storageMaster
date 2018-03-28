@@ -3,6 +3,7 @@ package com.example.storagemaster.storagemaster;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,7 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
         TextView txtTitle = view.findViewById(R.id.itemname);
         final TextView quantityView = view.findViewById(R.id.quantity);
 
-        txtTitle.setText(itemList.get(position).getItemName().toString());
+        txtTitle.setText(itemList.get(position).getItemName());
         quantityView.setText("" + itemList.get(position).getQuantity());
 
         viewHolder.name = view.findViewById(R.id.itemname);
@@ -73,7 +74,6 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
             public void onClick(View view) {
                 if(!MainActivity.user.inventory.get(ID).items.get(position).getCrossed()){
                    MainActivity.user.inventory.get(ID).crossItem(position);
-                   //viewHolder.name.setSpan(new StrikethroughSpan(), 0, viewHolder.name.length(), 0);
                 }
                 else{
                     MainActivity.user.inventory.get(ID).uncrossItem(position);

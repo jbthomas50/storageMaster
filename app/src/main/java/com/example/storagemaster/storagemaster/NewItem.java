@@ -86,7 +86,7 @@ public class NewItem extends AppCompatActivity {
         itemNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSI));
         categoryNum = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
         if(itemNum >= 0){
-            nameText.setText(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getItemName());
+            nameText.setText(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getItemName().toString());
             quantityText.setText(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getQuantity());
             minText.setText(Integer.toString(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getMin()));
             this.setTitle("Edit Item");
@@ -132,30 +132,6 @@ public class NewItem extends AppCompatActivity {
                 }
                 else{
                     Collections.sort(MainActivity.user.inventory.get(categoryNum).items, new ShoppingCompare());
-//                            new Comparator<Item>(){
-//
-//                        @Override
-//                        public int compare(Item item, Item t1) {
-//                            int first = 0;
-//                            String codeName1 = item.getItemName().toString().toUpperCase();
-//                            String codeName2 = t1.getItemName().toString().toUpperCase();
-//
-//                            if(item.getCrossed() && t1.getCrossed()){
-//                                first = codeName1.compareTo(codeName2);
-//                            }
-//                            else if(item.getCrossed()){
-//                                first = -1;
-//                            }
-//                            else if(t1.getCrossed()){
-//                                first = 1;
-//                            }
-//                            else{
-//                                first = codeName1.compareTo(codeName2);
-//                            }
-//
-//                            return first;
-//                        }
-//                    });
                     MainActivity.adapterShopping.notifyDataSetChanged();
                 }
 
