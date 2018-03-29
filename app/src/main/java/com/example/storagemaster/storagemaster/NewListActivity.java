@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,6 +41,13 @@ public class NewListActivity extends AppCompatActivity {
         getWindow().setLayout((int)(width*.8), (int)(height*.9)); //Originally .8 .3
         getWindow().setSoftInputMode(20);
         Log.d(TAG, "changed display size");
+
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.dimAmount = 0.50f;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(layoutParams);
+
+
         // initialize the edit text'
         listName = findViewById(R.id.editText);
 

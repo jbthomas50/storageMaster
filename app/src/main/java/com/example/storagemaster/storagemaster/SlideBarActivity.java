@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -58,6 +59,11 @@ public class SlideBarActivity extends AppCompatActivity{
         getWindow().setLayout((int) (width * .8), (int) (height * .9 )); //Originally .8 .4
 
         getWindow().setSoftInputMode(5|20);
+
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.dimAmount = 0.50f;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(layoutParams);
 
         //initialize the variables.
         this.itemPosition = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSI));

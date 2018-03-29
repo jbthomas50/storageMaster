@@ -1,6 +1,8 @@
 package com.example.storagemaster.storagemaster;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -68,13 +71,17 @@ public class NewItem extends AppCompatActivity {
         // set the window to the correct size.
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
+
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*.8), (int)(height*.9)); //Originally .8 .45
 
-        //getWindow().setGravity(Gravity.TOP);
-
         getWindow().setSoftInputMode(5|20);
+
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.dimAmount = 0.50f;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(layoutParams);
 
         // initialize the text boxes
         nameText = findViewById(R.id.newItemText);
