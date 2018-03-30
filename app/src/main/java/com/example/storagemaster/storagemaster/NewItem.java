@@ -111,6 +111,7 @@ public class NewItem extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "Save clicked");
                 int quantityI = 1;
                 int minI = 0;
                 String nameI = ("" + nameText.getText());
@@ -119,17 +120,15 @@ public class NewItem extends AppCompatActivity {
                 if(TextUtils.isDigitsOnly(quantity) && quantityText.getText().length() > 0) {
                     quantityI = Integer.parseInt(quantity);
                 }
-
                 String min = minText.getText().toString();
                 if(TextUtils.isDigitsOnly(min) && minText.getText().length() > 0) {
                     minI = Integer.parseInt(min);
                 }
-
+                Log.d(TAG, " " + MainActivity.user.inventory.get(0).items.size() + " ");
                 if(itemNum >= 0){
                     MainActivity.user.inventory.get(categoryNum).items.get(itemNum).setItemName(nameI);
-                    MainActivity.user.inventory.get(categoryNum).items.get(itemNum).setQuantity(quantityI);
                     MainActivity.user.inventory.get(categoryNum).items.get(itemNum).setMin(minI);
-
+                    MainActivity.user.inventory.get(categoryNum).items.get(itemNum).setQuantity(quantityI);
                 }
                 else {
                     MainActivity.user.inventory.get(categoryNum).addItem(nameI, quantityI, minI);

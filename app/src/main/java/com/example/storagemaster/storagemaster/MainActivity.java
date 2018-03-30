@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.internal.NavigationMenu;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -58,12 +59,12 @@ public class MainActivity extends AppCompatActivity
 
     public static NavigationView navigationView; //findViewById(R.id.nav_view);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Log.d(TAG, "at the very, very beginning");
-
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
