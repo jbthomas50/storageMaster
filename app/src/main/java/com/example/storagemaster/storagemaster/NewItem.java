@@ -74,7 +74,7 @@ public class NewItem extends AppCompatActivity {
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.8), (int)(height*.9)); //Originally .8 .45
+        getWindow().setLayout((int)(width*.8), (int)(height*.8)); //Originally .8 .45
 
         getWindow().setSoftInputMode(5|20);
 

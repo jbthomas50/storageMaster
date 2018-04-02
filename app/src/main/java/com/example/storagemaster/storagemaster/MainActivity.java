@@ -33,6 +33,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity
@@ -220,7 +222,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.hints) {
             Toast.makeText(MainActivity.this, "Settings Selected", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -290,6 +292,7 @@ public class MainActivity extends AppCompatActivity
             {
                 adapterShopping.setID(id);
                 lv.setAdapter(adapterShopping);
+                Collections.sort(MainActivity.user.inventory.get(0).items, new ShoppingCompare());
                 adapterShopping.notifyDataSetChanged();
             }
 

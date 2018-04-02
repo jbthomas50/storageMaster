@@ -56,7 +56,7 @@ public class SlideBarActivity extends AppCompatActivity{
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * .9 )); //Originally .8 .4
+        getWindow().setLayout((int) (width * .8), (int) (height * .8 )); //Originally .8 .4
 
         getWindow().setSoftInputMode(5|20);
 
