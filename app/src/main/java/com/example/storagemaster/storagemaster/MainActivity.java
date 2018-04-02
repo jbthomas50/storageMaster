@@ -90,7 +90,11 @@ public class MainActivity extends AppCompatActivity
             Category category = new Category();
             category.setCategoryName("Shopping List");
             user.inventory.add(category);
-            Log.i(TAG, "added category to user inventory");
+            Log.i(TAG, "added Shopping List to user inventory");
+            category = new Category();
+            category.setCategoryName("Main");
+            user.inventory.add(category);
+            Log.i(TAG, "added Main to user inventory");
         }
 
 

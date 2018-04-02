@@ -26,17 +26,17 @@
         <activity
             android:name=".NewListActivity"
             android:label="@string/title_activity_new_list"
-            android:theme="@style/AppTheme.CustomTheme">
-        </activity>
+            android:theme="@style/AppTheme.CustomTheme"></activity>
         <activity
             android:name=".SlideBarActivity"
             android:label="@string/title_activity_slider"
-            android:theme="@style/AppTheme.CustomTheme">
-        </activity>
+            android:theme="@style/AppTheme.CustomTheme"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".HintActivity"></activity>
     </application>
 
 </manifest>
