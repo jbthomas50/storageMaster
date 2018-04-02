@@ -94,6 +94,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                     quantityView.setText(itemList.get(position).getQuantity());
                     boolean inShoppingListAfter = itemList.get(position).inShoppingList;
 
+                    //if put in or taken out of shopping list tell the user through a toast
                     if (inShoppingListBefore == false && inShoppingListAfter == true) {
                         Toast.makeText(context, itemList.get(position).getItemName() + " added to Shopping List", Toast.LENGTH_SHORT).show();
                     }

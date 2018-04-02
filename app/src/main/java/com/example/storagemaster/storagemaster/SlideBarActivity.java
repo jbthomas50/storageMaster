@@ -160,7 +160,6 @@ public class SlideBarActivity extends AppCompatActivity{
                 Log.d(TAG, "got seek value");
                 MainActivity.user.inventory.get(catPosition).items.get(itemPosition).setQuantity(seekValue);//user.inventory.get(0).items.get(position).setQuantity(seekValue);
 
-                //Removed setting inshoppinglist bool here because it already gets taken care of when you call setQuantity --^
                 Log.d(TAG, "set quantity");
                 if(catPosition > 0) {
                     MainActivity.adapter.notifyDataSetChanged();

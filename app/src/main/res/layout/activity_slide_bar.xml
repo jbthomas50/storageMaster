@@ -49,6 +49,7 @@
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="number"
+        android:maxLength="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.widget.Toast;
@@ -108,6 +109,7 @@ public class Item implements Comparable<Item>{
         {
             inShoppingList = true;
             quantity.setSpan(new ForegroundColorSpan(Color.RED), 0, quantity.length(), 0);//change color to RED
+            //quantity.setSpan(new BackgroundColorSpan(Color.DKGRAY), 0, quantity.length(), 0);
         }
         else
         {
