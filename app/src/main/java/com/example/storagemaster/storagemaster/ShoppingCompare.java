@@ -3,11 +3,17 @@ package com.example.storagemaster.storagemaster;
 import java.util.Comparator;
 
 /**
- * Created by JBThomas on 3/22/2018.
+ * Sorts shopping list with crossed-out items on bottom.
  */
-
 public class ShoppingCompare implements Comparator<Item> {
 
+    /**
+     * compares items to sort alphabetically with crossed-out on bottom
+     *
+     * @param item first item to be compared
+     * @param t1 second item to be compared
+     * @return positive if item goes after, negative if it goes before.
+     */
     @Override
     public int compare(Item item, Item t1) {
         int first = 0;

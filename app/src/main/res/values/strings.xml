@@ -5,7 +5,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="hint">Hints</string>
+
     <string name="title_activity_main">Storage Master</string>
 
     <string name="title_activity_new_item">New Item</string>
@@ -17,6 +17,8 @@
     <string name="newItem">New Item</string>
     <string name="newList">New List</string>
     <string name="slider">Slider</string>
+
+    <string name="hint">Hints</string>
 
     <string name="itemName">Item Name</string>
     <string name="startQuant">Start Quantity</string>
@@ -30,5 +32,25 @@
 
     <string name="add">+</string>
     <string name="subtract">-</string>
+
+    <string name="hintsText">
+        Navigation Drawer:\n
+        First list is the shopping list.\n
+        Next lists are inventory categories.\n
+        New inventory categories can be created by tapping \"new list…\".\n
+        Inventory lists can be deleting by selecting \"edit list\" from the drop down menu, and then selecting \"delete\".\n\n
+        Shopping List:\n
+        Items are added automatically when minimum amount set by user is reached.\n
+        Items can be added by the user for a \"one time buy\" by tapping the add button in the bottom right corner.\n
+        The \'X\' button is used to cross or uncross items on the shopping list. The crossed items will be sorted to the bottom of the list.\n
+        The \'+\' button brings up a slider bar which can be used to set the amount of items bought. The item will then be taken off the list.\n
+        If the name of an item is tapped, it can be edited.\n\n
+        Category Lists:\n
+        Items can be added to the category by tapping the add button in the bottom right corner.
+        The item name, amount currently had, and minimum amount wanted can be set in the popup box\n
+        When the item name is tapped, the item values can be edited.\n
+        the \'+\' and \'-\' buttons are used to add and subtract quantity. If they are tapped and held, it brings up the slider bar for quick editing.\n
+
+    </string>
 
 </resources>

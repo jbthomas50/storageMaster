@@ -227,7 +227,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.hints) {
-            Toast.makeText(MainActivity.this, "Settings Selected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, HintActivity.class));
+
+            Toast.makeText(MainActivity.this, "Hints Selected", Toast.LENGTH_SHORT).show();
             return true;
         }
 
