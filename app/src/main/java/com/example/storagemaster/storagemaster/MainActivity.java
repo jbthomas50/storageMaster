@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity
 
         if (json != null) {
             Log.v(TAG, json);
-            Log.d(TAG, "inside of the if??");
             user = gson.fromJson(json, User.class);
         }
 

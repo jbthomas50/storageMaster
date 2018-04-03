@@ -36,6 +36,10 @@ public class NewListActivity extends AppCompatActivity {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.dimAmount = .06f;
+
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*.8), (int)(height*.8));
