@@ -139,6 +139,7 @@ public class Item implements Comparable<Item>{
         /*String number = "10";
         int result = Integer.parseInt(number);*/
         int result = Integer.parseInt(quantity.toString());
+        if (result < 999)
         result++;
         quantity = new SpannableString(Integer.toString(result));
         if (result <=  min)
