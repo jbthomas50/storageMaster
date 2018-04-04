@@ -81,6 +81,15 @@ public class MainActivity extends AppCompatActivity
         if (json != null) {
             Log.v(TAG, json);
             user = gson.fromJson(json, User.class);
+            for(int item = 0; item < user.inventory.get(0).items.size(); item++){
+                for(int i = 1; i < user.inventory.size(); i++){
+                    for(int it = 0; it < user.inventory.get(i).items.size(); it++){
+                        if (user.inventory.get(0).items.get(item).getItemName().equals(user.inventory.get(i).items.get(it).getItemName())){
+                            user.inventory.get(0).items.set(item, user.inventory.get(i).items.get(it));
+                        }
+                    }
+                }
+            }
         }
 
         Log.i(TAG, "loaded from shared preferences");
