@@ -37,20 +37,21 @@
         Navigation Drawer:\n
         First list is the shopping list.\n
         Next lists are inventory categories.\n
-        New inventory categories can be created by tapping \"new list…\".\n
-        Inventory lists can be deleting by selecting \"edit list\" from the drop down menu, and then selecting \"delete\".\n\n
+        New inventory categories can be created by tapping \"New Inventory List…\".\n
+        Inventory lists can be deleted by selecting \"edit list\" from the drop down menu, and then selecting \"delete\".\n\n
+
         Shopping List:\n
         Items are added automatically when minimum amount set by user is reached.\n
         Items can be added by the user for a \"one time buy\" by tapping the add button in the bottom right corner.\n
         The \'X\' button is used to cross or uncross items on the shopping list. The crossed items will be sorted to the bottom of the list.\n
         The \'+\' button brings up a slider bar which can be used to set the amount of items bought. The item will then be taken off the list.\n
         If the name of an item is tapped, it can be edited.\n\n
+
         Category Lists:\n
         Items can be added to the category by tapping the add button in the bottom right corner.
         The item name, amount currently had, and minimum amount wanted can be set in the popup box\n
-        When the item name is tapped, the item values can be edited.\n
-        the \'+\' and \'-\' buttons are used to add and subtract quantity. If they are tapped and held, it brings up the slider bar for quick editing.\n
-
+        When the item name is tapped, the item values can be easily edited.\n
+        the \'+\' and \'-\' buttons are used to add and subtract quantity. If they are tapped and held, it brings up the slider bar for quick editing.\n\n
     </string>
 
 </resources>

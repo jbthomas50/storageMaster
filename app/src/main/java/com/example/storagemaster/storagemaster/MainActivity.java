@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         //Spannable strings are strings that allow a manipulation of color and size.
-        SpannableString newList = new SpannableString("new list..."); //new string
+        SpannableString newList = new SpannableString("New Inventory List..."); //new string
         newList.setSpan(new ForegroundColorSpan(Color.GRAY), 0, newList.length(), 0);//change color to Gray
         newList.setSpan(new RelativeSizeSpan(1.2f),0,newList.length(),0);//make the font size bigger.
         /*The new list id will be -1 to differentiate from the real Categories*/

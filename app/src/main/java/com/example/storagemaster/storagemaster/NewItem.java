@@ -95,7 +95,10 @@ public class NewItem extends AppCompatActivity {
         if(itemNum >= 0){
             nameText.setText(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getItemName().toString());
             quantityText.setText(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getQuantity());
-            minText.setText(Integer.toString(MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getMin()));
+            int minTemp = MainActivity.user.inventory.get(categoryNum).items.get(itemNum).getMin();
+            if (minTemp >= 0) {
+                minText.setText(Integer.toString(minTemp));
+            }
             this.setTitle("Edit Item");
         }
 
@@ -113,7 +116,7 @@ public class NewItem extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "Save clicked");
                 int quantityI = 1;
-                int minI = 0;
+                int minI = -1;
                 String nameI = ("" + nameText.getText());
                 // add the new values to the item from the text boxes.
                 String quantity = quantityText.getText().toString();
@@ -148,7 +151,7 @@ public class NewItem extends AppCompatActivity {
         /**
          * Delete the item.
          *
-         * Ff there is an item already there, it will be deleted. If this
+         * If there is an item already there, it will be deleted. If this
          * button is pushed without a pre-existing item, it will just end
          * the activity.
          */
