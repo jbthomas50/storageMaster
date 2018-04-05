@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity
     public static ListView lv;
     public static int ID = 0;
     public static boolean isWindowOpen = false; //Variable used to prevent multiple conflicting windows from opening
+    public static int currentCategory = 0;
 
     public static NavigationView navigationView; //findViewById(R.id.nav_view);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -252,13 +252,22 @@ public class MainActivity extends AppCompatActivity
             } else {
                 Intent intent = new Intent(MainActivity.this, NewListActivity.class);
                 intent.putExtra(POSC, Integer.toString(position));
-                startActivity(intent);
+                currentCategory = position;
+                startActivityForResult(intent, 0);
             }
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 0) {
+            this.setTitle(user.inventory.get(currentCategory).getCategoryName());
+        }
+    }
     /**
      * The actions performed when a specific category is pressed in the navigation drawer
      * @param item The specific category pressed in the nav drawer

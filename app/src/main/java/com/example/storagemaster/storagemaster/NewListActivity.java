@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.example.storagemaster.storagemaster.MainActivity.POSC;
+
 /**
  * Create a new category or edit an existing category
  *
@@ -59,7 +61,7 @@ public class NewListActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.button2);
         deleteButton = findViewById(R.id.button);
 
-        catPosition = Integer.parseInt(getIntent().getStringExtra(MainActivity.POSC));
+        catPosition = Integer.parseInt(getIntent().getStringExtra(POSC));
 
         if(catPosition > -1){
            // listName.setText(MainActivity.category.items.get(position).getItemName());
@@ -86,8 +88,8 @@ public class NewListActivity extends AppCompatActivity {
                         Category newCategory = new Category();
                         newCategory.setCategoryName(listName.getText().toString());
                         MainActivity.user.inventory.add(newCategory);
-                        Log.d(TAG, "list added to inventory");
 
+                        Log.d(TAG, "list added to inventory");
                         //trying to get the new activity to load
                         /*int id = MainActivity.user.inventory.size();
                         MainActivity.adapter = new ItemListAdapter(this, MainActivity.user.inventory.get(id).items);
