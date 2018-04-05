@@ -1,22 +1,17 @@
 package com.example.storagemaster.storagemaster;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 
 import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Popup for creating a new item or editing an existing item.

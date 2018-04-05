@@ -2,15 +2,11 @@ package com.example.storagemaster.storagemaster;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.v7.util.SortedList;
 import android.text.SpannableString;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**

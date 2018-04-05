@@ -1,10 +1,7 @@
 package com.example.storagemaster.storagemaster;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.util.SortedList;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;

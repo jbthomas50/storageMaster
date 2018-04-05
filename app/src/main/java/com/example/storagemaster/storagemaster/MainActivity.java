@@ -1,41 +1,31 @@
 package com.example.storagemaster.storagemaster;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.internal.NavigationMenu;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.view.menu.MenuAdapter;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import com.google.gson.Gson;
+
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -264,9 +254,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 0) {
+        if (requestCode == 0 && user.inventory.size() > currentCategory) {
             this.setTitle(user.inventory.get(currentCategory).getCategoryName());
         }
+//        adapter = new ItemListAdapter(this, user.inventory.get(currentCategory - 1).items);
+//        adapter.setID(id);
+//        lv.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
     }
     /**
      * The actions performed when a specific category is pressed in the navigation drawer
@@ -291,15 +285,15 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             //startActivity(new Intent(MainActivity.this, NewListActivity.class));
         }
-        else if(id == -2) {
-            item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
-            //Set adapter to new category here
-            //Shopping list is 0
-            adapter = new ItemListAdapter(this, user.inventory.get(id).items);
-            adapter.setID(id);
-            lv.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
+//        else if(id == -2) {
+//            item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
+//            //Set adapter to new category here
+//            //Shopping list is 0
+//            adapter = new ItemListAdapter(this, user.inventory.get(id).items);
+//            adapter.setID(id);
+//            lv.setAdapter(adapter);
+//            adapter.notifyDataSetChanged();
+//        }
         else{
             this.setTitle(user.inventory.get(id).getCategoryName());
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer

@@ -2,9 +2,6 @@ package com.example.storagemaster.storagemaster;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.text.SpannableString;
-import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -1,9 +1,7 @@
 package com.example.storagemaster.storagemaster;
 
-import android.content.Context;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -114,13 +112,14 @@ public class NewListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
+
                 if (catPosition > 0) {
                     MainActivity.user.inventory.remove(catPosition);
                     menu.removeItem(catPosition);
                 }
 
                 MainActivity.addNavDrawerItems(menu);
-
+                Log.d(TAG, "" + catPosition);
                 finish();
             }
         });
