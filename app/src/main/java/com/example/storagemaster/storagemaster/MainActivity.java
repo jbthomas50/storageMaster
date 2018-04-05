@@ -147,11 +147,13 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Henry Function for adding a ListName/string to Nav Drawer
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
         addNavDrawerItems(menu); //update the nav drawer with correct category names
+        menu.getItem(0).setCheckable(true);
         menu.getItem(0).setChecked(true);
         Log.i(TAG, "passed drawer layout");
     }
@@ -280,9 +282,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         ID = id;
 
-        for (int i = 0; i < navigationView.getMenu().size(); i++){
-            navigationView.getMenu().getItem(i).setChecked(false);
-        }
         if (id == -1) {
             int position = -99;
 
@@ -301,6 +300,9 @@ public class MainActivity extends AppCompatActivity
             adapter.notifyDataSetChanged();
         }
         else{
+            for (int i = 0; i < navigationView.getMenu().size(); i++){
+                navigationView.getMenu().getItem(i).setChecked(false);
+            }
             this.setTitle(user.inventory.get(id).getCategoryName());
             item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
             //Set adapter to new category here
