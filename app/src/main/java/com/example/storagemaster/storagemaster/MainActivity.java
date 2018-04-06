@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity
     public static int ID = 0;
     public static boolean isWindowOpen = false; //Variable used to prevent multiple conflicting windows from opening
     public static int currentCategory = 0;
+    public static boolean isdeleting = false;
+    public static boolean newlistadded = false;
 
     public static NavigationView navigationView; //findViewById(R.id.nav_view);
 
@@ -235,16 +238,19 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.edit_list){
            int position = -99;//default if there isn't a menu item
-           for (int i = 0; i < navigationView.getMenu().size(); i++)
-               if (navigationView.getMenu().getItem(i).isChecked())
-                   position = i;//the position of a selected category
+//           for (int i = 0; i < navigationView.getMenu().size(); i++)
+//               if (navigationView.getMenu().getItem(i).isChecked())
+//                   position = i;//the position of a selected category
             //add the category to inventory
+            position = currentCategory;
             if (position == 0){
                 Toast.makeText(MainActivity.this, "Cannot edit/delete Shopping List", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(MainActivity.this, NewListActivity.class);
                 intent.putExtra(POSC, Integer.toString(position));
                 currentCategory = position;
+                isdeleting = false;
+                newlistadded = false;
                 startActivityForResult(intent, 0);
             }
         }
@@ -252,17 +258,59 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * This runs when the newlist activity is finished running, it checks if the list was
+     * deleted or edited and changes the name and/or current selected list depending on the function
+     * @param requestCode Just 0, don't ask questions
+     * @param resultCode I.., I.. don't know
+     * @param data Just stop reading
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == 0 && user.inventory.size() > currentCategory) {
-            this.setTitle(user.inventory.get(currentCategory).getCategoryName());
+        if (requestCode == 0) {
+            Log.d(TAG, "Result recieved 0");
+            Log.d(TAG, "Current list:" + currentCategory);
+            if (user.inventory.size() > currentCategory && !newlistadded) {
+                Log.d(TAG, "Editing list name");
+                this.setTitle(user.inventory.get(currentCategory).getCategoryName());
+            }
+            if (isdeleting) {
+                Log.d(TAG, "Deleting list");
+                if (currentCategory == 1) //Set shopping list adapter
+                {
+                    adapterShopping.setID(0);
+                    lv.setAdapter(adapterShopping);
+                    Collections.sort(MainActivity.user.inventory.get(0).items, new ShoppingCompare());
+                    adapterShopping.notifyDataSetChanged();
+                    this.setTitle(user.inventory.get(0).getCategoryName());
+                    navigationView.getMenu().getItem(0).setCheckable(true);
+                    currentCategory--;
+                }
+                else
+                {
+                    adapter = new ItemListAdapter(this, user.inventory.get(currentCategory - 1).items);
+                    adapter.setID(currentCategory - 1);
+                    ID = currentCategory - 1;
+                    lv.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    this.setTitle(user.inventory.get(currentCategory - 1).getCategoryName());
+                    navigationView.getMenu().getItem(currentCategory - 1).setCheckable(true);
+                    currentCategory--;
+                }
+            }
+            if (newlistadded)
+            {
+                Log.d(TAG, "New list");
+                currentCategory = user.inventory.size() - 1;
+                adapter = new ItemListAdapter(this, user.inventory.get(currentCategory).items);
+                adapter.setID(currentCategory);
+                ID = currentCategory;
+                lv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                this.setTitle(user.inventory.get(currentCategory).getCategoryName());
+                navigationView.getMenu().getItem(currentCategory).setCheckable(true);
+            }
         }
-//        adapter = new ItemListAdapter(this, user.inventory.get(currentCategory - 1).items);
-//        adapter.setID(id);
-//        lv.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
     }
     /**
      * The actions performed when a specific category is pressed in the navigation drawer
@@ -275,13 +323,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         ID = id;
-
+        currentCategory = id;
+        isdeleting = false;
+        newlistadded = false;
         if (id == -1) {
             int position = -99;
 
             Intent intent = new Intent(MainActivity.this, NewListActivity.class);
             intent.putExtra(POSC, Integer.toString(position));
-            startActivity(intent);
+            startActivityForResult(intent, 0);
             //startActivity(new Intent(MainActivity.this, NewListActivity.class));
         }
 //        else if(id == -2) {

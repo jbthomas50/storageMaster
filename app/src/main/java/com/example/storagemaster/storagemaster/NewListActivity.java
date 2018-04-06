@@ -86,7 +86,7 @@ public class NewListActivity extends AppCompatActivity {
                         Category newCategory = new Category();
                         newCategory.setCategoryName(listName.getText().toString());
                         MainActivity.user.inventory.add(newCategory);
-
+                        MainActivity.newlistadded = true;
                         Log.d(TAG, "list added to inventory");
                         //trying to get the new activity to load
                         /*int id = MainActivity.user.inventory.size();
@@ -116,6 +116,7 @@ public class NewListActivity extends AppCompatActivity {
                 if (catPosition > 0) {
                     MainActivity.user.inventory.remove(catPosition);
                     menu.removeItem(catPosition);
+                    MainActivity.isdeleting = true;
                 }
 
                 MainActivity.addNavDrawerItems(menu);
