@@ -13,8 +13,10 @@ import java.util.ArrayList;
 
 /**
  * Created by ME on 3/16/2018.
+ * This adapter takes a list of items and displays them with a x and + button
+ * and a dynamic quantity counter. Displays them on the selected listview.
+ * Used for the shopping list
  */
-
 public class ShoppingListAdapter extends ArrayAdapter<Item> {
     private final Activity context;
     private final ArrayList<Item> itemList;

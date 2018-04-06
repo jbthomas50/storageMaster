@@ -12,8 +12,9 @@ import java.util.Objects;
 
 /**
  * Created by ME on 3/2/2018.
+ * Stores the user information, a password and name
+ * and a list of categories called "inventory"
  */
-
 public class User {
     private String name;
     private String password;
@@ -85,6 +86,14 @@ public class User {
         return false;
     }
 
+    /**
+     * Was going to be used to move an item from one category to another
+     * @param name
+     * @param categoryFrom
+     * @param categoryTo
+     * @param context
+     * @return
+     */
     public boolean moveItem(String name, String categoryFrom, String categoryTo, Context context) {
         boolean itemFound = false;
         Category cFrom = null;

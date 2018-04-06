@@ -90,6 +90,10 @@ public class Item implements Comparable<Item>{
         this.itemName = new SpannableString(name);
     }
 
+    /**
+     * Used for crossing out the item name, returns a spannable string which can have it's look edited
+     * @return
+     */
     public SpannableString getItemName(){
         if(isCrossed) {
             itemName.setSpan(new StrikethroughSpan(), 0, itemName.length(), 0);
@@ -100,6 +104,10 @@ public class Item implements Comparable<Item>{
         return itemName;
     }
 
+    /**
+     * Used for turning the quantity red, returns a spannable string which can have it's look edited
+     * @return
+     */
     public SpannableString getQuantity() {
         if (Integer.parseInt(quantity.toString()) <=  min)
         {
@@ -114,6 +122,10 @@ public class Item implements Comparable<Item>{
         return quantity;
     }
 
+    /**
+     * Used to set the quantity to a given amount and updates the shopping list status of the item
+     * @param startQuantity The quantity to set the item to
+     */
     public void setQuantity(int startQuantity) {
         if(startQuantity >= 0 & startQuantity < 1000) {
             this.quantity = new SpannableString(Integer.toString(startQuantity));
@@ -131,6 +143,9 @@ public class Item implements Comparable<Item>{
         }
     }
 
+    /**
+     * Used to increment the item quantity by 1 and updates its shopping list status
+     */
     public void addQuantity(){
         /*String number = "10";
         int result = Integer.parseInt(number);*/
@@ -150,6 +165,9 @@ public class Item implements Comparable<Item>{
         }
     }
 
+    /**
+     * Used to decrement the item quantity by 1, and updates its shopping list status
+     */
     public void subtractQuantity(){
         int result = Integer.parseInt(quantity.toString());
         if(result > 0)

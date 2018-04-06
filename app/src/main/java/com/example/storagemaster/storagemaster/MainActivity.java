@@ -55,6 +55,13 @@ public class MainActivity extends AppCompatActivity
 
     public static NavigationView navigationView; //findViewById(R.id.nav_view);
 
+    /**
+     * Sets the current list and loads shared preferences
+     * Also creates and loads the shopping list if it doesn't exist yet
+     * Sets the item list adapter to work with the listview
+     * Initializes the navDrawer
+     * @param savedInstanceState Definitely not a savedInstanceState ;)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,20 +269,19 @@ public class MainActivity extends AppCompatActivity
      * This runs when the newlist activity is finished running, it checks if the list was
      * deleted or edited and changes the name and/or current selected list depending on the function
      * @param requestCode Just 0, don't ask questions
-     * @param resultCode I.., I.. don't know
+     * @param resultCode I... I don't know
      * @param data Just stop reading
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
-            Log.d(TAG, "Result recieved 0");
-            Log.d(TAG, "Current list:" + currentCategory);
+            Log.i(TAG, "Current list:" + currentCategory);
             if (user.inventory.size() > currentCategory && !newlistadded) {
-                Log.d(TAG, "Editing list name");
+                Log.i(TAG, "Editing list name");
                 this.setTitle(user.inventory.get(currentCategory).getCategoryName());
             }
             if (isdeleting) {
-                Log.d(TAG, "Deleting list");
+                Log.i(TAG, "Deleting list");
                 if (currentCategory == 1) //Set shopping list adapter
                 {
                     adapterShopping.setID(0);
@@ -286,7 +292,7 @@ public class MainActivity extends AppCompatActivity
                     navigationView.getMenu().getItem(0).setCheckable(true);
                     currentCategory--;
                 }
-                else
+                else //Set normal adapter
                 {
                     adapter = new ItemListAdapter(this, user.inventory.get(currentCategory - 1).items);
                     adapter.setID(currentCategory - 1);
@@ -300,7 +306,7 @@ public class MainActivity extends AppCompatActivity
             }
             if (newlistadded)
             {
-                Log.d(TAG, "New list");
+                Log.i(TAG, "New list");
                 currentCategory = user.inventory.size() - 1;
                 adapter = new ItemListAdapter(this, user.inventory.get(currentCategory).items);
                 adapter.setID(currentCategory);
