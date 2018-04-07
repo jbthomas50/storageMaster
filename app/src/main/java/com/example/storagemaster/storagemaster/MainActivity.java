@@ -154,8 +154,8 @@ public class MainActivity extends AppCompatActivity
         //Henry Function for adding a ListName/string to Nav Drawer
         Menu menu = navigationView.getMenu(); //access to the nav drawer menu
         addNavDrawerItems(menu); //update the nav drawer with correct category names
-        menu.getItem(0).setCheckable(true);
-        menu.getItem(0).setChecked(true);
+        menu.getItem(0).setCheckable(true);//make it checkable
+        menu.getItem(0).setChecked(true);//check the default list/shopping list
         Log.i(TAG, "passed drawer layout");
     }
 
