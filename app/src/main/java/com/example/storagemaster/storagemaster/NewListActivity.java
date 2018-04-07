@@ -76,6 +76,7 @@ public class NewListActivity extends AppCompatActivity {
                 if (catPosition > 0) {
                     listName = findViewById(R.id.editText);
                     MainActivity.user.inventory.get(catPosition).setCategoryName(listName.getText().toString());
+                    MainActivity.listedited = true;
                 }
                 else{
                     //String empty = "";

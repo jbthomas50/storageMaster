@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity
     public static int currentCategory = 0;
     public static boolean isdeleting = false;
     public static boolean newlistadded = false;
+    public static boolean listedited = false;
 
     public static NavigationView navigationView; //findViewById(R.id.nav_view);
 
@@ -256,8 +257,6 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, NewListActivity.class);
                 intent.putExtra(POSC, Integer.toString(position));
                 currentCategory = position;
-                isdeleting = false;
-                newlistadded = false;
                 startActivityForResult(intent, 0);
             }
         }
@@ -276,15 +275,19 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
             Log.i(TAG, "Current list:" + currentCategory);
-            if (user.inventory.size() > currentCategory && !newlistadded) {
-                Log.i(TAG, "Editing list name");
+            if (listedited) {
+                listedited = false;
+                Log.i(TAG, "Editing list name " + currentCategory);
                 this.setTitle(user.inventory.get(currentCategory).getCategoryName());
             }
-            if (isdeleting) {
-                Log.i(TAG, "Deleting list");
+            else if (isdeleting) {
+                isdeleting = false;
+                Log.i(TAG, "Deleting list " + currentCategory);
                 if (currentCategory == 1) //Set shopping list adapter
                 {
+                    Log.i(TAG, "Moving to shopping list " + currentCategory);
                     adapterShopping.setID(0);
+                    ID = 0;
                     lv.setAdapter(adapterShopping);
                     Collections.sort(MainActivity.user.inventory.get(0).items, new ShoppingCompare());
                     adapterShopping.notifyDataSetChanged();
@@ -294,6 +297,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else //Set normal adapter
                 {
+                    Log.i(TAG, "Moving to list " + currentCategory);
                     adapter = new ItemListAdapter(this, user.inventory.get(currentCategory - 1).items);
                     adapter.setID(currentCategory - 1);
                     ID = currentCategory - 1;
@@ -304,9 +308,10 @@ public class MainActivity extends AppCompatActivity
                     currentCategory--;
                 }
             }
-            if (newlistadded)
+            else if (newlistadded)
             {
-                Log.i(TAG, "New list");
+                newlistadded = false;
+                Log.i(TAG, "New list " + currentCategory);
                 currentCategory = user.inventory.size() - 1;
                 adapter = new ItemListAdapter(this, user.inventory.get(currentCategory).items);
                 adapter.setID(currentCategory);
@@ -315,6 +320,33 @@ public class MainActivity extends AppCompatActivity
                 adapter.notifyDataSetChanged();
                 this.setTitle(user.inventory.get(currentCategory).getCategoryName());
                 navigationView.getMenu().getItem(currentCategory).setCheckable(true);
+            }
+            else //New list activity exited
+            {
+                Log.i(TAG, "New list activity exited " + currentCategory);
+                if (user.inventory.size() == 1) //Set shopping list adapter
+                {
+                    Log.i(TAG, "Moving to shopping list " + currentCategory);
+                    adapterShopping.setID(0);
+                    ID = 0;
+                    lv.setAdapter(adapterShopping);
+                    Collections.sort(MainActivity.user.inventory.get(0).items, new ShoppingCompare());
+                    adapterShopping.notifyDataSetChanged();
+                    this.setTitle(user.inventory.get(0).getCategoryName());
+                    navigationView.getMenu().getItem(0).setCheckable(true);
+                    currentCategory = 0;
+                }
+                else {
+                    Log.i(TAG, "Moving to list " + currentCategory);
+                    currentCategory = user.inventory.size() - 1;
+                    adapter = new ItemListAdapter(this, user.inventory.get(currentCategory).items);
+                    adapter.setID(currentCategory);
+                    ID = currentCategory;
+                    lv.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    this.setTitle(user.inventory.get(currentCategory).getCategoryName());
+                    navigationView.getMenu().getItem(currentCategory).setCheckable(true);
+                }
             }
         }
     }
@@ -330,8 +362,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         ID = id;
         currentCategory = id;
-        isdeleting = false;
-        newlistadded = false;
         if (id == -1) {
             int position = -99;
 
