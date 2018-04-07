@@ -54,9 +54,6 @@ public class NewItem extends AppCompatActivity {
      *
      * @param savedInstanceState
      */
-
-
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +63,9 @@ public class NewItem extends AppCompatActivity {
         // set the window to the correct size.
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.8), (int)(height*.8)); //Originally .8 .45
+        getWindow().setLayout((int)(width*.8), (int)(height*.8));
 
         getWindow().setSoftInputMode(5|20);
 
@@ -100,9 +96,9 @@ public class NewItem extends AppCompatActivity {
         // initialize the buttons
         saveButton = findViewById(R.id.saveItemButton);
         deleteButton = findViewById(R.id.deleteItemButton);
-        
 
-        /**
+
+        /*
          * Get the values from the three text boxes, save them to the item
          * and then end the activity.
          */
@@ -143,7 +139,7 @@ public class NewItem extends AppCompatActivity {
             }
         });
 
-        /**
+        /*
          * Delete the item.
          *
          * If there is an item already there, it will be deleted. If this
@@ -153,6 +149,7 @@ public class NewItem extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "delete clicked");
                 if(itemNum >= 0) {
                     MainActivity.user.inventory.get(categoryNum).items.remove(itemNum);
                     if(categoryNum > 0) {

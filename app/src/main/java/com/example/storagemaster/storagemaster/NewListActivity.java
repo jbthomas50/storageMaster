@@ -62,7 +62,6 @@ public class NewListActivity extends AppCompatActivity {
         catPosition = Integer.parseInt(getIntent().getStringExtra(POSC));
 
         if(catPosition > -1){
-           // listName.setText(MainActivity.category.items.get(position).getItemName());
             listName.setText(MainActivity.navigationView.getMenu().getItem(catPosition).getTitle());
             this.setTitle("Edit List");
         }
@@ -79,7 +78,6 @@ public class NewListActivity extends AppCompatActivity {
                     MainActivity.listedited = true;
                 }
                 else{
-                    //String empty = "";
                     if (listName.toString() == null) {
                         Toast.makeText(getApplicationContext(), "No Name Entered!", Toast.LENGTH_SHORT).show();
                         finish();
@@ -89,20 +87,11 @@ public class NewListActivity extends AppCompatActivity {
                         MainActivity.user.inventory.add(newCategory);
                         MainActivity.newlistadded = true;
                         Log.d(TAG, "list added to inventory");
-                        //trying to get the new activity to load
-                        /*int id = MainActivity.user.inventory.size();
-                        MainActivity.adapter = new ItemListAdapter(this, MainActivity.user.inventory.get(id).items);
-                        MainActivity.adapter.setID(id);
-                        MainActivity.lv.setAdapter(MainActivity.adapter);
-                        MainActivity.adapter.notifyDataSetChanged();*/
                     }
                 }
-
-                //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
                 MainActivity.addNavDrawerItems(menu);
 
                 Log.d(TAG, "addNavDrawerItems called");
-                //item.setCheckable(true);
                 if(catPosition > -1)
                     menu.getItem(catPosition).setChecked(true);
                 finish();
@@ -125,16 +114,5 @@ public class NewListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        //Henry Function for adding a ListName/string to Nav Drawer
-        //Menu menu = MainActivity.navigationView.getMenu(); //access to the nav drawer menu
-        //MainActivity.addNavDrawerItems(menu);
-
-        //System.out.println("Inventory Size: " + MainActivity.inventory.size());
-
-
-
-
     }
-
 }

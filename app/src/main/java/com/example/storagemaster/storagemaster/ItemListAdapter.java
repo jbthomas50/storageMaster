@@ -29,6 +29,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     /**
      * Constructor
+     *
      * @param context The context of the current activity so it
      *                knows how to display the list in the listview
      * @param itemList The list of items to display in the list view

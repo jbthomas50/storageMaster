@@ -92,7 +92,8 @@ public class Item implements Comparable<Item>{
 
     /**
      * Used for crossing out the item name, returns a spannable string which can have it's look edited
-     * @return
+     *
+     * @return the name of the item
      */
     public SpannableString getItemName(){
         if(isCrossed) {
@@ -106,7 +107,8 @@ public class Item implements Comparable<Item>{
 
     /**
      * Used for turning the quantity red, returns a spannable string which can have it's look edited
-     * @return
+     *
+     * @return the quantity
      */
     public SpannableString getQuantity() {
         if (Integer.parseInt(quantity.toString()) <=  min)
@@ -124,6 +126,7 @@ public class Item implements Comparable<Item>{
 
     /**
      * Used to set the quantity to a given amount and updates the shopping list status of the item
+     *
      * @param startQuantity The quantity to set the item to
      */
     public void setQuantity(int startQuantity) {
@@ -147,8 +150,6 @@ public class Item implements Comparable<Item>{
      * Used to increment the item quantity by 1 and updates its shopping list status
      */
     public void addQuantity(){
-        /*String number = "10";
-        int result = Integer.parseInt(number);*/
         int result = Integer.parseInt(quantity.toString());
         if (result < 999)
         result++;
@@ -177,7 +178,6 @@ public class Item implements Comparable<Item>{
         {
             MainActivity.user.inventory.get(0).addExistingItem(this);
             inShoppingList = true;
-            //quantity.setSpan(new StrikethroughSpan(), 0, quantity.length(), 0);
         }
         else
         {
@@ -192,6 +192,7 @@ public class Item implements Comparable<Item>{
 
     /**
      * Ensures that the item minimum isn't below 0 or more than 999
+     *
      * @param min The minimum amount of the item the user WANTS to have on hand
      */
     public void setMin(int min) {
@@ -203,6 +204,7 @@ public class Item implements Comparable<Item>{
     /**
      * An item can have multiple barcodes if the user buys it from
      * a different store, adds this barcode to the list of barcodes
+     *
      * @param barcode The barcode object to add to the list
      */
     public void addBarcode(Barcode barcode)
@@ -236,6 +238,7 @@ public class Item implements Comparable<Item>{
 
     /**
      * Used to sort the list of items in the CATEGORY object
+     *
      * @param item The item to be sorted
      * @return Returns true if the item has a higher sort value
      */

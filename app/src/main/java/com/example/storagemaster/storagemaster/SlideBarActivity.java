@@ -41,9 +41,6 @@ public class SlideBarActivity extends AppCompatActivity{
      *
      * @param savedInstanceState is stuff
      */
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +87,7 @@ public class SlideBarActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "adding to quantity");
                 seekValue++;
                 numItems.setText("" + seekValue);
                 seek.post(new Runnable(){
@@ -113,6 +111,7 @@ public class SlideBarActivity extends AppCompatActivity{
                         seek.setProgress(seekValue);
                     }
                 });
+                Log.i(TAG, "subtracting from quantity");
             }
         });
 
@@ -126,6 +125,7 @@ public class SlideBarActivity extends AppCompatActivity{
                         seek.setProgress(seekValue);
                     }
                 });
+                Log.i(TAG, "changing edittext value");
             }
         });
 

@@ -2,6 +2,7 @@ package com.example.storagemaster.storagemaster;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by ME on 3/16/2018.
+ * Created by Alex on 3/16/2018.
  * This adapter takes a list of items and displays them with a x and + button
  * and a dynamic quantity counter. Displays them on the selected listview.
  * Used for the shopping list
@@ -71,6 +72,7 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
 
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "item crossed out");
                 if(!MainActivity.user.inventory.get(ID).items.get(position).getCrossed()){
                    MainActivity.user.inventory.get(ID).crossItem(position);
                 }
@@ -85,6 +87,7 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
 
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "adding to quantity");
                 Intent intent = new Intent(context, SlideBarActivity.class);
                 intent.putExtra(MainActivity.POSI, Integer.toString(position));
                 intent.putExtra(MainActivity.POSC, Integer.toString(ID));

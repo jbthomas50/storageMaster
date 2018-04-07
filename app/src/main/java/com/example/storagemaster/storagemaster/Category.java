@@ -95,7 +95,6 @@ public class Category implements Comparable<Category> {
                 return true;
             }
             else{
-            //Toast.makeText(context, "Item not found", Toast.LENGTH_SHORT).show();
             Log.e("Category", "User attempted to remove an item that doesn't exist: " + item.getItemName());
             }
         return false;

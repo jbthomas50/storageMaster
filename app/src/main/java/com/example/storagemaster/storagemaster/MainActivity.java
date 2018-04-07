@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -82,6 +81,9 @@ public class MainActivity extends AppCompatActivity
         if (json != null) {
             Log.v(TAG, json);
             user = gson.fromJson(json, User.class);
+
+            // hopefully a temporary fix. Goes through all of the lists to connect the correct
+            // items to the inventory items.
             for(int item = 0; item < user.inventory.get(0).items.size(); item++){
                 for(int i = 1; i < user.inventory.size(); i++){
                     for(int it = 0; it < user.inventory.get(i).items.size(); it++){
@@ -185,9 +187,7 @@ public class MainActivity extends AppCompatActivity
             if(user.inventory.get(i).getCategoryName() != null){
                 listName = new SpannableString(user.inventory.get(i).getCategoryName());
             }
-            //SpannableString listName = new SpannableString(user.inventory.get(i).getCategoryName().toString());
             listName.setSpan(new RelativeSizeSpan(1.2f),0,listName.length(),0);
-            //String listName = inventory.get(i).getCategoryName();
             menu.add(2, i, i, listName);
         }
 
@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Fill the ... settings menu
+     *
      * @param menu The menu in the settings menu.
      * @return if menu inflated
      */
@@ -226,6 +227,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * The actions performed when an item is pressed in the settings menu
+     *
      * @param item the specific item pressed in the settings menu
      * @return
      */
@@ -246,9 +248,6 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.edit_list){
            int position = -99;//default if there isn't a menu item
-//           for (int i = 0; i < navigationView.getMenu().size(); i++)
-//               if (navigationView.getMenu().getItem(i).isChecked())
-//                   position = i;//the position of a selected category
             //add the category to inventory
             position = currentCategory;
             if (position == 0){
@@ -267,6 +266,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * This runs when the newlist activity is finished running, it checks if the list was
      * deleted or edited and changes the name and/or current selected list depending on the function
+     *
      * @param requestCode Just 0, don't ask questions
      * @param resultCode I... I don't know
      * @param data Just stop reading
@@ -350,8 +350,10 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
     /**
      * The actions performed when a specific category is pressed in the navigation drawer
+     *
      * @param item The specific category pressed in the nav drawer
      * @return
      */
@@ -370,15 +372,6 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intent, 0);
             //startActivity(new Intent(MainActivity.this, NewListActivity.class));
         }
-//        else if(id == -2) {
-//            item.setCheckable(true);//leaves the list selected highlighted in the nav drawer
-//            //Set adapter to new category here
-//            //Shopping list is 0
-//            adapter = new ItemListAdapter(this, user.inventory.get(id).items);
-//            adapter.setID(id);
-//            lv.setAdapter(adapter);
-//            adapter.notifyDataSetChanged();
-//        }
         else{
             for (int i = 0; i < navigationView.getMenu().size(); i++){
                 navigationView.getMenu().getItem(i).setChecked(false);

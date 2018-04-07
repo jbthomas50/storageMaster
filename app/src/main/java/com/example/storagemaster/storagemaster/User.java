@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Objects;
 
 /**
- * Created by ME on 3/2/2018.
+ * Created by Alex on 3/2/2018.
  * Stores the user information, a password and name
  * and a list of categories called "inventory"
  */
@@ -28,6 +28,11 @@ public class User {
         inventory = new ArrayList<>();
     }
 
+    /**
+     * originally used to get the shopping list from the other lists.
+     *
+     * @return returns the shopping list.
+     */
     public ArrayList<Item> getShoppingList() {
         ArrayList<Item> list = inventory.get(0).items; //Main list that we'll return
         //Searching through the categories
@@ -45,6 +50,13 @@ public class User {
         return list;
     }
 
+    /**
+     * Can be used to add a category. Checks to make sure it doesn't exist.
+     *
+     * @param name The new category's name.
+     * @param context the context
+     * @return true if the category was added.
+     */
     public boolean addCategory(String name, Context context) {
         boolean itemFound = false;
         //Logic that ensures the category isn't already in the list
@@ -66,6 +78,13 @@ public class User {
         return true;
     }
 
+    /**
+     * Can be used to remove a category.
+     *
+     * @param name the category name.
+     * @param context just the context.
+     * @return true if the category existed and has been removed, otherwise false.
+     */
     public boolean removeCategory(String name, Context context) {
 
         boolean itemFound = false;
